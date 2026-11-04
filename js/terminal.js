@@ -167,7 +167,7 @@ class InteractiveTerminal {
   cmdDisciplines() {
     return `
 <span class="term-coral">Idea-Wise Core Disciplines:</span>
-1. <strong>Enterprise ERP & Cleanroom Compliance</strong> — Air Calibre Systems calculation engine & audit automation.
+1. <strong>Enterprise ERP & Cleanroom Compliance</strong> — Calculation engine & audit automation web portal.
 2. <strong>Product Dashboards & SaaS Scaling</strong> — Getty, Care, Zylo, Roster dashboards at VSplash Tech Labs.
 3. <strong>Third-Party API Automation</strong> — GoDaddy domain & service lifecycle provisioning with CRM queues.
 4. <strong>Cross-Platform SPAs & Serverless SQL</strong> — React Native, Node.js, Neon PostgreSQL on Render.
