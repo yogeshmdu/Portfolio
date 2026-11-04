@@ -195,13 +195,13 @@ class InteractiveTerminal {
   cmdProjects() {
     return `
 <span class="term-coral">Key Projects & Live Deployments:</span>
-• <strong>Enterprise Web Portal</strong> - <a href="https://validationwebsite.netlify.app" target="_blank" class="term-link">validationwebsite.netlify.app</a>
+• <strong>Enterprise Web Portal</strong> - <a href="https://website-of-acs.netlify.app/" target="_blank" class="term-link">website-of-acs.netlify.app</a>
 • <strong>Reports Module Website</strong> - <a href="http://validationreportmodule.netlify.app" target="_blank" class="term-link">validationreportmodule.netlify.app</a>
+• <strong>World Travel Budget</strong> - <a href="https://worldtravelbudget.netlify.app/" target="_blank" class="term-link">worldtravelbudget.netlify.app</a>
 • <strong>Food Delivery Application</strong> - <a href="https://food-delivery-app-1-ufhh.onrender.com/#/home" target="_blank" class="term-link">food-delivery-app-1-ufhh.onrender.com</a>
 • <strong>Explore Madurai Tourism</strong> - <a href="http://exploremadurai.netlify.app" target="_blank" class="term-link">exploremadurai.netlify.app</a>
-• <strong>E-Commerce & Claim System Website</strong> - Laravel, React, Redux, MongoDB
 • <strong>IMDb Movie Discovery Hub</strong> - React.js, RapidAPI, Tailwind CSS
-• <strong>Global Travel Platform</strong> - React.js, Bootstrap 5.3, CSS3
+• <strong>Food Ordering & Culinary Web App</strong> - React.js, Redux, Tailwind CSS
 `;
   }
 

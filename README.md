@@ -1,8 +1,8 @@
 # Yogesh B — Full Stack Architect & Software Engineer
 
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)](https://validationwebsite.netlify.app)
+[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)](https://website-of-acs.netlify.app/)
 [![Role](https://img.shields.io/badge/Role-Full%20Stack%20Architect-FF4B32)](http://linkedin.com/in/yogesh-app-dev)
-[![Experience](https://img.shields.io/badge/Experience-5%2B%20Years-929DA7)](https://validationwebsite.netlify.app)
+[![Experience](https://img.shields.io/badge/Experience-5%2B%20Years-929DA7)](https://website-of-acs.netlify.app/)
 [![Company](https://img.shields.io/badge/Company-VSplash%20Tech%20Labs-17191c)](#commercial-experience)
 [![Contact](https://img.shields.io/badge/Phone-%2B91%208098621%20639-FF4B32)](tel:+918098621639)
 
@@ -77,12 +77,12 @@ Crafted according to the specified palette:
 
 | Project | Category / Type | Stack | Idea & Live URL |
 | :--- | :--- | :--- | :--- |
-| **Enterprise Web Portal** | Live Web Portal | Core PHP, Bootstrap 5, MySQL, ERP Workflows | Cloud ERP automating cleanroom audits. <br>🔗 [Live on Netlify](https://validationwebsite.netlify.app) |
+| **Enterprise Web Portal** | Live Web Portal | Core PHP, Bootstrap 5, MySQL, ERP Workflows | Cloud ERP automating cleanroom audits. <br>🔗 [Live on Netlify](https://website-of-acs.netlify.app/) |
 | **Reports Module Website** | Reports Module | PHP, MySQL, Calculation Engine, PDF Export | Certified air velocity calculation engine. <br>🔗 [Live on Netlify](http://validationreportmodule.netlify.app) |
-| **E-commerce & Claim Management Website** | E-Commerce Website | Laravel, React.js, Redux, Core PHP, MongoDB | Unified claim workflows & equipment storefront. |
+| **World Travel Budget** | Travel Website | React.js, Bootstrap 5.3, Video UI, Netlify | Global travel destination & budget platform. <br>🔗 [Live on Netlify](https://worldtravelbudget.netlify.app/) |
 | **Food Delivery Application** | Full-Stack / Mobile | React Native, Node.js, PostgreSQL, Render, Neon | On-demand ordering with serverless Neon DB. <br>🔗 [Live on Render](https://food-delivery-app-1-ufhh.onrender.com/#/home) |
 | **IMDb Movie Discovery Hub** | Entertainment Website | React.js, RapidAPI, Tailwind CSS, Fetch API | Real-time movie discovery with debounced search. |
-| **Global Travel & Destination Platform** | Travel Website | React.js, Bootstrap 5.3, CSS Animations | Interactive worldwide travel itinerary explorer. |
+| **Food Ordering & Culinary Web App** | Food Platform | React.js, Redux, Tailwind CSS, REST API | Interactive culinary ordering platform with cart state. |
 | **Explore Madurai Cultural & Tourism Guide** | Tourism Website | Bootstrap 5, HTML5, CSS3, JavaScript | Digital cultural guide for Madurai. <br>🔗 [Live on Netlify](http://exploremadurai.netlify.app) |
 
 ---

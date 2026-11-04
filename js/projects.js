@@ -12,7 +12,7 @@ const portfolioProjects = [
     categoryLabel: 'Enterprise ERP',
     tagline: 'Comprehensive ERP validation portal for cleanroom & HVAC compliance audits',
     image: 'assets/images/project-aircalibre-web.jpg',
-    liveUrl: 'https://validationwebsite.netlify.app',
+    liveUrl: 'https://website-of-acs.netlify.app/',
     githubUrl: null,
     tags: ['Core PHP', 'Bootstrap 5', 'JavaScript ES6+', 'MySQL', 'ERP Workflows'],
     idea: 'Digitize paper-heavy HVAC & cleanroom compliance testing into an automated, role-based cloud ERP accessible by field engineers and corporate clients in real time.',
@@ -53,28 +53,29 @@ const portfolioProjects = [
     architecture: 'Core PHP mathematical computation routines, dynamic DOM template hydration, relational audit persistence, and fast PDF-ready output formatting.'
   },
   {
-    id: 'ecommerce-laravel-react',
-    title: 'E-commerce & Claim Management Website',
-    company: 'E-Commerce Website',
-    category: 'enterprise',
-    categoryLabel: 'Laravel & React',
-    tagline: 'Integrated claim management workflows & scalable e-commerce storefront website',
-    image: 'assets/images/project-aircalibre-preview.jpg',
-    liveUrl: null,
+    id: 'world-travel-budget',
+    title: 'World Travel Budget',
+    company: 'Travel Website',
+    category: 'react',
+    categoryLabel: 'React & Bootstrap',
+    tagline: 'Global travel destination exploration & budget planning platform',
+    image: 'assets/images/project-travel-budget.jpg',
+    video: 'assets/video/travel-video.mp4',
+    liveUrl: 'https://worldtravelbudget.netlify.app/',
     githubUrl: null,
-    tags: ['Laravel', 'React.js', 'Redux', 'Core PHP', 'Tailwind CSS', 'MongoDB', 'MySQL'],
-    idea: 'Consolidate industrial equipment procurement and post-sale warranty claims into a unified website with shared authentication and real-time status tracking.',
-    problem: 'Managing operational equipment claims and inventory purchases simultaneously required two distinct workflows integrated into a unified portal.',
-    solution: 'Developed interactive claim management RESTful endpoints using Core PHP, AJAX, and MySQL, paired with a modern e-commerce storefront built with Laravel, React.js, Redux, Tailwind CSS, and MongoDB.',
-    impact: 'Streamlined warranty lifecycle processing from days to hours with end-to-end Redux cart state and flexible product catalogs.',
+    tags: ['React.js', 'Bootstrap 5.3', 'Video UI', 'Responsive UI', 'Netlify'],
+    idea: 'This is a travel website built using React.js and styled with Bootstrap 5.3 for a sleek, responsive design. The platform offers an immersive experience for travelers exploring famous destinations across the globe with interactive and user-friendly features.',
+    problem: 'Travelers often encounter cluttered, confusing travel sites that make discovering destination itineraries and planning travel budgets overwhelming and disjointed.',
+    solution: 'Engineered an intuitive, video-enhanced travel portal with responsive Bootstrap 5.3 layouts, dynamic destination showcases, and interactive exploration features.',
+    impact: 'Deployed live on Netlify with sub-second page loads, immersive ambient video backgrounds, and responsive layouts across all devices.',
     features: [
-      'Interactive claim management workflows with status lifecycle auditing',
-      'Centralized Redux state container managing cart, user sessions, and product variants',
-      'Flexible MongoDB product schemas supporting dynamic attributes and equipment specs',
-      'Secure order processing with input validation and automated receipt generation',
-      'Mobile-first responsive styling crafted with Tailwind CSS'
+      'High-definition video showcase capturing world travel hotspots',
+      'Built with React.js component architecture for swift client-side navigation',
+      'Styled with modern Bootstrap 5.3 for a sleek, mobile-first responsive design',
+      'Intuitive travel budget planning and itinerary discovery features',
+      'Fast, continuous cloud deployment hosted live on Netlify'
     ],
-    architecture: 'Laravel & Core PHP backend services, relational MySQL for claims, MongoDB for product catalogs, and React.js with Redux for frontend state.'
+    architecture: 'React.js component-based architecture, Bootstrap 5.3 responsive layout system, HTML5 video integration, and optimized cloud hosting on Netlify.'
   },
   {
     id: 'food-delivery-app',
@@ -126,28 +127,28 @@ const portfolioProjects = [
     architecture: 'React functional components with useState, useEffect, and custom hooks for network caching, styled with responsive utilities.'
   },
   {
-    id: 'travel-explorer',
-    title: 'Global Travel & Destination Platform',
-    company: 'Travel Website',
+    id: 'food-ordering-platform',
+    title: 'Food Ordering & Culinary Web App',
+    company: 'Food Platform',
     category: 'react',
-    categoryLabel: 'React & UI',
-    tagline: 'Immersive exploration portal showcasing top travel destinations worldwide',
+    categoryLabel: 'React & Redux',
+    tagline: 'Interactive culinary ordering platform with live cart state & category filtering',
     image: 'assets/images/project-swiggy-travel.jpg',
     liveUrl: null,
     githubUrl: null,
-    tags: ['React.js', 'Bootstrap 5.3', 'Interactive UI', 'CSS Animations'],
-    idea: 'Design a visually engaging, card-driven world travel itinerary platform that allows globetrotters to build customized multi-day travel itineraries interactively.',
-    problem: 'Travel websites can be overwhelming with cluttered navigation and confusing destination catalogs.',
-    solution: 'Created an aesthetic, card-driven itinerary explorer with high-res imagery, interactive filters for continents, and clear adventure guides.',
-    impact: 'Intuitive user interface resulting in high engagement and clear trip breakdown previews across all screen sizes.',
+    tags: ['React.js', 'Redux', 'Tailwind CSS', 'REST API', 'Cart State'],
+    idea: 'Build an ultra-responsive, card-driven food ordering and restaurant discovery platform with dynamic culinary categories, live search, and seamless cart state persistence.',
+    problem: 'Traditional food web interfaces often experience latency during rapid cart mutations, category switching, and real-time order calculations.',
+    solution: 'Developed a modular React single-page application with central Redux state handling instant item additions, quantity recalculations, and responsive menu grid layouts.',
+    impact: 'Sub-16ms UI updates with instant state synchronization and fluid mobile-first ordering workflows.',
     features: [
-      'Continent and activity-based destination filters',
-      'Interactive travel itinerary preview modal with day-by-day guides',
-      'High-resolution imagery showcase with smooth card hover transitions',
-      'Interactive cost estimator and trip inquiry form',
-      'Fully responsive layouts ensuring flawless display across mobile and desktop'
+      'Interactive culinary catalog showcasing regional cuisines, chef specials, and ingredient breakdowns',
+      'Real-time cart state management with instant quantity increments and discount calculations',
+      'Debounced dietary and category filters (Spicy, Vegetarian, Specials)',
+      'High-resolution culinary photography showcase with smooth hover elevations',
+      'Fully responsive desktop, tablet, and mobile interface'
     ],
-    architecture: 'Componentized React directory structure utilizing modern Bootstrap 5.3 utilities and custom CSS backdrop filters.'
+    architecture: 'React.js with functional components, centralized Redux state management, and modern CSS utility layouts.'
   },
   {
     id: 'explore-madurai',
@@ -216,9 +217,13 @@ class ProjectsManager {
              <span>Preview Idea</span>
            </button>`;
 
+      const mediaHtml = p.video 
+        ? `<video src="${p.video}" poster="${p.image}" autoplay loop muted playsinline></video>`
+        : `<img src="${p.image}" alt="${p.title}" loading="lazy">`;
+
       card.innerHTML = `
         <div class="project-thumb">
-          <img src="${p.image}" alt="${p.title}" loading="lazy">
+          ${mediaHtml}
           <div class="project-overlay">
             <span class="project-category-badge">${p.categoryLabel}</span>
             <span class="project-company-badge">${p.company}</span>
@@ -285,9 +290,13 @@ class ProjectsManager {
          </a>`
       : '';
 
+    const modalMediaHtml = p.video
+      ? `<video src="${p.video}" poster="${p.image}" autoplay loop muted playsinline controls></video>`
+      : `<img src="${p.image}" alt="${p.title}">`;
+
     this.modalContent.innerHTML = `
       <div class="modal-thumb">
-        <img src="${p.image}" alt="${p.title}">
+        ${modalMediaHtml}
       </div>
       <div class="modal-content">
         <div class="modal-meta-row">
@@ -332,6 +341,10 @@ class ProjectsManager {
   closeModal() {
     window.soundEngine?.playClick();
     if (!this.modal) return;
+    const modalVideo = this.modal.querySelector('video');
+    if (modalVideo) {
+      modalVideo.pause();
+    }
     this.modal.classList.remove('active');
     document.body.style.overflow = '';
   }
