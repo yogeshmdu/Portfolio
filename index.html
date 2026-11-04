@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yogesh B | Full Stack Developer & Software Engineer</title>
+  <title>Yogesh B | Full Stack Architect & Software Engineer</title>
   
   <!-- SEO & Social Meta -->
-  <meta name="description" content="Portfolio of Yogesh B — Full Stack Developer & Software Engineer with 5+ years of experience at VSplash Tech Labs and Air Calibre Systems. Expertise in React.js, Node.js, PHP, Laravel, MongoDB, MySQL, and AWS EC2.">
+  <meta name="description" content="Portfolio of Yogesh B — Full Stack Developer & Software Engineer with 5+ years of commercial experience at VSplash Tech Labs and Air Calibre Systems. Expertise across React.js, Node.js, PHP, Laravel, MongoDB, MySQL, and AWS EC2.">
   <meta name="keywords" content="Yogesh B, Full Stack Developer, Software Engineer, VSplash Tech Labs, Air Calibre Systems, React.js, Node.js, Laravel, PHP, MongoDB, PostgreSQL, AWS EC2, Portfolio">
   <meta name="author" content="Yogesh B">
   
   <!-- Open Graph / Social Sharing -->
-  <meta property="og:title" content="Yogesh B — Full Stack Developer & Software Engineer">
+  <meta property="og:title" content="Yogesh B — Full Stack Architect & Software Engineer">
   <meta property="og:description" content="5+ years of commercial software engineering experience across enterprise dashboards (Getty, Care, Zylo, Roster), GoDaddy API integrations, React SPAs, and full-stack architectures.">
-  <meta property="og:image" content="assets/images/hero-portrait.jpg">
+  <meta property="og:image" content="assets/images/yogesh-portrait-new.jpg">
   <meta property="og:type" content="website">
   
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
@@ -27,20 +27,31 @@
 </head>
 <body>
 
-  <!-- Background Canvas: Interactive Constellation Mesh -->
-  <div id="canvas-container">
+  <!-- ===================================================================
+       MULTI-LAYER BACKGROUND SYSTEM
+       Layer 1: Fluid Ambient Radiant Aura Canvas
+       Layer 2: Dotted Matrix & Architectural CAD Grid
+       Layer 3: Interactive Constellation Particles Canvas
+       Layer 4: Optional Ambient Motion Video Backdrop
+       =================================================================== -->
+
+  <!-- Layer 1: Fluid Radiant Aura Canvas (#FF4B32 & #929DA7 over #17191c) -->
+  <canvas id="fluid-canvas" class="fluid-canvas"></canvas>
+
+  <!-- Layer 2: Cybernetic CAD Dotted Matrix & Laser Scanner Sweep -->
+  <div class="bg-grid-lattice">
+    <div class="laser-scanner-line"></div>
+  </div>
+
+  <!-- Layer 3: Interactive Constellation Mesh -->
+  <div id="canvas-container" class="canvas-container">
     <canvas id="canvas-bg"></canvas>
   </div>
 
-  <!-- Ambient Motion Video Backdrop (Toggleable) -->
+  <!-- Layer 4: Ambient Motion Video Backdrop (Toggleable) -->
   <div id="video-backdrop" class="video-backdrop">
     <video src="assets/video/hero-bg.mp4" muted loop playsinline></video>
   </div>
-
-  <!-- Ambient Color Glow Blobs -->
-  <div class="ambient-glow ambient-glow-1"></div>
-  <div class="ambient-glow ambient-glow-2"></div>
-  <div class="ambient-glow ambient-glow-3"></div>
 
   <!-- Interactive Custom Cursor -->
   <div id="cursor-dot" class="custom-cursor-dot"></div>
@@ -49,14 +60,16 @@
   <!-- Content Wrapper -->
   <div class="content-wrapper">
 
-    <!-- Global Header & Floating HUD -->
+    <!-- ===================================================================
+         FLOATING MINIMAL GLASS HEADER
+         =================================================================== -->
     <header class="site-header">
       <div class="container nav-container">
         
-        <!-- Brand Logo -->
+        <!-- Brand Logo with Live Pulse -->
         <a href="#hero" class="brand-logo" onclick="window.soundEngine?.playClick()">
           <div class="logo-badge">&lt;/&gt;</div>
-          <div>
+          <div class="brand-text-wrap">
             <span class="brand-name">Yogesh B</span><span class="brand-dot">.</span>
             <span class="brand-tag">DEV</span>
           </div>
@@ -64,11 +77,11 @@
 
         <!-- Desktop Navigation Links -->
         <ul id="nav-menu" class="nav-menu">
-          <li><a href="#about" class="nav-link" onclick="window.soundEngine?.playClick()">About</a></li>
+          <li><a href="#disciplines" class="nav-link" onclick="window.soundEngine?.playClick()">Disciplines</a></li>
+          <li><a href="#projects" class="nav-link" onclick="window.soundEngine?.playClick()">Work</a></li>
           <li><a href="#experience" class="nav-link" onclick="window.soundEngine?.playClick()">Experience</a></li>
           <li><a href="#skills" class="nav-link" onclick="window.soundEngine?.playClick()">Skills</a></li>
-          <li><a href="#projects" class="nav-link" onclick="window.soundEngine?.playClick()">Projects</a></li>
-          <li><a href="#education" class="nav-link" onclick="window.soundEngine?.playClick()">Education</a></li>
+          <li><a href="#about" class="nav-link" onclick="window.soundEngine?.playClick()">About</a></li>
           <li><a href="#contact" class="nav-link" onclick="window.soundEngine?.playClick()">Contact</a></li>
         </ul>
 
@@ -76,28 +89,28 @@
         <div class="nav-actions">
           <!-- Terminal Trigger -->
           <button class="action-btn terminal-trigger" title="Open Interactive CLI Terminal" aria-label="Open Terminal">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
           </button>
 
           <!-- Sound FX Toggle -->
           <button id="sound-toggle-btn" class="action-btn" title="Toggle Sound FX" aria-label="Toggle Sound Effects">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
           </button>
 
-          <!-- Theme Toggle (Dark / Light) -->
+          <!-- Theme Toggle (Midnight Charcoal / Cool Steel Luxe) -->
           <button id="theme-toggle-btn" class="action-btn" title="Toggle Color Theme" aria-label="Toggle Theme">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           </button>
 
-          <!-- Resume Action -->
+          <!-- Resume Action Button -->
           <a href="https://drive.google.com/file/d/1bqSkS_GvY5UXWBCcUDE_82oHqTe4ww3L/view?usp" target="_blank" rel="noopener noreferrer" class="resume-nav-btn" onclick="window.soundEngine?.playClick()">
             <span>Resume</span>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </a>
 
           <!-- Mobile Hamburger Toggle -->
           <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle Mobile Menu">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
         </div>
 
@@ -105,7 +118,7 @@
     </header>
 
     <!-- ===================================================================
-         HERO SECTION
+         HERO SECTION (Matching Reference Aesthetic & Typographic Layout)
          =================================================================== -->
     <section id="hero" class="hero-section">
       <div class="container hero-grid">
@@ -113,47 +126,44 @@
         <!-- Left: Text & CTA Content -->
         <div class="hero-content">
 
-          <!-- Interactive Vector Blueprint Wordmark (Originkit WebGL Rig) -->
-          <div class="hero-wordmark-wrapper">
-            <div class="wordmark-label-tag">
-              <span class="pulse-dot-sm"></span>
-              <span>Interactive Vector Blueprint • CAD Rig</span>
-            </div>
-            <div id="vector-wordmark-host" class="vector-wordmark-host" title="Hover / Move pointer to interact with vector rig">
-              <h1 class="hero-title" style="margin: 0;">
-                Hi, I'm <span class="gradient-text">Yogesh B</span>
-              </h1>
-            </div>
+          <!-- Eyebrow Tag -->
+          <div class="hero-eyebrow-pill">
+            <span class="live-pulse-coral"></span>
+            <span class="eyebrow-text">FULL STACK ARCHITECT & SOFTWARE ENGINEER • 5+ YEARS</span>
           </div>
+
+          <!-- Monumental Display Typography: Create Beyond Limits Style -->
+          <h1 class="hero-display-title">
+            <span class="hero-title-line">Engineering</span>
+            <span class="hero-title-line">Beyond</span>
+            <span class="hero-title-line text-coral">Limits</span>
+          </h1>
 
           <!-- Dynamic Typewriter Title -->
           <div class="hero-typewriter-container">
             <span class="typewriter-prefix">Specializing in</span>
             <span class="typewriter-wrapper">
-              <span id="typewriter-target" class="typewriter-text">Full-Stack Developer</span>
+              <span id="typewriter-target" class="typewriter-text">Full-Stack Architect</span>
               <span class="typewriter-cursor"></span>
             </span>
           </div>
 
           <p class="hero-description">
-            Full Stack Developer with <strong>5+ years of experience</strong> architecting web applications, APIs, and enterprise systems across <strong>React.js</strong>, <strong>Node.js</strong>, <strong>PHP</strong>, <strong>Laravel</strong>, <strong>MySQL</strong>, and <strong>MongoDB</strong>. Proven track record scaling core product dashboards (<em>Getty</em>, <em>Care</em>, <em>Zylo</em>, <em>Roster</em>) and GoDaddy service automation at <strong>VSplash Tech Labs</strong> and <strong>Air Calibre Systems</strong>.
+            Architecting mission-critical enterprise systems, resilient full-stack applications, and high-throughput APIs across <strong>React.js</strong>, <strong>Node.js</strong>, <strong>PHP</strong>, <strong>Laravel</strong>, <strong>MySQL</strong>, and <strong>MongoDB</strong> with 5+ years of verified commercial impact at <strong>VSplash Tech Labs</strong> and <strong>Air Calibre Systems</strong>.
           </p>
 
-          <!-- Action Buttons -->
+          <!-- Action Buttons (Matching Sample Pill Style) -->
           <div class="hero-cta-group">
-            <a href="#projects" class="btn-primary" onclick="window.soundEngine?.playClick()">
-              <span>Explore My Work</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <a href="#projects" class="btn-hero-primary" onclick="window.soundEngine?.playClick()">
+              <span>Explore Selected Work</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
 
-            <a href="#contact" class="btn-secondary" onclick="window.soundEngine?.playClick()">
-              <span>Get in Touch</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            </a>
-
-            <button class="btn-outline terminal-trigger">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-              <span>Terminal CLI</span>
+            <button class="btn-hero-secondary terminal-trigger" onclick="window.soundEngine?.playClick()">
+              <span class="play-icon-circle">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </span>
+              <span>Interactive CLI Terminal</span>
             </button>
           </div>
 
@@ -176,262 +186,191 @@
 
             <a href="https://www.instagram.com/its_guru.__/" target="_blank" rel="noopener noreferrer" class="social-pill" onclick="window.soundEngine?.playClick()">
               <img src="assets/icons/instagram.svg" alt="Instagram">
-              <span>Instagram</span>
+              <span>@its_guru.__</span>
             </a>
           </div>
 
         </div>
 
-        <!-- Right: Interactive Architecture & Code Workstation (Zero image, pure interactive tech) -->
-        <div class="hero-visual">
-          <div class="workstation-container" id="hero-workstation">
+        <!-- Right: Futuristic 3D Portrait Card featuring Yogesh's actual photo -->
+        <div class="hero-visual" id="hero-visual-host">
+          <div class="hero-portrait-card" id="hero-portrait-card">
             
-            <!-- Ambient Cybernetic Glow Backdrop -->
-            <div class="workstation-glow"></div>
+            <!-- Ambient Radiant Coral Energy Glow -->
+            <div class="portrait-coral-glow"></div>
+            <div class="portrait-fluid-ring"></div>
+            <div class="portrait-fluid-ring-outer"></div>
 
-            <!-- Interactive Code Workstation Card -->
-            <div class="workstation-card" id="workstation-card">
+            <!-- Glassmorphic Portrait Frame -->
+            <div class="portrait-frame">
+              <img src="assets/images/yogesh-portrait-new.jpg" alt="Yogesh B — Full Stack Developer & Software Engineer" class="portrait-img">
               
-              <!-- Window Topbar -->
-              <div class="workstation-topbar">
-                <div class="window-controls">
-                  <span class="control-dot dot-red"></span>
-                  <span class="control-dot dot-yellow"></span>
-                  <span class="control-dot dot-green"></span>
-                </div>
-                
-                <div class="workstation-title">
-                  <span class="env-tag">PROD_NODE</span>
-                  <span id="active-file-title" class="file-title">AirCalibreERP.ts</span>
-                </div>
-
-                <div class="live-status-ping" title="Server Cluster Live">
-                  <span class="live-ping-dot"></span>
-                  <span class="live-ping-text">ONLINE • 18ms</span>
-                </div>
-              </div>
-
-              <!-- File Tabs -->
-              <div class="workstation-tabs">
-                <button type="button" class="tab-btn active" data-tab="aircalibre" id="tab-aircalibre">
-                  <span class="tab-icon">⚙️</span>
-                  <span>AirCalibreERP.ts</span>
-                </button>
-                <button type="button" class="tab-btn" data-tab="fooddelivery" id="tab-fooddelivery">
-                  <span class="tab-icon">🍔</span>
-                  <span>FoodDeliveryAPI.js</span>
-                </button>
-                <button type="button" class="tab-btn" data-tab="schema" id="tab-schema">
-                  <span class="tab-icon">🐬</span>
-                  <span>NeonPostgres.sql</span>
-                </button>
-              </div>
-
-              <!-- Code Viewport -->
-              <div class="workstation-code-body">
-                <div class="code-line-numbers">
-                  <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                  <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-                  <span>11</span><span>12</span><span>13</span>
-                </div>
-                <div class="code-content-container" id="code-display">
-                  <!-- Populated dynamically by js/main.js -->
-                </div>
-              </div>
-
-              <!-- Interactive Action Bar -->
-              <div class="workstation-footer">
-                <div class="footer-telemetry">
-                  <span class="telemetry-item">
-                    <span class="telemetry-label">MEMORY:</span>
-                    <span class="telemetry-val">124MB / 512MB</span>
-                  </span>
-                  <span class="telemetry-item">
-                    <span class="telemetry-label">STACK:</span>
-                    <span class="telemetry-val">Node v20 + PHP 8.2</span>
-                  </span>
-                </div>
-
-                <button type="button" class="run-sim-btn" id="btn-run-simulation" title="Execute Simulated API Request">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3"/>
-                  </svg>
-                  <span>Execute Endpoint</span>
-                </button>
-              </div>
-
-              <!-- Live Execution Output Drawer -->
-              <div class="simulation-output-drawer" id="simulation-output">
-                <div class="drawer-header">
-                  <span class="drawer-title">⚡ HTTP/2 200 OK • Execution Time: 22ms</span>
-                  <button type="button" class="drawer-close" id="btn-close-sim">&times;</button>
-                </div>
-                <pre class="drawer-json" id="sim-json-output">
-{
-  "status": "success",
-  "audit_cluster": "Air Calibre Enterprise Cleanroom Suite",
-  "validation_report": "HEPA-FLOW-PASS",
-  "db_sync": "Neon PostgreSQL (1,420 rows indexed)",
-  "latency": "22ms",
-  "engineer": "Yogesh B (Full Stack Developer)"
-}</pre>
-              </div>
-
+              <!-- Translucent Coral Gradient Lighting Overlay -->
+              <div class="portrait-gradient-overlay"></div>
+              
+              <!-- CAD Coordinate Crosshairs -->
+              <div class="cad-crosshair top-left"><span>+</span> [01:SYS]</div>
+              <div class="cad-crosshair top-right"><span>+</span> [IST_2026]</div>
+              <div class="cad-crosshair bottom-left"><span>+</span> [NODE_OK]</div>
+              <div class="cad-crosshair bottom-right"><span>+</span> [5+ YRS]</div>
             </div>
 
-            <!-- Floating Architecture Satellites -->
-            <div class="floating-tech-badge badge-top-left">
-              <span class="tech-badge-dot" style="background:#00f2fe; box-shadow:0 0 8px #00f2fe;"></span>
-              <span>React.js & Redux</span>
+            <!-- Floating Glassmorphic Telemetry Badges (3D Parallax) -->
+            <div class="floating-badge badge-top-right">
+              <div class="badge-icon">🚀</div>
+              <div>
+                <div class="badge-title">5+ Years Commercial Dev</div>
+                <div class="badge-subtitle">VSplash Tech Labs & Air Calibre</div>
+              </div>
             </div>
 
-            <div class="floating-tech-badge badge-top-right">
-              <span class="tech-badge-dot" style="background:#22c55e; box-shadow:0 0 8px #22c55e;"></span>
-              <span>Node.js & Express</span>
+            <div class="floating-badge badge-bottom-left">
+              <div class="badge-pulse-dot"></div>
+              <div>
+                <div class="badge-title">Open for Opportunities</div>
+                <div class="badge-subtitle">Remote Worldwide & On-Site</div>
+              </div>
             </div>
 
-            <div class="floating-tech-badge badge-bottom-left">
-              <span class="tech-badge-dot" style="background:#8b5cf6; box-shadow:0 0 8px #8b5cf6;"></span>
-              <span>Core PHP & Laravel</span>
-            </div>
-
-            <div class="floating-tech-badge badge-bottom-right">
-              <span class="tech-badge-dot" style="background:#f59e0b; box-shadow:0 0 8px #f59e0b;"></span>
-              <span>PostgreSQL & Render</span>
+            <div class="floating-badge badge-bottom-right">
+              <div class="badge-icon">⚡</div>
+              <div>
+                <div class="badge-title">Full-Stack Architecture</div>
+                <div class="badge-subtitle">React • Node • PHP • SQL</div>
+              </div>
             </div>
 
           </div>
         </div>
 
-      </div>
-
-      <!-- Ambient Background Switcher Pill -->
-      <div class="bg-switch-control">
-        <span>Backdrop:</span>
-        <button id="bg-btn-canvas" class="active">Constellation</button>
-        <button id="bg-btn-video">Motion Video</button>
       </div>
     </section>
 
     <!-- ===================================================================
-         STATS BANNER
+         METRICS / CREDIBILITY STRIP
          =================================================================== -->
-    <div class="container stats-banner">
-      <div class="stats-grid">
-        <div class="stat-item reveal-on-scroll delay-100">
-          <div class="stat-icon">📅</div>
-          <div>
-            <div class="stat-number">5+</div>
-            <div class="stat-label">Years Software Engineering</div>
+    <section class="metrics-strip">
+      <div class="container">
+        <div class="metrics-grid">
+          
+          <div class="metric-item">
+            <div class="metric-number">5+ <span class="metric-plus text-coral">Yrs</span></div>
+            <div class="metric-label">Commercial Experience</div>
           </div>
-        </div>
 
-        <div class="stat-item reveal-on-scroll delay-200">
-          <div class="stat-icon">🏢</div>
-          <div>
-            <div class="stat-number">2</div>
-            <div class="stat-label">Tech Companies (VSplash & Air Calibre)</div>
+          <div class="metric-item">
+            <div class="metric-number">2 <span class="metric-plus text-coral">Orgs</span></div>
+            <div class="metric-label">VSplash & Air Calibre</div>
           </div>
-        </div>
 
-        <div class="stat-item reveal-on-scroll delay-300">
-          <div class="stat-icon">📊</div>
-          <div>
-            <div class="stat-number">4+</div>
-            <div class="stat-label">Core Enterprise Dashboards</div>
+          <div class="metric-item">
+            <div class="metric-number">7+ <span class="metric-plus text-coral">Feats</span></div>
+            <div class="metric-label">Live Systems & Previews</div>
           </div>
-        </div>
 
-        <div class="stat-item reveal-on-scroll delay-400">
-          <div class="stat-icon">🤖</div>
-          <div>
-            <div class="stat-number">AI-Assisted</div>
-            <div class="stat-label">Optimized Code Analysis & Quality</div>
+          <div class="metric-item">
+            <div class="metric-number">100<span class="metric-plus text-coral">%</span></div>
+            <div class="metric-label">Automated Audit Calcs</div>
           </div>
+
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- ===================================================================
-         ABOUT SECTION
+         IDEA-WISE CORE DISCIPLINES & SERVICES
          =================================================================== -->
-    <section id="about" class="about-section">
+    <section id="disciplines" class="disciplines-section">
       <div class="container">
         
         <div class="section-header reveal-on-scroll">
-          <span class="section-tag">Professional Summary</span>
-          <h2 class="section-title">Architecting Scalable <span class="gradient-text">Full-Stack Solutions</span></h2>
+          <span class="section-tag">Core Disciplines</span>
+          <h2 class="section-title">Idea-Wise <span class="text-coral">Engineering Services</span></h2>
           <p class="section-subtitle">
-            Hands-on software engineer with deep expertise across frontend, backend, APIs, cloud deployments, and high-performance databases.
+            Bridging conceptual design, complex enterprise workflows, and robust engineering architectures.
           </p>
         </div>
 
-        <div class="about-grid">
+        <div class="disciplines-grid">
           
-          <!-- Left: About Visual -->
-          <div class="about-card-left reveal-on-scroll">
-            <div class="about-photo-wrapper">
-              <img src="assets/images/about-photo.png" alt="Yogesh B" loading="lazy">
+          <!-- Discipline 1: Enterprise ERP & Compliance Automation -->
+          <div class="discipline-card glow-border reveal-on-scroll">
+            <div class="discipline-top">
+              <span class="discipline-num text-coral">01</span>
             </div>
-            
-            <div class="about-badge-card">
-              <div class="about-badge-icon">🎓</div>
-              <div>
-                <div class="about-badge-title">B.E. in ECE (2019)</div>
-                <div class="about-badge-subtitle">Hardware Rigor + Modern Software Craft</div>
-              </div>
+            <h3 class="discipline-title">Compliance ERP & Calculation Engines</h3>
+            <div class="discipline-idea">
+              <strong>The Idea:</strong> Replace error-prone manual testing spreadsheets with automated, role-based calculation portals that deliver certified compliance reports instantly.
+            </div>
+            <p class="discipline-desc">
+              Engineered for Air Calibre Systems. Converts on-site airflow velocities, HEPA filter efficiency formulas, and particle count readings into verifiable, export-ready audit certificates.
+            </p>
+            <div class="discipline-tags">
+              <span>Core PHP</span>
+              <span>MySQL</span>
+              <span>Calculation Engines</span>
+              <span>PDF Automation</span>
             </div>
           </div>
 
-          <!-- Right: Narrative & Engineering Pillars -->
-          <div class="about-text-content reveal-on-scroll delay-200">
-            <p class="about-lead">
-              Experienced in building and scaling mission-critical web applications across React.js, JavaScript, Node.js, PHP, Laravel, MySQL, and MongoDB.
-            </p>
-
-            <p class="about-paragraph">
-              Throughout my <strong>5+ years in professional software engineering</strong>, I have contributed across the full product lifecycle: data mapping, automated exports, validation engines, pagination, query optimization, and release-readiness activities. At <strong>VSplash Tech Labs Private Ltd.</strong> (Remote), I developed and maintained core enterprise product dashboards (<em>Getty</em>, <em>Care</em>, <em>Zylo</em>, <em>Roster</em>), automated CRM order processing with GoDaddy APIs, and spearheaded legacy modernization into modern React & TypeScript SPAs.
-            </p>
-
-            <p class="about-paragraph">
-              Previously at <strong>Air Calibre Systems</strong> (Chennai), I architected claim management systems, validation reporting portals, and full-scale e-commerce platforms using Core PHP, Laravel, React.js, Redux, and MongoDB. I actively integrate AI-assisted engineering tools (such as Claude and Copilot) to accelerate code analysis, test coverage, debugging, and continuous refactoring.
-            </p>
-
-            <!-- 4 Pillars of Engineering -->
-            <div class="about-pillars">
-              <div class="pillar-card">
-                <div class="pillar-header">
-                  <span class="pillar-icon">📊</span>
-                  <span class="pillar-title">Enterprise Dashboards</span>
-                </div>
-                <p class="pillar-desc">Multi-tenant dashboards (Getty, Care, Zylo, Roster) with role-based data analytics and export pipelines.</p>
-              </div>
-
-              <div class="pillar-card">
-                <div class="pillar-header">
-                  <span class="pillar-icon">🔄</span>
-                  <span class="pillar-title">APIs & Service Automation</span>
-                </div>
-                <p class="pillar-desc">RESTful APIs, WebSockets, GoDaddy API integrations, CRM order lifecycles, and webhook synchronizations.</p>
-              </div>
-
-              <div class="pillar-card">
-                <div class="pillar-header">
-                  <span class="pillar-icon">⚛️</span>
-                  <span class="pillar-title">SPA & Modernization</span>
-                </div>
-                <p class="pillar-desc">Decomposing monolithic views into typed, scalable React.js and TypeScript SPAs styled with Tailwind CSS.</p>
-              </div>
-
-              <div class="pillar-card">
-                <div class="pillar-header">
-                  <span class="pillar-icon">☁️</span>
-                  <span class="pillar-title">DevOps & Cloud Pipelines</span>
-                </div>
-                <p class="pillar-desc">AWS EC2, Docker, Nginx, Firebase Hosting, CI/CD pipelines, Git/GitHub, and Postman test automation.</p>
-              </div>
+          <!-- Discipline 2: High-Concurrency Product Dashboards -->
+          <div class="discipline-card glow-border reveal-on-scroll delay-100">
+            <div class="discipline-top">
+              <span class="discipline-num text-coral">02</span>
             </div>
+            <h3 class="discipline-title">Mission-Critical Product Suites</h3>
+            <div class="discipline-idea">
+              <strong>The Idea:</strong> Unify operational data, team rosters, and business metrics into sub-second, highly responsive dashboards for distributed remote teams.
+            </div>
+            <p class="discipline-desc">
+              Developed and maintained core product dashboards (Getty, Care, Zylo, Roster) at VSplash Tech Labs Private Ltd. Spearheaded legacy view modernization into typed React & TypeScript SPAs.
+            </p>
+            <div class="discipline-tags">
+              <span>React.js</span>
+              <span>TypeScript</span>
+              <span>Doctrine ORM</span>
+              <span>MongoDB & MySQL</span>
+            </div>
+          </div>
 
+          <!-- Discipline 3: API Integrations & Service Provisioning -->
+          <div class="discipline-card glow-border reveal-on-scroll delay-200">
+            <div class="discipline-top">
+              <span class="discipline-num text-coral">03</span>
+            </div>
+            <h3 class="discipline-title">Third-Party APIs & Service Automation</h3>
+            <div class="discipline-idea">
+              <strong>The Idea:</strong> Eliminate manual provisioning bottlenecks through automated CRM order lifecycles and direct GoDaddy product API synchronizations.
+            </div>
+            <p class="discipline-desc">
+              Implemented automated domain and hosting provisioning pipelines, real-time webhooks, WebSocket live streaming, and high-throughput RESTful endpoints with sub-second response times.
+            </p>
+            <div class="discipline-tags">
+              <span>GoDaddy APIs</span>
+              <span>RESTful APIs</span>
+              <span>WebSockets</span>
+              <span>Postman CI/CD</span>
+            </div>
+          </div>
+
+          <!-- Discipline 4: Cross-Platform Apps & Cloud Deployments -->
+          <div class="discipline-card glow-border reveal-on-scroll delay-300">
+            <div class="discipline-top">
+              <span class="discipline-num text-coral">04</span>
+            </div>
+            <h3 class="discipline-title">Full-Stack SPAs & Cloud Infrastructure</h3>
+            <div class="discipline-idea">
+              <strong>The Idea:</strong> Deliver fluid, cross-platform ordering and discovery applications backed by serverless cloud SQL and automated deployments.
+            </div>
+            <p class="discipline-desc">
+              Engineered mobile-first food delivery applications with Neon serverless PostgreSQL, deployed on Render, and built responsive tourism guides on Netlify.
+            </p>
+            <div class="discipline-tags">
+              <span>React Native</span>
+              <span>Node.js / Express</span>
+              <span>Neon PostgreSQL</span>
+              <span>AWS EC2 & Docker</span>
+            </div>
           </div>
 
         </div>
@@ -440,14 +379,44 @@
     </section>
 
     <!-- ===================================================================
-         EXPERIENCE SECTION (VSplash Tech Labs & Air Calibre Systems)
+         SELECTED WORK & VERIFIED PROJECTS (Idea-Wise Showcase)
+         =================================================================== -->
+    <section id="projects" class="projects-section">
+      <div class="container">
+        
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">Featured Engineering</span>
+          <h2 class="section-title">Selected Work & <span class="text-coral">Live Deployments</span></h2>
+          <p class="section-subtitle">
+            Explore commercial ERP validation systems, automated report calculation engines, and interactive web applications.
+          </p>
+        </div>
+
+        <!-- Project Filter Bar -->
+        <div class="projects-filter-bar reveal-on-scroll">
+          <button class="filter-btn project-filter-btn active" data-filter="all">All Projects (7)</button>
+          <button class="filter-btn project-filter-btn" data-filter="enterprise">Web Portals & Reports Modules</button>
+          <button class="filter-btn project-filter-btn" data-filter="react">React & Full-Stack</button>
+          <button class="filter-btn project-filter-btn" data-filter="culture">Cultural Showcase</button>
+        </div>
+
+        <!-- Dynamic Projects Container (Rendered via js/projects.js) -->
+        <div id="projects-container" class="projects-grid">
+          <!-- Populated by ProjectsManager in js/projects.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         COMMERCIAL EXPERIENCE (VSplash Tech Labs & Air Calibre Systems)
          =================================================================== -->
     <section id="experience" class="experience-section">
       <div class="container">
         
         <div class="section-header reveal-on-scroll">
           <span class="section-tag">Career Milestones</span>
-          <h2 class="section-title">Commercial <span class="gradient-text">Experience</span></h2>
+          <h2 class="section-title">Commercial <span class="text-coral">Experience</span></h2>
           <p class="section-subtitle">
             5+ years of delivering enterprise product dashboards, third-party API automation, and modern web applications.
           </p>
@@ -478,35 +447,35 @@
 
             <div class="exp-highlights">
               <div class="exp-highlight-item">
-                <span class="check-bullet">✓</span>
+                <span class="check-bullet text-coral">✓</span>
                 <div class="exp-highlight-text">
                   <strong>Core Product Dashboards:</strong> Developed and maintained enterprise dashboards (<strong>Getty, Care, Zylo, Roster</strong>) using PHP, Doctrine ORM, JavaScript ES6+, MongoDB, and MySQL.
                 </div>
               </div>
 
               <div class="exp-highlight-item">
-                <span class="check-bullet">✓</span>
+                <span class="check-bullet text-coral">✓</span>
                 <div class="exp-highlight-text">
                   <strong>Reporting Modules & Pipelines:</strong> Designed and optimized reporting modules, backend business logic, and automated data retrieval pipelines supporting role-based operational data.
                 </div>
               </div>
 
               <div class="exp-highlight-item">
-                <span class="check-bullet">✓</span>
+                <span class="check-bullet text-coral">✓</span>
                 <div class="exp-highlight-text">
                   <strong>CRM & GoDaddy API Integration:</strong> Implemented CRM order-handling workflows and integrated GoDaddy product/service management functionality for automated third-party provisioning.
                 </div>
               </div>
 
               <div class="exp-highlight-item">
-                <span class="check-bullet">✓</span>
+                <span class="check-bullet text-coral">✓</span>
                 <div class="exp-highlight-text">
                   <strong>Modernization to SPAs:</strong> Led the modernization of legacy monolithic web views into scalable, modular SPAs using <strong>React.js</strong>, <strong>TypeScript</strong>, <strong>Node.js</strong>, and <strong>Tailwind CSS</strong>.
                 </div>
               </div>
 
               <div class="exp-highlight-item">
-                <span class="check-bullet">✓</span>
+                <span class="check-bullet text-coral">✓</span>
                 <div class="exp-highlight-text">
                   <strong>Python Analytics & AWS Cloud:</strong> Integrated Python-based micro-workflows for specialized data processing and backend analytics; utilized AWS EC2, Postman, Git/GitHub, and MySQL Workbench for continuous integration and deployments.
                 </div>
@@ -552,35 +521,35 @@
 
             <div class="exp-highlights">
               <div class="exp-highlight-item">
-                <span class="check-bullet">✓</span>
+                <span class="check-bullet text-coral">✓</span>
                 <div class="exp-highlight-text">
                   <strong>Claim Management & Dashboards:</strong> Architected and delivered claim management systems, analytical dashboards, and e-commerce platforms using Core PHP, Laravel, React.js, and MySQL.
                 </div>
               </div>
 
               <div class="exp-highlight-item">
-                <span class="check-bullet">✓</span>
+                <span class="check-bullet text-coral">✓</span>
                 <div class="exp-highlight-text">
                   <strong>RESTful Endpoints & Workflows:</strong> Built interactive claim management workflows and RESTful endpoints using Core PHP, AJAX, and MySQL with sub-second query execution.
                 </div>
               </div>
 
               <div class="exp-highlight-item">
-                <span class="check-bullet">✓</span>
+                <span class="check-bullet text-coral">✓</span>
                 <div class="exp-highlight-text">
                   <strong>E-Commerce Platform:</strong> Developed an end-to-end e-commerce platform using <strong>Laravel</strong>, <strong>React.js</strong>, <strong>Redux</strong>, <strong>Tailwind CSS</strong>, and <strong>MongoDB</strong>.
                 </div>
               </div>
 
               <div class="exp-highlight-item">
-                <span class="check-bullet">✓</span>
+                <span class="check-bullet text-coral">✓</span>
                 <div class="exp-highlight-text">
                   <strong>Data-Driven Reporting:</strong> Created dynamic reporting dashboards with optimized query performance and seamless API-driven interfaces for cleanroom compliance audits.
                 </div>
               </div>
 
               <div class="exp-highlight-item">
-                <span class="check-bullet">✓</span>
+                <span class="check-bullet text-coral">✓</span>
                 <div class="exp-highlight-text">
                   <strong>Hosting & Migrations:</strong> Managed hosting, deployments, and database migrations across cPanel and cloud hosting environments using Git and FileZilla.
                 </div>
@@ -607,16 +576,16 @@
     </section>
 
     <!-- ===================================================================
-         SKILLS SECTION
+         TECHNICAL ARSENAL (SKILLS)
          =================================================================== -->
     <section id="skills" class="skills-section">
       <div class="container">
         
         <div class="section-header reveal-on-scroll">
           <span class="section-tag">Technical Competencies</span>
-          <h2 class="section-title">My Technical <span class="gradient-text">Arsenal</span></h2>
+          <h2 class="section-title">My Technical <span class="text-coral">Arsenal</span></h2>
           <p class="section-subtitle">
-            A comprehensive matrix of programming languages, frontend frameworks, backend runtimes, databases, and DevOps tools.
+            A comprehensive matrix of frontend frameworks, backend runtimes, databases, and DevOps tools.
           </p>
         </div>
 
@@ -636,7 +605,9 @@
           <div class="skill-card reveal-on-scroll" data-category="frontend">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">⚛️</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/react.svg" alt="React.js">
+                </div>
                 <div>
                   <div class="skill-name">React.js & Redux</div>
                   <div class="skill-category-tag">Frontend</div>
@@ -656,7 +627,9 @@
           <div class="skill-card reveal-on-scroll" data-category="frontend">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">📘</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/typescript.svg" alt="TypeScript">
+                </div>
                 <div>
                   <div class="skill-name">JavaScript & TypeScript</div>
                   <div class="skill-category-tag">Languages</div>
@@ -676,7 +649,9 @@
           <div class="skill-card reveal-on-scroll" data-category="backend">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">🟢</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/nodejs.svg" alt="Node.js">
+                </div>
                 <div>
                   <div class="skill-name">Node.js & Express</div>
                   <div class="skill-category-tag">Backend</div>
@@ -696,7 +671,9 @@
           <div class="skill-card reveal-on-scroll" data-category="backend">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">🐘</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/php.svg" alt="PHP & Laravel">
+                </div>
                 <div>
                   <div class="skill-name">PHP, Laravel & Doctrine</div>
                   <div class="skill-category-tag">Backend</div>
@@ -716,7 +693,9 @@
           <div class="skill-card reveal-on-scroll" data-category="database">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">🍃</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/mongodb.svg" alt="MongoDB">
+                </div>
                 <div>
                   <div class="skill-name">MongoDB & PostgreSQL</div>
                   <div class="skill-category-tag">Databases</div>
@@ -736,7 +715,9 @@
           <div class="skill-card reveal-on-scroll" data-category="database">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">🐬</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/mysql.svg" alt="MySQL">
+                </div>
                 <div>
                   <div class="skill-name">MySQL Database</div>
                   <div class="skill-category-tag">Databases</div>
@@ -756,7 +737,9 @@
           <div class="skill-card reveal-on-scroll" data-category="frontend">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">🌊</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/tailwind.svg" alt="Tailwind CSS">
+                </div>
                 <div>
                   <div class="skill-name">Tailwind & Bootstrap 5</div>
                   <div class="skill-category-tag">Frontend</div>
@@ -776,7 +759,9 @@
           <div class="skill-card reveal-on-scroll" data-category="frontend">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">📱</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/react-native.svg" alt="React Native">
+                </div>
                 <div>
                   <div class="skill-name">React Native</div>
                   <div class="skill-category-tag">Mobile</div>
@@ -796,7 +781,9 @@
           <div class="skill-card reveal-on-scroll" data-category="backend">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">🐍</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/python.svg" alt="Python">
+                </div>
                 <div>
                   <div class="skill-name">Python & Micro-Workflows</div>
                   <div class="skill-category-tag">Backend</div>
@@ -812,11 +799,13 @@
             <p class="skill-desc">Data processing pipelines, backend analytics tasks, automation scripts, Django basics.</p>
           </div>
 
-          <!-- Third-Party APIs (GoDaddy, Maps, Salesforce) -->
+          <!-- Third-Party APIs (GoDaddy, Maps) -->
           <div class="skill-card reveal-on-scroll" data-category="database">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">🔌</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/api.svg" alt="APIs & Architecture">
+                </div>
                 <div>
                   <div class="skill-name">APIs & Integrations</div>
                   <div class="skill-category-tag">APIs & Architecture</div>
@@ -836,7 +825,9 @@
           <div class="skill-card reveal-on-scroll" data-category="tools">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">☁️</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/docker-aws.svg" alt="AWS EC2 & Docker">
+                </div>
                 <div>
                   <div class="skill-name">AWS EC2 & Docker</div>
                   <div class="skill-category-tag">Cloud & DevOps</div>
@@ -852,11 +843,13 @@
             <p class="skill-desc">AWS EC2 instance provisioning, Docker containerization, Firebase Hosting, Nginx, Apache.</p>
           </div>
 
-          <!-- Security & Auth (JWT, OAuth, RBAC) -->
+          <!-- Security & Auth -->
           <div class="skill-card reveal-on-scroll" data-category="tools">
             <div class="skill-header">
               <div class="skill-icon-name">
-                <div class="skill-icon">🛡️</div>
+                <div class="skill-icon">
+                  <img src="assets/icons/skills/security.svg" alt="Security & CI/CD">
+                </div>
                 <div>
                   <div class="skill-name">Security & CI/CD</div>
                   <div class="skill-category-tag">Security & DevOps</div>
@@ -869,7 +862,7 @@
                 <div class="skill-meter-fill" style="width: 92%;"></div>
               </div>
             </div>
-            <p class="skill-desc">JWT, OAuth 2.0, RBAC, Firebase Auth, Git/GitHub, Bitbucket, Postman, Jest testing.</p>
+            <p class="skill-desc">JWT, OAuth 2.0, RBAC, Firebase Auth, Git/GitHub, Postman, Jest testing.</p>
           </div>
 
         </div>
@@ -878,30 +871,88 @@
     </section>
 
     <!-- ===================================================================
-         PROJECTS SECTION
+         ABOUT SECTION
          =================================================================== -->
-    <section id="projects" class="projects-section">
+    <section id="about" class="about-section">
       <div class="container">
         
         <div class="section-header reveal-on-scroll">
-          <span class="section-tag">Featured Engineering</span>
-          <h2 class="section-title">Air Calibre Systems & <span class="gradient-text">Featured Work</span></h2>
+          <span class="section-tag">Professional Narrative</span>
+          <h2 class="section-title">Architecting Resilient <span class="text-coral">Full-Stack Solutions</span></h2>
           <p class="section-subtitle">
-            Commercial ERP validation portals, calculation engines, and interactive web applications with live demos and verified UI previews.
+            Hands-on software engineer with deep expertise across frontend, backend, APIs, cloud deployments, and high-performance databases.
           </p>
         </div>
 
-        <!-- Project Filter Bar -->
-        <div class="projects-filter-bar reveal-on-scroll">
-          <button class="filter-btn project-filter-btn active" data-filter="all">All Projects (7)</button>
-          <button class="filter-btn project-filter-btn" data-filter="enterprise">Air Calibre Systems & ERP</button>
-          <button class="filter-btn project-filter-btn" data-filter="react">React & Web Applications</button>
-          <button class="filter-btn project-filter-btn" data-filter="culture">Showcase & Tourism</button>
-        </div>
+        <div class="about-grid">
+          
+          <!-- Left: About Visual with Photo -->
+          <div class="about-card-left reveal-on-scroll">
+            <div class="about-photo-wrapper">
+              <img src="assets/images/about-photo.png" alt="Yogesh B" loading="lazy">
+              <div class="about-photo-glow"></div>
+            </div>
+            
+            <div class="about-badge-card">
+              <div class="about-badge-icon">🎓</div>
+              <div>
+                <div class="about-badge-title">B.E. in ECE (2019)</div>
+                <div class="about-badge-subtitle">Hardware Rigor + Modern Software Craft</div>
+              </div>
+            </div>
+          </div>
 
-        <!-- Dynamic Projects Container (Rendered via js/projects.js) -->
-        <div id="projects-container" class="projects-grid">
-          <!-- Populated by ProjectsManager in js/projects.js -->
+          <!-- Right: Narrative & Engineering Pillars -->
+          <div class="about-text-content reveal-on-scroll delay-200">
+            <p class="about-lead">
+              Experienced in building and scaling mission-critical web applications across React.js, JavaScript, Node.js, PHP, Laravel, MySQL, and MongoDB.
+            </p>
+
+            <p class="about-paragraph">
+              Throughout my <strong>5+ years in professional software engineering</strong>, I have contributed across the full product lifecycle: data mapping, automated exports, validation engines, pagination, query optimization, and release-readiness activities. At <strong>VSplash Tech Labs Private Ltd.</strong> (Remote), I developed and maintained core enterprise product dashboards (<em>Getty</em>, <em>Care</em>, <em>Zylo</em>, <em>Roster</em>), automated CRM order processing with GoDaddy APIs, and spearheaded legacy modernization into modern React & TypeScript SPAs.
+            </p>
+
+            <p class="about-paragraph">
+              Previously at <strong>Air Calibre Systems</strong> (Chennai), I architected claim management systems, validation reporting portals, and full-scale e-commerce platforms using Core PHP, Laravel, React.js, Redux, and MongoDB. I actively integrate modern engineering practices and AI-assisted workflows to accelerate test coverage, debugging, and continuous refactoring.
+            </p>
+
+            <!-- 4 Pillars of Engineering -->
+            <div class="about-pillars">
+              <div class="pillar-card">
+                <div class="pillar-header">
+                  <span class="pillar-icon">📊</span>
+                  <span class="pillar-title">Enterprise Dashboards</span>
+                </div>
+                <p class="pillar-desc">Multi-tenant dashboards (Getty, Care, Zylo, Roster) with role-based data analytics and export pipelines.</p>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-header">
+                  <span class="pillar-icon">🔄</span>
+                  <span class="pillar-title">APIs & Service Automation</span>
+                </div>
+                <p class="pillar-desc">RESTful APIs, WebSockets, GoDaddy API integrations, CRM order lifecycles, and webhook synchronizations.</p>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-header">
+                  <span class="pillar-icon">⚛️</span>
+                  <span class="pillar-title">SPA & Modernization</span>
+                </div>
+                <p class="pillar-desc">Decomposing monolithic views into typed, scalable React.js and TypeScript SPAs styled with Tailwind CSS.</p>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-header">
+                  <span class="pillar-icon">☁️</span>
+                  <span class="pillar-title">DevOps & Cloud Pipelines</span>
+                </div>
+                <p class="pillar-desc">AWS EC2, Docker, Nginx, Firebase Hosting, CI/CD pipelines, Git/GitHub, and Postman test automation.</p>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
       </div>
@@ -915,7 +966,7 @@
         
         <div class="section-header reveal-on-scroll">
           <span class="section-tag">Academic Credentials</span>
-          <h2 class="section-title">Educational <span class="gradient-text">Foundation</span></h2>
+          <h2 class="section-title">Educational <span class="text-coral">Foundation</span></h2>
           <p class="section-subtitle">
             Engineering discipline combining hardware rigor, digital logic, and modern full-stack web software architecture.
           </p>
@@ -970,9 +1021,9 @@
         
         <div class="section-header reveal-on-scroll">
           <span class="section-tag">Let's Connect</span>
-          <h2 class="section-title">Start a <span class="gradient-text">Conversation</span></h2>
+          <h2 class="section-title">Start a <span class="text-coral">Conversation</span></h2>
           <p class="section-subtitle">
-            Looking for a Senior Software Developer or Full-Stack Engineer for remote roles, enterprise projects, or technical consulting? Reach out directly.
+            Looking for a Senior Software Developer or Full-Stack Architect for remote roles, enterprise projects, or technical consulting? Reach out directly.
           </p>
         </div>
 
@@ -996,7 +1047,7 @@
               <!-- Contact Channels -->
               <div class="contact-channels">
                 
-                <!-- Phone (From Resume) -->
+                <!-- Phone -->
                 <div class="channel-item">
                   <div class="channel-icon">
                     <img src="assets/icons/phone.svg" alt="Phone">
@@ -1020,7 +1071,7 @@
                   <button class="copy-btn copy-trigger" data-copy="yogesh0398@gmail.com" title="Copy email address">Copy</button>
                 </div>
 
-                <!-- Location -->
+                <!-- Base Location -->
                 <div class="channel-item">
                   <div class="channel-icon">
                     <img src="assets/icons/location.svg" alt="Location">
@@ -1045,7 +1096,7 @@
 
                 <!-- Instagram Channel -->
                 <a href="https://www.instagram.com/its_guru.__/" target="_blank" rel="noopener noreferrer" class="channel-item" onclick="window.soundEngine?.playClick()">
-                  <div class="channel-icon" style="background: rgba(225, 48, 108, 0.15);">
+                  <div class="channel-icon" style="background: rgba(255, 75, 50, 0.15);">
                     <img src="assets/icons/instagram.svg" alt="Instagram">
                   </div>
                   <div class="channel-details">
@@ -1080,7 +1131,7 @@
 
               <div class="form-group">
                 <label for="form-subject" class="form-label">Subject</label>
-                <input type="text" id="form-subject" class="form-input" placeholder="e.g. Senior Software Engineer Role / Project Collaboration">
+                <input type="text" id="form-subject" class="form-input" placeholder="e.g. Full-Stack / Software Engineer Role">
               </div>
 
               <div class="form-group">
@@ -1090,7 +1141,7 @@
 
               <button type="submit" class="submit-btn">
                 <span>Send Direct Message</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
               </button>
             </form>
           </div>
@@ -1109,17 +1160,17 @@
         <div class="footer-content">
           <div class="footer-left">
             <div class="footer-brand">
-              <span class="gradient-text">Yogesh B</span><span class="brand-dot">.</span>
+              <span class="text-coral">Yogesh B</span><span class="brand-dot">.</span>
             </div>
             <p class="footer-desc">
-              Full Stack Developer & Software Engineer with 5+ years of experience across VSplash Tech Labs and Air Calibre Systems. Building high-performance web applications, enterprise dashboards, and scalable APIs.
+              Full Stack Architect & Software Engineer with 5+ years of verified commercial impact across VSplash Tech Labs and Air Calibre Systems. Building high-performance web applications, enterprise dashboards, and scalable APIs.
             </p>
           </div>
 
-          <!-- Back to Top Action (Smooth scroll to top) -->
+          <!-- Back to Top Action -->
           <div class="footer-action">
             <a href="#hero" id="footer-back-to-top" class="scroll-top-btn" title="Back to Top" aria-label="Back to Top" onclick="window.soundEngine?.playClick()">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="19" x2="12" y2="5"></line>
                 <polyline points="5 12 12 5 19 12"></polyline>
               </svg>
@@ -1128,7 +1179,7 @@
         </div>
 
         <div class="footer-bottom">
-          <div>&copy; 2026 Yogesh B. All rights reserved. Built with modern web technologies.</div>
+          <div>&copy; 2026 Yogesh B. All rights reserved. Built with modern web standards.</div>
           <div>Madurai, Tamil Nadu, India</div>
         </div>
 
@@ -1150,7 +1201,7 @@
   </div>
 
   <!-- ===================================================================
-       INNOVATIVE DEVELOPER CLI TERMINAL DRAWER
+       DEVELOPER CLI TERMINAL DRAWER
        =================================================================== -->
   <div id="terminal-drawer" class="terminal-drawer">
     <div class="terminal-topbar">
@@ -1159,7 +1210,7 @@
         <span class="terminal-dot yellow"></span>
         <span class="terminal-dot green"></span>
       </div>
-      <div class="terminal-title">yogesh@developer: ~ (bash CLI v2.5 - VSplash & Air Calibre)</div>
+      <div class="terminal-title">yogesh@developer: ~ (bash CLI v2.6 - VSplash & Air Calibre)</div>
       <div id="terminal-close-btn" class="terminal-close">&times;</div>
     </div>
 
@@ -1167,7 +1218,7 @@
       <div class="terminal-welcome">
         ╔══════════════════════════════════════════════════════════════════╗<br>
         ║  YOGESH B — SOFTWARE ENGINEER WORKSTATION CLI                    ║<br>
-        ║  Type 'help' to inspect experience, skills, projects, or resume. ║<br>
+        ║  Type 'help' to inspect disciplines, projects, skills, or resume.║<br>
         ╚══════════════════════════════════════════════════════════════════╝
       </div>
       
@@ -1192,10 +1243,10 @@
 
   <!-- JavaScript Modules -->
   <script src="js/audio.js"></script>
+  <script src="js/fluid-background.js"></script>
   <script src="js/particles.js"></script>
   <script src="js/projects.js"></script>
   <script src="js/terminal.js"></script>
-  <script src="js/vector-wordmark.js"></script>
   <script src="js/main.js"></script>
 
 </body>

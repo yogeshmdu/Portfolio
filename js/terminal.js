@@ -1,5 +1,6 @@
 /**
- * Interactive Terminal / CLI Mode - Updated with Verified UI Projects & Instagram Handle
+ * Interactive Terminal / CLI Mode
+ * Themed with Midnight Charcoal (#17191c), Cool Steel Grey (#929DA7), and Vibrant Coral Orange (#FF4B32).
  */
 
 class InteractiveTerminal {
@@ -14,18 +15,18 @@ class InteractiveTerminal {
     this.commands = {
       help: () => this.cmdHelp(),
       whoami: () => this.cmdWhoami(),
+      disciplines: () => this.cmdDisciplines(),
+      ideas: () => this.cmdDisciplines(),
       skills: () => this.cmdSkills(),
       projects: () => this.cmdProjects(),
       experience: () => this.cmdExperience(),
       education: () => this.cmdEducation(),
       contact: () => this.cmdContact(),
       resume: () => this.cmdResume(),
+      clock: () => this.cmdClock(),
       clear: () => this.cmdClear(),
       theme: () => this.cmdTheme(),
-      matrix: () => this.cmdMatrix(),
-      wordmark: () => this.cmdWordmark(),
-      blueprint: () => this.cmdWordmark(),
-      sudo: () => "Permission denied: You are a guest in Yogesh's workstation. 😉"
+      sudo: () => "Permission denied: Guest mode active in Yogesh's engineering workstation. 😉"
     };
 
     this.commandHistory = [];
@@ -60,12 +61,12 @@ class InteractiveTerminal {
         } else if (e.key === 'ArrowUp') {
           if (this.historyIndex > 0) {
             this.historyIndex--;
-            this.input.value = this.commandHistory[this.historyIndex];
+            this.input.value = this.commandHistory[this.historyIndex] || '';
           }
         } else if (e.key === 'ArrowDown') {
           if (this.historyIndex < this.commandHistory.length - 1) {
             this.historyIndex++;
-            this.input.value = this.commandHistory[this.historyIndex];
+            this.input.value = this.commandHistory[this.historyIndex] || '';
           } else {
             this.historyIndex = this.commandHistory.length;
             this.input.value = '';
@@ -75,8 +76,7 @@ class InteractiveTerminal {
     }
 
     document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === '`') {
-        e.preventDefault();
+      if (e.key === '`' && (e.ctrlKey || e.metaKey)) {
         this.toggle();
       }
     });
@@ -85,189 +85,178 @@ class InteractiveTerminal {
   toggle() {
     window.soundEngine?.playPop();
     if (!this.drawer) return;
-    this.drawer.classList.toggle('active');
-    if (this.drawer.classList.contains('active')) {
-      setTimeout(() => this.input?.focus(), 300);
+    this.drawer.classList.toggle('open');
+    if (this.drawer.classList.contains('open')) {
+      setTimeout(() => this.input && this.input.focus(), 150);
     }
-  }
-
-  open() {
-    if (!this.drawer) return;
-    this.drawer.classList.add('active');
-    setTimeout(() => this.input?.focus(), 300);
   }
 
   close() {
     window.soundEngine?.playClick();
-    if (!this.drawer) return;
-    this.drawer.classList.remove('active');
+    if (this.drawer) {
+      this.drawer.classList.remove('open');
+    }
   }
 
-  handleCommand(cmdLine) {
+  handleCommand(cmdRaw) {
     window.soundEngine?.playClick();
-    const parts = cmdLine.toLowerCase().split(' ');
-    const cmd = parts[0];
+    const cmd = cmdRaw.toLowerCase().trim();
+    const entry = document.createElement('div');
+    entry.className = 'history-entry';
 
-    const userLine = document.createElement('div');
-    userLine.className = 'terminal-line';
-    userLine.innerHTML = `<span class="terminal-prompt">yogesh@developer:~$</span> <span style="color:#ffffff;">${this.escapeHtml(cmdLine)}</span>`;
-    this.historyContainer.appendChild(userLine);
+    const promptLine = document.createElement('div');
+    promptLine.className = 'history-prompt';
+    promptLine.innerHTML = `<span class="term-coral">yogesh@developer</span>:<span class="term-steel">~</span>$ ${this.escapeHtml(cmdRaw)}`;
+    entry.appendChild(promptLine);
+
+    const outputLine = document.createElement('div');
+    outputLine.className = 'history-output';
 
     if (this.commands[cmd]) {
-      const output = this.commands[cmd]();
-      if (output) {
-        const outLine = document.createElement('div');
-        outLine.className = 'terminal-line output';
-        outLine.innerHTML = output;
-        this.historyContainer.appendChild(outLine);
+      const result = this.commands[cmd]();
+      if (result !== undefined) {
+        outputLine.innerHTML = result;
+        entry.appendChild(outputLine);
       }
     } else {
-      const errLine = document.createElement('div');
-      errLine.className = 'terminal-line output';
-      errLine.style.color = '#f87171';
-      errLine.textContent = `bash: command not found: ${cmd}. Type 'help' for available commands.`;
-      this.historyContainer.appendChild(errLine);
+      outputLine.innerHTML = `<span class="term-err">Command not found: '${this.escapeHtml(cmd)}'. Type <span class="term-coral">'help'</span> for a list of valid commands.</span>`;
+      entry.appendChild(outputLine);
     }
 
-    this.body.scrollTop = this.body.scrollHeight;
+    if (this.historyContainer) {
+      this.historyContainer.appendChild(entry);
+      this.body.scrollTop = this.body.scrollHeight;
+    }
   }
 
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  /* Command Implementations */
   cmdHelp() {
-    return `Available system commands:
-  • <span style="color:#00f2fe;">whoami</span>      - Overview of Yogesh's background & commercial experience
-  • <span style="color:#00f2fe;">skills</span>      - Comprehensive technical stack & frameworks
-  • <span style="color:#00f2fe;">projects</span>    - List Air Calibre Systems & verified projects
-  • <span style="color:#00f2fe;">experience</span>  - Career timeline: VSplash Tech Labs & Air Calibre Systems
-  • <span style="color:#00f2fe;">education</span>   - Engineering (B.E. ECE 2019) & academic foundation
-  • <span style="color:#00f2fe;">contact</span>     - Direct phone (+91 8098621 639), email, and Instagram (@its_guru.__)
-  • <span style="color:#00f2fe;">resume</span>      - Open official PDF resume in Google Drive
-  • <span style="color:#00f2fe;">theme</span>       - Toggle between Obsidian Dark and Light mode
-  • <span style="color:#00f2fe;">blueprint</span>   - Inspect WebGL Vector Wordmark shader telemetry
-  • <span style="color:#00f2fe;">matrix</span>      - Run the cybernetic Matrix sequence
-  • <span style="color:#00f2fe;">clear</span>       - Clear the terminal screen`;
+    return `
+<div class="cli-table">
+  <div><span class="term-coral">disciplines</span>  - Inspect core engineering disciplines & ideas</div>
+  <div><span class="term-coral">whoami</span>       - High-level bio and commercial credentials</div>
+  <div><span class="term-coral">experience</span>   - Commercial tenure at VSplash Tech Labs & Air Calibre</div>
+  <div><span class="term-coral">projects</span>     - List of 7 live deployments & key engineering feats</div>
+  <div><span class="term-coral">skills</span>       - Technical competencies & architecture stack</div>
+  <div><span class="term-coral">education</span>    - Academic foundation (B.E. ECE 2019)</div>
+  <div><span class="term-coral">clock</span>        - Current Madurai IST time & availability</div>
+  <div><span class="term-coral">contact</span>      - Phone, email, LinkedIn, and Instagram</div>
+  <div><span class="term-coral">resume</span>       - Direct link to official resume on Google Drive</div>
+  <div><span class="term-coral">theme</span>        - Toggle between Obsidian Dark and Luxe Light</div>
+  <div><span class="term-coral">clear</span>        - Clear terminal history</div>
+</div>
+`;
   }
 
   cmdWhoami() {
-    return `<span style="color:#10b981; font-weight:bold;">YOGESH B</span> | Full Stack Developer & Software Engineer
-Experience: 5+ Years across frontend, backend, APIs, and relational/document databases.
-Commercial Experience:
-  • Software Engineer at VSplash Tech Labs Private Ltd. (Remote | April 2025 - October 2026)
-  • Full Stack Developer at Air Calibre Systems (Chennai | June 2021 - February 2025)
-Education: Bachelor of Engineering (B.E.) in Electronics and Communication Engineering (Graduated: 2019)
-Specializations: Enterprise ERP Workflows, Validation Report Engines, Core PHP, Laravel, React.js, Redux, Node.js, MySQL, MongoDB, and AWS EC2.`;
+    return `
+<strong>Yogesh B</strong> — Full Stack Developer & Software Engineer
+• <strong>Experience:</strong> 5+ Years of verified commercial engineering
+• <strong>Companies:</strong> VSplash Tech Labs Private Ltd. (Remote) & Air Calibre Systems (Chennai)
+• <strong>Specialization:</strong> Enterprise ERP Portals, GoDaddy Automation, React/TypeScript SPAs, REST APIs
+• <strong>Base:</strong> Madurai, Tamil Nadu, India (Available for Worldwide Remote & On-Site Roles)
+`;
   }
 
-  cmdSkills() {
-    return `Technical Stack Matrix:
-  [Languages]   JavaScript ES6+, TypeScript, PHP, Python, SQL, HTML5, CSS3
-  [Frontend]    React.js, Redux, React Native, Tailwind CSS, Bootstrap 5, jQuery, AJAX
-  [Backend]     Core PHP, Laravel, Node.js, Express.js, Doctrine ORM, Django, SQLAlchemy
-  [Databases]   MySQL, PostgreSQL, MongoDB
-  [APIs & Arch] RESTful APIs, GraphQL, WebSockets, GoDaddy API, Google Maps API
-  [DevOps/Cloud]Docker, AWS EC2, Firebase Hosting, Nginx, Apache, Git/GitHub, Postman, Jest`;
-  }
-
-  cmdProjects() {
-    return `Featured Showcase Projects (Air Calibre Systems & Web Apps):
-  1. <span style="color:#00f2fe;">Air Calibre System Enterprise Web Portal</span> [Live on Netlify]
-     Stack: Core PHP, Bootstrap 5, JavaScript ES6+, MySQL, ERP Workflows
-     URL: <a href="https://validationwebsite.netlify.app" target="_blank" style="color:#38bdf8; text-decoration:underline;">https://validationwebsite.netlify.app</a>
-  2. <span style="color:#00f2fe;">Air Calibre System Validation & Report Engine</span> [Live on Netlify]
-     Stack: PHP, MySQL, JavaScript, CSS3, Calculation Engine, PDF Export
-     URL: <a href="http://validationreportmodule.netlify.app" target="_blank" style="color:#38bdf8; text-decoration:underline;">http://validationreportmodule.netlify.app</a>
-  3. <span style="color:#00f2fe;">Air Calibre E-commerce & Claim System</span>
-     Stack: Laravel, React.js, Redux, Core PHP, Tailwind CSS, MongoDB, MySQL
-  4. <span style="color:#00f2fe;">Food Delivery App (Madurai Syead Meats)</span> [Live on Render]
-     Stack: React Native / React, Node.js, PostgreSQL (Neon), Render, Antigravity
-     URL: <a href="https://food-delivery-app-1-ufhh.onrender.com/#/home" target="_blank" style="color:#38bdf8; text-decoration:underline;">https://food-delivery-app-1-ufhh.onrender.com/#/home</a>
-  5. <span style="color:#00f2fe;">IMDb Movie Discovery Hub</span>
-     Stack: React.js, RapidAPI, Tailwind CSS, Fetch API
-  6. <span style="color:#00f2fe;">Global Travel & Destination Platform</span>
-     Stack: React.js, Bootstrap 5.3, Interactive UI
-  7. <span style="color:#00f2fe;">Explore Madurai Cultural & Tourism Guide</span> [Live on Netlify]
-     Stack: Bootstrap 5, HTML5, CSS3, JavaScript
-     URL: <a href="http://exploremadurai.netlify.app" target="_blank" style="color:#38bdf8; text-decoration:underline;">http://exploremadurai.netlify.app</a>`;
+  cmdDisciplines() {
+    return `
+<span class="term-coral">Idea-Wise Core Disciplines:</span>
+1. <strong>Enterprise ERP & Cleanroom Compliance</strong> — Air Calibre Systems calculation engine & audit automation.
+2. <strong>Product Dashboards & SaaS Scaling</strong> — Getty, Care, Zylo, Roster dashboards at VSplash Tech Labs.
+3. <strong>Third-Party API Automation</strong> — GoDaddy domain & service lifecycle provisioning with CRM queues.
+4. <strong>Cross-Platform SPAs & Serverless SQL</strong> — React Native, Node.js, Neon PostgreSQL on Render.
+`;
   }
 
   cmdExperience() {
-    return `🏢 Commercial Experience History:
-  • <span style="color:#38bdf8; font-weight:bold;">VSplash Tech Labs Private Ltd.</span> — Software Engineer
-    Location: Hyderabad, India | Remote  |  Duration: April 2025 – October 2026
-    - Developed and maintained core product dashboards: Getty, Care, Zylo, and Roster.
-    - Designed automated data retrieval pipelines and reporting modules.
-    - Implemented CRM order handling and automated GoDaddy product/service provisioning.
-    - Led modernization of legacy monolithic views into modern React/TypeScript/Tailwind SPAs.
-    - Handled deployments and testing via AWS EC2, Postman, and Git/GitHub.
+    return `
+<span class="term-coral">Commercial Engineering Milestones:</span>
+1. <strong>Software Engineer | VSplash Tech Labs Private Ltd.</strong>
+   <em>April 2025 – October 2026 | Hyderabad, India (Remote)</em>
+   • Maintained enterprise dashboards (Getty, Care, Zylo, Roster) using PHP, Doctrine ORM, MongoDB, MySQL.
+   • Integrated GoDaddy APIs for automated service and product management.
+   • Led modernization into React.js, TypeScript, and Tailwind CSS SPAs.
+   • Python analytics pipelines, AWS EC2, Postman testing, and CI/CD.
 
-  • <span style="color:#38bdf8; font-weight:bold;">Air Calibre Systems</span> — Full Stack Developer
-    Location: Chennai, India  |  Duration: June 2021 – February 2025
-    - Architected claim management systems, validation portals, and e-commerce platforms.
-    - Built interactive claim management workflows and RESTful endpoints using PHP & MySQL.
-    - Developed end-to-end e-commerce platform using Laravel, React.js, Redux, and MongoDB.
-    - Managed hosting, deployments, and database migrations across cPanel and cloud hosting.`;
+2. <strong>Full Stack Developer | Air Calibre Systems</strong>
+   <em>June 2021 – February 2025 | Chennai, India</em>
+   • Architected cleanroom ERP portal & calculation report module.
+   • Built claim management RESTful endpoints (Core PHP, AJAX, MySQL).
+   • Developed e-commerce platform using Laravel, React.js, Redux, Tailwind, MongoDB.
+`;
+  }
+
+  cmdProjects() {
+    return `
+<span class="term-coral">Key Projects & Live Deployments:</span>
+• <strong>Enterprise Web Portal</strong> - <a href="https://validationwebsite.netlify.app" target="_blank" class="term-link">validationwebsite.netlify.app</a>
+• <strong>Reports Module Website</strong> - <a href="http://validationreportmodule.netlify.app" target="_blank" class="term-link">validationreportmodule.netlify.app</a>
+• <strong>Food Delivery Application</strong> - <a href="https://food-delivery-app-1-ufhh.onrender.com/#/home" target="_blank" class="term-link">food-delivery-app-1-ufhh.onrender.com</a>
+• <strong>Explore Madurai Tourism</strong> - <a href="http://exploremadurai.netlify.app" target="_blank" class="term-link">exploremadurai.netlify.app</a>
+• <strong>E-Commerce & Claim System Website</strong> - Laravel, React, Redux, MongoDB
+• <strong>IMDb Movie Discovery Hub</strong> - React.js, RapidAPI, Tailwind CSS
+• <strong>Global Travel Platform</strong> - React.js, Bootstrap 5.3, CSS3
+`;
+  }
+
+  cmdSkills() {
+    return `
+<span class="term-coral">Technical Stack Matrix:</span>
+• <strong>Frontend:</strong> React.js, Redux Toolkit, React Native, TypeScript, JavaScript ES6+, Tailwind CSS, Bootstrap 5
+• <strong>Backend:</strong> Node.js, Express.js, Laravel, Core PHP, Doctrine ORM, Python
+• <strong>Databases:</strong> MySQL, MongoDB, PostgreSQL (Neon Serverless)
+• <strong>Cloud & APIs:</strong> RESTful APIs, WebSockets, GoDaddy APIs, AWS EC2, Docker, Postman, Git
+`;
   }
 
   cmdEducation() {
-    return `🎓 Education Credentials:
-  • <span style="color:#00f2fe; font-weight:bold;">Bachelor of Engineering (B.E.) — ECE</span>
-    Electronics and Communication Engineering | Graduated: 2019
-    Pandian Saraswathi Yadav Engineering College, Sivagangai
-  • <span style="color:#00f2fe; font-weight:bold;">Higher Secondary School Certificate</span>
-    St. Mary's Higher Secondary School, Madurai`;
+    return `
+<span class="term-coral">Academic Credentials:</span>
+• <strong>Bachelor of Engineering (B.E.) — Electronics & Communication Engineering (ECE)</strong>
+  Pandian Saraswathi Yadav Engineering College, Sivagangai (Graduated: 2019)
+• <strong>Higher Secondary School Certificate</strong>
+  St. Mary's Higher Secondary School, Madurai
+`;
   }
 
   cmdContact() {
-    return `Direct Contact Information for Yogesh B:
-  📞 Phone: <a href="tel:+918098621639" style="color:#38bdf8;">+91 8098621 639</a>
-  📧 Email: <a href="mailto:yogesh0398@gmail.com" style="color:#38bdf8;">yogesh0398@gmail.com</a>
-  📍 Location: Madurai, Tamil Nadu, India (122/4 Chinna Rajakoor, Rajakoor - 625107)
-  💼 LinkedIn: <a href="http://linkedin.com/in/yogesh-app-dev" target="_blank" style="color:#38bdf8;">linkedin.com/in/yogesh-app-dev</a>
-  📸 Instagram: <a href="https://www.instagram.com/its_guru.__/" target="_blank" style="color:#38bdf8;">@its_guru.__</a> (Official Profile)`;
+    return `
+<span class="term-coral">Direct Channels:</span>
+• <strong>Phone:</strong> <a href="tel:+918098621639" class="term-link">+91 8098621 639</a>
+• <strong>Email:</strong> <a href="mailto:yogesh0398@gmail.com" class="term-link">yogesh0398@gmail.com</a>
+• <strong>LinkedIn:</strong> <a href="http://linkedin.com/in/yogesh-app-dev" target="_blank" class="term-link">linkedin.com/in/yogesh-app-dev</a>
+• <strong>Instagram:</strong> <a href="https://www.instagram.com/its_guru.__/" target="_blank" class="term-link">@its_guru.__</a>
+• <strong>Base:</strong> Madurai, Tamil Nadu, India
+`;
   }
 
   cmdResume() {
     window.open('https://drive.google.com/file/d/1bqSkS_GvY5UXWBCcUDE_82oHqTe4ww3L/view?usp', '_blank');
-    return `Opening Yogesh's official resume in new tab...`;
+    return `Opening official resume on Google Drive in a new tab... 📄`;
   }
 
-  cmdClear() {
-    this.historyContainer.innerHTML = '';
-    return null;
+  cmdClock() {
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat([], { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+    return `Current time in Madurai: <span class="term-coral">${formatter.format(now)} IST</span> (Tamil Nadu, India)`;
   }
 
   cmdTheme() {
-    if (window.portfolioMain) {
-      window.portfolioMain.toggleTheme();
-      return `Theme switched successfully.`;
+    window.portfolioApp?.toggleTheme();
+    return `Toggled visual color theme.`;
+  }
+
+  cmdClear() {
+    if (this.historyContainer) {
+      this.historyContainer.innerHTML = '';
     }
-    return `Theme toggle invoked.`;
-  }
-
-  cmdMatrix() {
-    const lines = [
-      'WAKE UP, NEO...',
-      'THE MATRIX HAS YOU...',
-      'FOLLOW THE WHITE RABBIT.',
-      '01011001 01001111 01000111 01000101 01010011 01001000',
-      'ACCESS GRANTED: YOGESH B (AIR CALIBRE SYSTEMS & VSPLASH) WORKSTATION ONLINE.'
-    ];
-    return `<span style="color:#22c55e; font-family:monospace;">${lines.join('<br>')}</span>`;
-  }
-
-  cmdWordmark() {
-    return `<span style="color:#00f2fe; font-family:monospace;">
-    ⚡ WebGL Vector Wordmark Rig Active<br>
-    • Shader: 2-Channel Procedural Font Atlas (Red: Solid, Green: Vector Outline)<br>
-    • Lattice Handles: 3 Dynamic Vertex Nodes with Damped Pointer Tracking<br>
-    • Coordinate Readouts: Live [X, Y] Screen Normal Space<br>
-    • Interaction: Hover pointer over the hero title or test sweep dynamics!
-    </span>`;
-  }
-
-  escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
+    return undefined;
   }
 }
 

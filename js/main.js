@@ -1,5 +1,6 @@
 /**
- * Main Application Orchestrator - Updated with VSplash Tech Labs Credentials
+ * Main Application Orchestrator
+ * Themed with Midnight Charcoal (#17191c), Cool Steel Grey (#929DA7), and Vibrant Coral Orange (#FF4B32).
  */
 
 class PortfolioApp {
@@ -14,11 +15,12 @@ class PortfolioApp {
     this.toastText = document.getElementById('toast-text');
 
     this.typewriterPhrases = [
-      'Full-Stack Developer',
-      'Software Engineer',
-      'React.js & Node.js',
+      'Full-Stack Architect',
+      'Software Engineer (5+ Yrs)',
+      'Enterprise ERP Portals',
+      'React.js & Node.js SPAs',
       'PHP & Laravel Systems',
-      '5+ Years Experience'
+      'GoDaddy API Automation'
     ];
 
     this.init();
@@ -27,7 +29,7 @@ class PortfolioApp {
   init() {
     this.applyTheme(this.theme);
     this.initTypewriter();
-    this.initHeroWorkstation();
+    this.initHeroPortrait();
     this.initMaduraiClock();
     this.initCustomCursor();
     this.initScrollReveal();
@@ -45,8 +47,8 @@ class PortfolioApp {
 
     if (this.themeBtn) {
       this.themeBtn.innerHTML = theme === 'dark'
-        ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
-        : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+        ? `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
+        : `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
     }
   }
 
@@ -54,7 +56,7 @@ class PortfolioApp {
     window.soundEngine?.playClick();
     const nextTheme = this.theme === 'dark' ? 'light' : 'dark';
     this.applyTheme(nextTheme);
-    this.showToast(`Switched to ${nextTheme === 'dark' ? 'Obsidian Dark' : 'Luxe Light'} mode`);
+    this.showToast(`Switched to ${nextTheme === 'dark' ? 'Midnight Charcoal' : 'Cool Steel Luxe'} mode`);
   }
 
   /* Sound Control */
@@ -73,11 +75,11 @@ class PortfolioApp {
   updateSoundIcon(enabled) {
     if (!this.soundBtn) return;
     this.soundBtn.innerHTML = enabled
-      ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`
-      : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
+      ? `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`
+      : `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
   }
 
-  /* Background Mode Switcher (Constellation vs Ambient Video) */
+  /* Background Mode Switcher (Canvas vs Video) */
   initBackgroundSwitcher() {
     const canvasBtn = document.getElementById('bg-btn-canvas');
     const videoBtn = document.getElementById('bg-btn-video');
@@ -117,125 +119,51 @@ class PortfolioApp {
     setMode(this.bgMode);
   }
 
-  /* Interactive Architecture & Code Workstation Controller */
-  initHeroWorkstation() {
-    const workstation = document.getElementById('hero-workstation');
-    const card = document.getElementById('workstation-card');
-    const codeDisplay = document.getElementById('code-display');
-    const fileTitle = document.getElementById('active-file-title');
-    const btnSim = document.getElementById('btn-run-simulation');
-    const simDrawer = document.getElementById('simulation-output');
-    const btnCloseSim = document.getElementById('btn-close-sim');
+  /* Interactive Hero Portrait with 3D Mouse Parallax Tilt */
+  initHeroPortrait() {
+    const host = document.getElementById('hero-visual-host');
+    const card = document.getElementById('hero-portrait-card');
+    if (!host || !card) return;
 
-    if (!workstation || !card || !codeDisplay) return;
+    const badges = card.querySelectorAll('.floating-badge');
+    const glow = card.querySelector('.portrait-coral-glow');
 
-    // Code files repository with syntax highlighting
-    const snippets = {
-      aircalibre: {
-        title: 'AirCalibreERP.ts',
-        code: `<span class="syn-comment">// Air Calibre Systems — Cleanroom Calculation Engine</span>
-<span class="syn-kw">export class</span> <span class="syn-type">CleanroomAuditService</span> <span class="syn-kw">implements</span> <span class="syn-type">IAudit</span> {
-  <span class="syn-kw">async</span> <span class="syn-fn">calculateVelocity</span>(<span class="syn-prop">grid</span>: <span class="syn-type">number[]</span>): <span class="syn-type">Promise&lt;Result&gt;</span> {
-    <span class="syn-kw">const</span> <span class="syn-prop">avg</span> = grid.<span class="syn-fn">reduce</span>((<span class="syn-prop">a</span>, <span class="syn-prop">b</span>) =&gt; a + b, <span class="syn-num">0</span>) / grid.<span class="syn-prop">length</span>;
-    <span class="syn-kw">const</span> <span class="syn-prop">compliant</span> = avg &gt;= <span class="syn-num">0.45</span> &amp;&amp; avg &lt;= <span class="syn-num">0.55</span>;
-    
-    <span class="syn-kw">await</span> <span class="syn-prop">this</span>.<span class="syn-prop">db</span>.<span class="syn-fn">saveReport</span>({
-      <span class="syn-prop">auditId</span>: <span class="syn-str">"ACS-2026-VAL"</span>,
-      <span class="syn-prop">status</span>: compliant ? <span class="syn-str">"PASS"</span> : <span class="syn-str">"RE_CALIBRATE"</span>,
-      <span class="syn-prop">velocity</span>: avg,
-      <span class="syn-prop">timestamp</span>: <span class="syn-kw">new</span> <span class="syn-type">Date</span>().<span class="syn-fn">toISOString</span>()
-    });
-    <span class="syn-kw">return</span> { <span class="syn-prop">success</span>: <span class="syn-kw">true</span>, <span class="syn-prop">verified</span>: compliant };
-  }
-}`
-      },
-      fooddelivery: {
-        title: 'FoodDeliveryAPI.js',
-        code: `<span class="syn-comment">// Madurai Syead Meats — Express.js & Neon REST API</span>
-<span class="syn-prop">router</span>.<span class="syn-fn">post</span>(<span class="syn-str">'/api/v1/orders/create'</span>, <span class="syn-prop">authGuard</span>, <span class="syn-kw">async</span> (<span class="syn-prop">req</span>, <span class="syn-prop">res</span>) =&gt; {
-  <span class="syn-kw">const</span> { <span class="syn-prop">customerId</span>, <span class="syn-prop">items</span>, <span class="syn-prop">slot</span> } = req.<span class="syn-prop">body</span>;
-  <span class="syn-kw">const</span> <span class="syn-prop">dbClient</span> = <span class="syn-kw">await</span> neonPool.<span class="syn-fn">connect</span>();
-  
-  <span class="syn-kw">try</span> {
-    <span class="syn-kw">await</span> dbClient.<span class="syn-fn">query</span>(<span class="syn-str">'BEGIN'</span>);
-    <span class="syn-kw">const</span> <span class="syn-prop">order</span> = <span class="syn-kw">await</span> dbClient.<span class="syn-fn">query</span>(
-      <span class="syn-str">'INSERT INTO orders (customer_id, eta) VALUES ($1, $2) RETURNING *'</span>,
-      [customerId, <span class="syn-str">'30 MINS'</span>]
-    );
-    <span class="syn-kw">await</span> dbClient.<span class="syn-fn">query</span>(<span class="syn-str">'COMMIT'</span>);
-    <span class="syn-kw">return</span> res.<span class="syn-fn">status</span>(<span class="syn-num">201</span>).<span class="syn-fn">json</span>({ <span class="syn-prop">status</span>: <span class="syn-str">'confirmed'</span>, <span class="syn-prop">order</span>: order.<span class="syn-prop">rows</span>[<span class="syn-num">0</span>] });
-  } <span class="syn-kw">catch</span> (<span class="syn-prop">err</span>) {
-    <span class="syn-kw">await</span> dbClient.<span class="syn-fn">query</span>(<span class="syn-str">'ROLLBACK'</span>);
-    <span class="syn-kw">return</span> res.<span class="syn-fn">status</span>(<span class="syn-num">500</span>).<span class="syn-fn">json</span>({ <span class="syn-prop">error</span>: <span class="syn-str">'Order creation failed'</span> });
-  }
-});`
-      },
-      schema: {
-        title: 'NeonPostgres.sql',
-        code: `<span class="syn-comment">-- Neon Serverless PostgreSQL Schema • Cloud Architecture</span>
-<span class="syn-kw">CREATE TABLE IF NOT EXISTS</span> <span class="syn-type">public.enterprise_deployments</span> (
-  <span class="syn-prop">id</span> <span class="syn-type">UUID PRIMARY KEY DEFAULT</span> <span class="syn-fn">gen_random_uuid</span>(),
-  <span class="syn-prop">service_name</span> <span class="syn-type">VARCHAR(120) NOT NULL</span>,
-  <span class="syn-prop">stack</span> <span class="syn-type">VARCHAR(80) DEFAULT</span> <span class="syn-str">'React + Node + PostgreSQL'</span>,
-  <span class="syn-prop">latency_ms</span> <span class="syn-type">INTEGER DEFAULT</span> <span class="syn-num">18</span>,
-  <span class="syn-prop">cloud_provider</span> <span class="syn-type">VARCHAR(50) DEFAULT</span> <span class="syn-str">'Render Cloud'</span>,
-  <span class="syn-prop">created_at</span> <span class="syn-type">TIMESTAMPTZ DEFAULT</span> <span class="syn-fn">NOW</span>()
-);
-
-<span class="syn-comment">-- Sub-millisecond indexed audit retrieval</span>
-<span class="syn-kw">CREATE INDEX</span> <span class="syn-fn">idx_enterprise_service</span> 
-  <span class="syn-kw">ON</span> <span class="syn-type">public.enterprise_deployments</span>(<span class="syn-prop">service_name</span>);`
-      }
-    };
-
-    // Load initial code
-    codeDisplay.innerHTML = snippets.aircalibre.code;
-
-    // Tab switching
-    const tabs = document.querySelectorAll('.workstation-tabs .tab-btn');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        window.soundEngine?.playClick();
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        const key = tab.getAttribute('data-tab');
-        if (snippets[key]) {
-          codeDisplay.innerHTML = snippets[key].code;
-          if (fileTitle) fileTitle.textContent = snippets[key].title;
-          this.showToast(`Inspecting ${snippets[key].title}`);
-        }
-      });
-    });
-
-    // Run Simulation Button
-    if (btnSim && simDrawer) {
-      btnSim.addEventListener('click', () => {
-        window.soundEngine?.playPop();
-        simDrawer.classList.toggle('open');
-        this.showToast('Executing live endpoint simulation... ⚡');
-      });
-    }
-
-    if (btnCloseSim && simDrawer) {
-      btnCloseSim.addEventListener('click', () => {
-        simDrawer.classList.remove('open');
-      });
-    }
-
-    // 3D Parallax Tilt on Cursor Hover
-    workstation.addEventListener('mousemove', (e) => {
-      const rect = workstation.getBoundingClientRect();
+    host.addEventListener('mousemove', (e) => {
+      const rect = host.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-      const rotX = -y * 12;
-      const rotY = x * 12;
-      card.style.transform = `rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.015, 1.015, 1.015)`;
+      const rotX = -y * 14;
+      const rotY = x * 14;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+
+      // Subtle parallax on telemetry badges
+      badges.forEach((badge, index) => {
+        const factor = (index + 1) * 8;
+        const bx = -x * factor;
+        const by = -y * factor;
+        badge.style.transform = `translate3d(${bx.toFixed(1)}px, ${by.toFixed(1)}px, 20px)`;
+      });
+
+      if (glow) {
+        glow.style.transform = `translate3d(${(-x * 25).toFixed(1)}px, ${(-y * 25).toFixed(1)}px, 0) scale(1.1)`;
+      }
     });
 
-    workstation.addEventListener('mouseleave', () => {
-      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    host.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      badges.forEach(badge => {
+        badge.style.transform = 'translate3d(0, 0, 0)';
+      });
+      if (glow) {
+        glow.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      }
+    });
+
+    card.addEventListener('click', () => {
+      window.soundEngine?.playPop();
+      this.showToast('Full Stack Architect • 5+ Years Experience 🚀');
     });
   }
 
@@ -248,35 +176,33 @@ class PortfolioApp {
     let charIndex = 0;
     let isDeleting = false;
     const typingSpeed = 70;
-    const deletingSpeed = 35;
-    const pauseTime = 2000;
+    const deletingSpeed = 40;
+    const pauseDelay = 1800;
 
-    const tick = () => {
+    const type = () => {
       const currentPhrase = this.typewriterPhrases[phraseIndex];
 
       if (isDeleting) {
+        target.textContent = currentPhrase.substring(0, charIndex - 1);
         charIndex--;
-        target.textContent = currentPhrase.substring(0, charIndex);
       } else {
+        target.textContent = currentPhrase.substring(0, charIndex + 1);
         charIndex++;
-        target.textContent = currentPhrase.substring(0, charIndex);
       }
 
-      let delta = isDeleting ? deletingSpeed : typingSpeed;
-
       if (!isDeleting && charIndex === currentPhrase.length) {
-        delta = pauseTime;
         isDeleting = true;
+        setTimeout(type, pauseDelay);
       } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         phraseIndex = (phraseIndex + 1) % this.typewriterPhrases.length;
-        delta = 350;
+        setTimeout(type, 350);
+      } else {
+        setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
       }
-
-      setTimeout(tick, delta);
     };
 
-    tick();
+    setTimeout(type, 500);
   }
 
   /* Madurai Real-Time Clock & Greeting */
@@ -336,7 +262,7 @@ class PortfolioApp {
       }, { duration: 250, fill: 'forwards' });
     });
 
-    const interactiveSelectors = 'a, button, input, textarea, .project-card, .skill-card, .exp-card, .filter-btn';
+    const interactiveSelectors = 'a, button, input, textarea, .project-card, .discipline-card, .skill-card, .exp-card, .filter-btn, .hero-portrait-card';
     document.querySelectorAll(interactiveSelectors).forEach(el => {
       el.addEventListener('mouseenter', () => {
         document.body.classList.add('cursor-hover');
@@ -357,7 +283,7 @@ class PortfolioApp {
         }
       });
     }, {
-      threshold: 0.15,
+      threshold: 0.12,
       rootMargin: '0px 0px -40px 0px'
     });
 
@@ -374,7 +300,7 @@ class PortfolioApp {
       const scrollY = window.pageYOffset;
 
       if (header) {
-        if (scrollY > 50) {
+        if (scrollY > 40) {
           header.classList.add('scrolled');
         } else {
           header.classList.remove('scrolled');
@@ -383,7 +309,7 @@ class PortfolioApp {
 
       sections.forEach(current => {
         const sectionHeight = current.offsetHeight;
-        const sectionTop = current.offsetTop - 120;
+        const sectionTop = current.offsetTop - 130;
         const sectionId = current.getAttribute('id');
 
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
@@ -496,8 +422,8 @@ class PortfolioApp {
         e.preventDefault();
         window.soundEngine?.playClick();
         window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
+            top: 0,
+            behavior: 'smooth'
         });
       });
     }
@@ -505,5 +431,5 @@ class PortfolioApp {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.portfolioMain = new PortfolioApp();
+  window.portfolioApp = new PortfolioApp();
 });
