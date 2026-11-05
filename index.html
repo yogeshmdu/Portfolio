@@ -6,6 +6,12 @@
   <script>
     /* Immediate theme initialization to prevent flash: default to light */
     (function() {
+      // Clear legacy dark cache so initial open is guaranteed Light Mode
+      if (!localStorage.getItem('theme_v2_initialized')) {
+        localStorage.removeItem('theme');
+        localStorage.setItem('theme', 'light');
+        localStorage.setItem('theme_v2_initialized', 'true');
+      }
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
     })();
