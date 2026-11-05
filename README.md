@@ -104,7 +104,6 @@ Crafted according to the specified palette:
 - **Phone**: [+91 8098621 639](tel:+918098621639)
 - **Email**: [yogesh0398@gmail.com](mailto:yogesh0398@gmail.com)
 - **LinkedIn**: [linkedin.com/in/yogesh-app-dev](http://linkedin.com/in/yogesh-app-dev)
-- **Instagram**: [@its_guru.__](https://www.instagram.com/its_guru.__/)
 - **Location**: Madurai, Tamil Nadu, India (Open to Remote Worldwide)
 - **Resume**: [View on Google Drive](https://drive.google.com/file/d/1bqSkS_GvY5UXWBCcUDE_82oHqTe4ww3L/view?usp)
 

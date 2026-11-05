@@ -123,12 +123,14 @@ class PortfolioApp {
     this.soundBtn.addEventListener('click', () => {
       const state = window.soundEngine?.toggle();
       this.updateSoundIcon(state);
-      this.showToast(state ? 'Sound FX Enabled 🔊' : 'Sound FX Muted 🔇');
+      this.showToast(state ? 'Sound & Music Enabled 🎵' : 'Sound & Music Muted 🔇');
     });
   }
 
   updateSoundIcon(enabled) {
     if (!this.soundBtn) return;
+    this.soundBtn.setAttribute('title', enabled ? 'Mute Sound & Music' : 'Enable Sound & Background Music');
+    this.soundBtn.setAttribute('aria-label', enabled ? 'Mute Sound and Background Music' : 'Enable Sound and Background Music');
     this.soundBtn.innerHTML = enabled
       ? `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`
       : `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
@@ -418,6 +420,14 @@ class PortfolioApp {
           this.navMenu.classList.remove('open');
         });
       });
+
+      document.addEventListener('click', (e) => {
+        if (this.navMenu.classList.contains('open')) {
+          if (!this.navMenu.contains(e.target) && !this.mobileToggle.contains(e.target)) {
+            this.navMenu.classList.remove('open');
+          }
+        }
+      });
     }
 
     // Copy to clipboard triggers
@@ -687,81 +697,44 @@ class PortfolioApp {
       });
     }
 
-    const goToMilestone = (idx) => {
-      if (window.innerWidth > 960) {
-        isUserClicking = true;
-        clearTimeout(clickTimeout);
+    let autoTimer = null;
+    const startAutoCycle = () => {
+      stopAutoCycle();
+      autoTimer = setInterval(() => {
+        const nextIdx = (currentIndex + 1) % cards.length;
+        updateActiveItem(nextIdx, false);
+      }, 5500);
+    };
 
-        updateActiveItem(idx, false);
-
-        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-        const totalRunway = section.offsetHeight - window.innerHeight;
-        if (totalRunway > 0) {
-          const targetProgress = (idx + 0.35) / cards.length;
-          const targetY = sectionTop + (targetProgress * totalRunway);
-          window.scrollTo({ top: targetY, behavior: 'smooth' });
-        }
-
-        clickTimeout = setTimeout(() => {
-          isUserClicking = false;
-        }, 800);
-      } else {
-        updateActiveItem(idx, false);
-        cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const stopAutoCycle = () => {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
       }
     };
 
-    // Scroll Handler: calculates progress through pinned runway and executes transitions
-    let scrollTicking = false;
-    const handleScroll = () => {
-      if (scrollTicking) return;
-      scrollTicking = true;
-      window.requestAnimationFrame(() => {
-        scrollTicking = false;
+    section.addEventListener('mouseenter', stopAutoCycle);
+    section.addEventListener('mouseleave', startAutoCycle);
+    section.addEventListener('touchstart', stopAutoCycle, { passive: true });
 
-        if (window.innerWidth <= 960) return;
-        if (isUserClicking) return;
-
-        const rect = section.getBoundingClientRect();
-        const totalRunway = section.offsetHeight - window.innerHeight;
-        if (totalRunway <= 0) return;
-
-        // When pinned runway is in active viewport range
-        if (rect.top <= 120 && rect.bottom >= window.innerHeight - 120) {
-          const scrolled = -rect.top + 72;
-          const progress = Math.max(0, Math.min(1, scrolled / totalRunway));
-
-          // Fine continuous rotation for the clock stick across 0° to 180°
-          const continuousAngle = progress * 180;
-          if (clockMasterStick) {
-            clockMasterStick.style.setProperty('--hand-rotation', `${continuousAngle}deg`);
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            startAutoCycle();
+          } else {
+            stopAutoCycle();
           }
-          if (clockSecondStick) {
-            clockSecondStick.style.setProperty('--second-rotation', `${continuousAngle + 10}deg`);
-          }
+        });
+      }, { threshold: 0.35 });
+      obs.observe(section);
+    }
 
-          // Arc fill progress
-          if (clockArcFill) {
-            clockArcFill.style.strokeDashoffset = `${totalArcLen * (1 - progress)}`;
-          }
-
-          // Move active node along the vertical track
-          if (activeNode && verticalTrack) {
-            const trackHeight = Math.max(0, verticalTrack.offsetHeight - 50);
-            const nodeY = 25 + (progress * trackHeight);
-            activeNode.style.top = `${nodeY}px`;
-          }
-
-          // Discrete milestone card transition: prefix hides, suffix shows
-          const step = Math.min(cards.length - 1, Math.floor(progress * cards.length + 0.1));
-          if (step !== currentIndex) {
-            updateActiveItem(step, true);
-          }
-        }
-      });
+    const goToMilestone = (idx) => {
+      stopAutoCycle();
+      updateActiveItem(idx, false);
+      setTimeout(startAutoCycle, 4000);
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Initial activation
     updateActiveItem(0);

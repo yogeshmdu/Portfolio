@@ -258,7 +258,6 @@ class InteractiveTerminal {
 • <strong>Phone:</strong> <a href="tel:+918098621639" class="term-link">+91 8098621 639</a>
 • <strong>Email:</strong> <a href="mailto:yogesh0398@gmail.com" class="term-link">yogesh0398@gmail.com</a>
 • <strong>LinkedIn:</strong> <a href="http://linkedin.com/in/yogesh-app-dev" target="_blank" class="term-link">linkedin.com/in/yogesh-app-dev</a>
-• <strong>Instagram:</strong> <a href="https://www.instagram.com/its_guru.__/" target="_blank" class="term-link">@its_guru.__</a>
 • <strong>Base:</strong> Madurai, Tamil Nadu, India
 `;
   }
