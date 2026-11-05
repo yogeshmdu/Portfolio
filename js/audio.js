@@ -106,6 +106,35 @@ class SoundEngine {
       osc.stop(this.ctx.currentTime + 0.07);
     } catch (e) {}
   }
+
+  /* Mechanical ceiling lamp pull-cord switch (Dual-click) */
+  playLampSwitch() {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.ctx) return;
+
+    try {
+      const now = this.ctx.currentTime;
+      [0, 0.042].forEach((offset, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(idx === 0 ? 820 : 540, now + offset);
+        osc.frequency.exponentialRampToValueAtTime(140, now + offset + 0.038);
+
+        gain.gain.setValueAtTime(0.07, now + offset);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.038);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now + offset);
+        osc.stop(now + offset + 0.038);
+      });
+    } catch (e) {}
+  }
+
 }
 
 window.soundEngine = new SoundEngine();

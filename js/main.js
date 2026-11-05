@@ -36,6 +36,7 @@ class PortfolioApp {
     this.initScrollSpy();
     this.initDisciplinesStickyTimeline();
     this.initBackgroundSwitcher();
+    this.initRopeThemeToggle();
     this.bindEvents();
     this.initSoundButton();
   }
@@ -46,11 +47,64 @@ class PortfolioApp {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
 
+    if (this.updateRopeTooltip) {
+      this.updateRopeTooltip(theme);
+    }
+
     if (this.themeBtn) {
       this.themeBtn.innerHTML = theme === 'dark'
         ? `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
         : `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
     }
+  }
+
+  /* Hanging Ceiling Lamp Pull Rope Theme Switch */
+  initRopeThemeToggle() {
+    const ropeContainer = document.getElementById('theme-rope-toggle');
+    const ropeTooltip = document.querySelector('.rope-tooltip-pill');
+    if (!ropeContainer) return;
+
+    this.updateRopeTooltip = (theme) => {
+      if (ropeTooltip) {
+        ropeTooltip.textContent = theme === 'dark' ? 'Pull for Light ☀️' : 'Pull for Dark 🌙';
+      }
+    };
+
+    this.updateRopeTooltip(this.theme);
+
+    const pullRope = () => {
+      if (ropeContainer.classList.contains('is-pulled')) return;
+
+      // Play mechanical lamp switch click
+      if (window.soundEngine?.playLampSwitch) {
+        window.soundEngine.playLampSwitch();
+      } else {
+        window.soundEngine?.playClick();
+      }
+
+      // Add pull bounce spring animation
+      ropeContainer.classList.add('is-pulled');
+      setTimeout(() => {
+        ropeContainer.classList.remove('is-pulled');
+      }, 700);
+
+      // Toggle theme between dark and light
+      const nextTheme = this.theme === 'dark' ? 'light' : 'dark';
+      this.applyTheme(nextTheme);
+      this.showToast(`Switched to ${nextTheme === 'dark' ? 'Midnight Charcoal' : 'Cool Steel Luxe'} mode`);
+    };
+
+    ropeContainer.addEventListener('click', (e) => {
+      e.preventDefault();
+      pullRope();
+    });
+
+    ropeContainer.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        pullRope();
+      }
+    });
   }
 
   toggleTheme() {
@@ -222,7 +276,18 @@ class PortfolioApp {
         hour12: true
       };
       const formatter = new Intl.DateTimeFormat([], options);
-      clockEl.textContent = formatter.format(now) + ' IST';
+      const parts = formatter.formatToParts(now);
+
+      const hour = parts.find(p => p.type === 'hour')?.value || '00';
+      const minute = parts.find(p => p.type === 'minute')?.value || '00';
+      const second = parts.find(p => p.type === 'second')?.value || '00';
+      const dayPeriod = (parts.find(p => p.type === 'dayPeriod')?.value || 'PM').toUpperCase();
+
+      clockEl.innerHTML = `
+        <span class="time-val">${hour}:${minute}:${second}</span>
+        <span class="time-ampm">${dayPeriod}</span>
+        <span class="time-code">IST</span>
+      `;
 
       const hourFormatter = new Intl.DateTimeFormat([], { timeZone: 'Asia/Kolkata', hour: 'numeric', hour12: false });
       const currentHour = parseInt(hourFormatter.format(now), 10);
@@ -364,6 +429,13 @@ class PortfolioApp {
         if (textToCopy) {
           navigator.clipboard.writeText(textToCopy).then(() => {
             this.showToast(`Copied to clipboard: ${textToCopy} 📋`);
+            const prevText = btn.textContent;
+            btn.textContent = 'Copied! ✓';
+            btn.classList.add('copied');
+            setTimeout(() => {
+              btn.textContent = prevText;
+              btn.classList.remove('copied');
+            }, 1800);
           }).catch(() => {
             this.showToast(`Failed to copy: ${textToCopy}`);
           });

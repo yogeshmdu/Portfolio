@@ -5,6 +5,56 @@
 
 const portfolioProjects = [
   {
+    id: 'food-delivery-app',
+    title: 'Food Delivery Application',
+    company: 'Delivery Website',
+    category: 'react',
+    categoryLabel: 'React Native & Node.js',
+    tagline: 'On-demand food delivery platform powered by Node.js, PostgreSQL & Render',
+    image: 'assets/images/project-food-delivery.jpg',
+    liveUrl: 'https://food-delivery-app-1-ufhh.onrender.com/#/home',
+    githubUrl: null,
+    tags: ['React Native', 'Node.js', 'PostgreSQL', 'Neon DB', 'Render', 'Antigravity IDE', 'AI Tools'],
+    idea: 'Empower culinary businesses and restaurants with an ultra-fast on-demand delivery app featuring dynamic menu categorization, serverless cloud database, and one-tap WhatsApp orders.',
+    problem: 'Food businesses needed an ultra-fast, modern digital storefront to eliminate phone order bottlenecks and showcase dishes with real-time pricing and delivery tracking.',
+    solution: 'Engineered a modern cross-platform application utilizing React Native / React.js on the frontend, a Node.js REST API on the backend, and serverless PostgreSQL on Neon hosted on Render, developed using Antigravity and AI-assisted workflows.',
+    impact: 'Deployed live on Render with serverless Neon DB, delivering sub-20ms query latency and seamless multi-channel ordering.',
+    features: [
+      'Clean mobile-first UI with categorized menu ordering and delivery tracking',
+      'Instant debounced search bar for swift product lookup and filtering',
+      'Direct one-tap WhatsApp and phone call triggers for local delivery coordination',
+      'Serverless PostgreSQL database persistence hosted on Neon',
+      'Continuous deployment and cloud hosting powered by Render',
+      'Developed with Antigravity IDE and modern AI-assisted engineering tools'
+    ],
+    architecture: 'React Native / React.js frontend, Node.js & Express REST API, Neon serverless PostgreSQL, deployed on Render cloud platform.'
+  },
+  {
+    id: 'world-travel-budget',
+    title: 'World Travel Budget',
+    company: 'Travel Website',
+    category: 'react',
+    categoryLabel: 'React & Bootstrap',
+    tagline: 'Global travel destination exploration & budget planning platform',
+    image: 'assets/images/project-travel-budget.jpg',
+    video: 'assets/video/travel-video.mp4',
+    liveUrl: 'https://worldtravelbudget.netlify.app/',
+    githubUrl: null,
+    tags: ['React.js', 'Bootstrap 5.3', 'Video UI', 'Responsive UI', 'Netlify'],
+    idea: 'This is a travel website built using React.js and styled with Bootstrap 5.3 for a sleek, responsive design. The platform offers an immersive experience for travelers exploring famous destinations across the globe with interactive and user-friendly features.',
+    problem: 'Travelers often encounter cluttered, confusing travel sites that make discovering destination itineraries and planning travel budgets overwhelming and disjointed.',
+    solution: 'Engineered an intuitive, video-enhanced travel portal with responsive Bootstrap 5.3 layouts, dynamic destination showcases, and interactive exploration features.',
+    impact: 'Deployed live on Netlify with sub-second page loads, immersive ambient video backgrounds, and responsive layouts across all devices.',
+    features: [
+      'High-definition video showcase capturing world travel hotspots',
+      'Built with React.js component architecture for swift client-side navigation',
+      'Styled with modern Bootstrap 5.3 for a sleek, mobile-first responsive design',
+      'Intuitive travel budget planning and itinerary discovery features',
+      'Fast, continuous cloud deployment hosted live on Netlify'
+    ],
+    architecture: 'React.js component-based architecture, Bootstrap 5.3 responsive layout system, HTML5 video integration, and optimized cloud hosting on Netlify.'
+  },
+  {
     id: 'air-calibre-web',
     title: 'Enterprise Web Portal',
     company: 'Live Web Portal',
@@ -51,56 +101,6 @@ const portfolioProjects = [
       'Secure data validation preventing out-of-spec or missing parameter submissions'
     ],
     architecture: 'Core PHP mathematical computation routines, dynamic DOM template hydration, relational audit persistence, and fast PDF-ready output formatting.'
-  },
-  {
-    id: 'world-travel-budget',
-    title: 'World Travel Budget',
-    company: 'Travel Website',
-    category: 'react',
-    categoryLabel: 'React & Bootstrap',
-    tagline: 'Global travel destination exploration & budget planning platform',
-    image: 'assets/images/project-travel-budget.jpg',
-    video: 'assets/video/travel-video.mp4',
-    liveUrl: 'https://worldtravelbudget.netlify.app/',
-    githubUrl: null,
-    tags: ['React.js', 'Bootstrap 5.3', 'Video UI', 'Responsive UI', 'Netlify'],
-    idea: 'This is a travel website built using React.js and styled with Bootstrap 5.3 for a sleek, responsive design. The platform offers an immersive experience for travelers exploring famous destinations across the globe with interactive and user-friendly features.',
-    problem: 'Travelers often encounter cluttered, confusing travel sites that make discovering destination itineraries and planning travel budgets overwhelming and disjointed.',
-    solution: 'Engineered an intuitive, video-enhanced travel portal with responsive Bootstrap 5.3 layouts, dynamic destination showcases, and interactive exploration features.',
-    impact: 'Deployed live on Netlify with sub-second page loads, immersive ambient video backgrounds, and responsive layouts across all devices.',
-    features: [
-      'High-definition video showcase capturing world travel hotspots',
-      'Built with React.js component architecture for swift client-side navigation',
-      'Styled with modern Bootstrap 5.3 for a sleek, mobile-first responsive design',
-      'Intuitive travel budget planning and itinerary discovery features',
-      'Fast, continuous cloud deployment hosted live on Netlify'
-    ],
-    architecture: 'React.js component-based architecture, Bootstrap 5.3 responsive layout system, HTML5 video integration, and optimized cloud hosting on Netlify.'
-  },
-  {
-    id: 'food-delivery-app',
-    title: 'Food Delivery Application',
-    company: 'Delivery Website',
-    category: 'react',
-    categoryLabel: 'React Native & Node.js',
-    tagline: 'On-demand food delivery platform powered by Node.js, PostgreSQL & Render',
-    image: 'assets/images/project-food-delivery.jpg',
-    liveUrl: 'https://food-delivery-app-1-ufhh.onrender.com/#/home',
-    githubUrl: null,
-    tags: ['React Native', 'Node.js', 'PostgreSQL', 'Neon DB', 'Render', 'Antigravity IDE', 'AI Tools'],
-    idea: 'Empower culinary businesses and restaurants with an ultra-fast on-demand delivery app featuring dynamic menu categorization, serverless cloud database, and one-tap WhatsApp orders.',
-    problem: 'Food businesses needed an ultra-fast, modern digital storefront to eliminate phone order bottlenecks and showcase dishes with real-time pricing and delivery tracking.',
-    solution: 'Engineered a modern cross-platform application utilizing React Native / React.js on the frontend, a Node.js REST API on the backend, and serverless PostgreSQL on Neon hosted on Render, developed using Antigravity and AI-assisted workflows.',
-    impact: 'Deployed live on Render with serverless Neon DB, delivering sub-20ms query latency and seamless multi-channel ordering.',
-    features: [
-      'Clean mobile-first UI with categorized menu ordering and delivery tracking',
-      'Instant debounced search bar for swift product lookup and filtering',
-      'Direct one-tap WhatsApp and phone call triggers for local delivery coordination',
-      'Serverless PostgreSQL database persistence hosted on Neon',
-      'Continuous deployment and cloud hosting powered by Render',
-      'Developed with Antigravity IDE and modern AI-assisted engineering tools'
-    ],
-    architecture: 'React Native / React.js frontend, Node.js & Express REST API, Neon serverless PostgreSQL, deployed on Render cloud platform.'
   },
   {
     id: 'imdb-clone',

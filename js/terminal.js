@@ -41,11 +41,35 @@ class InteractiveTerminal {
 
   bindEvents() {
     this.toggleBtns.forEach(btn => {
-      btn.addEventListener('click', () => this.toggle());
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.toggle();
+      });
     });
 
     if (this.closeBtn) {
-      this.closeBtn.addEventListener('click', () => this.close());
+      this.closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.close();
+      });
+    }
+
+    // Click on backdrop outside the modal window closes the popup
+    if (this.drawer) {
+      this.drawer.addEventListener('click', (e) => {
+        if (e.target === this.drawer) {
+          this.close();
+        }
+      });
+    }
+
+    // Clicking anywhere inside terminal body auto-focuses the input
+    if (this.body && this.input) {
+      this.body.addEventListener('click', (e) => {
+        if (window.getSelection().toString().length === 0) {
+          this.input.focus();
+        }
+      });
     }
 
     if (this.input) {
@@ -75,8 +99,11 @@ class InteractiveTerminal {
       });
     }
 
+    // Keyboard shortcuts: Escape to close modal, Ctrl/Cmd + ` to toggle
     document.addEventListener('keydown', (e) => {
-      if (e.key === '`' && (e.ctrlKey || e.metaKey)) {
+      if (e.key === 'Escape' && this.drawer && this.drawer.classList.contains('open')) {
+        this.close();
+      } else if (e.key === '`' && (e.ctrlKey || e.metaKey)) {
         this.toggle();
       }
     });
@@ -146,8 +173,8 @@ class InteractiveTerminal {
   <div><span class="term-coral">skills</span>       - Technical competencies & architecture stack</div>
   <div><span class="term-coral">education</span>    - Academic foundation (B.E. ECE 2019)</div>
   <div><span class="term-coral">clock</span>        - Current Madurai IST time & availability</div>
-  <div><span class="term-coral">contact</span>      - Phone, email, LinkedIn, and Instagram</div>
-  <div><span class="term-coral">resume</span>       - Direct link to official resume on Google Drive</div>
+  <div><span class="term-coral">contact</span>      - Phone, email, and LinkedIn</div>
+  <div><span class="term-coral">resume</span>       - Direct download of official resume (PDF)</div>
   <div><span class="term-coral">theme</span>        - Toggle between Obsidian Dark and Luxe Light</div>
   <div><span class="term-coral">clear</span>        - Clear terminal history</div>
 </div>
@@ -195,10 +222,10 @@ class InteractiveTerminal {
   cmdProjects() {
     return `
 <span class="term-coral">Key Projects & Live Deployments:</span>
+• <strong>Food Delivery Application</strong> - <a href="https://food-delivery-app-1-ufhh.onrender.com/#/home" target="_blank" class="term-link">food-delivery-app-1-ufhh.onrender.com</a>
+• <strong>World Travel Budget</strong> - <a href="https://worldtravelbudget.netlify.app/" target="_blank" class="term-link">worldtravelbudget.netlify.app</a>
 • <strong>Enterprise Web Portal</strong> - <a href="https://website-of-acs.netlify.app/" target="_blank" class="term-link">website-of-acs.netlify.app</a>
 • <strong>Reports Module Website</strong> - <a href="http://validationreportmodule.netlify.app" target="_blank" class="term-link">validationreportmodule.netlify.app</a>
-• <strong>World Travel Budget</strong> - <a href="https://worldtravelbudget.netlify.app/" target="_blank" class="term-link">worldtravelbudget.netlify.app</a>
-• <strong>Food Delivery Application</strong> - <a href="https://food-delivery-app-1-ufhh.onrender.com/#/home" target="_blank" class="term-link">food-delivery-app-1-ufhh.onrender.com</a>
 • <strong>Explore Madurai Tourism</strong> - <a href="http://exploremadurai.netlify.app" target="_blank" class="term-link">exploremadurai.netlify.app</a>
 • <strong>IMDb Movie Discovery Hub</strong> - React.js, RapidAPI, Tailwind CSS
 • <strong>Food Ordering & Culinary Web App</strong> - React.js, Redux, Tailwind CSS
@@ -237,8 +264,8 @@ class InteractiveTerminal {
   }
 
   cmdResume() {
-    window.open('https://drive.google.com/file/d/1bqSkS_GvY5UXWBCcUDE_82oHqTe4ww3L/view?usp', '_blank');
-    return `Opening official resume on Google Drive in a new tab... 📄`;
+    window.open('https://drive.google.com/uc?export=download&id=18j0J1hhtb_8h6INpdU-PzHpfSm-R8x5n', '_blank');
+    return `Initiating official resume download from Google Drive... 📄`;
   }
 
   cmdClock() {
