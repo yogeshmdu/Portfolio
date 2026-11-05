@@ -32,17 +32,17 @@
   --bg-card: var(--c-midnight-card);
   --bg-card-hover: var(--c-midnight-card-hover);
   --bg-glass: var(--c-midnight-glass);
-  
+
   --border-color: var(--c-steel-border);
   --border-color-hover: rgba(255, 75, 50, 0.45);
-  
+
   --text-primary: #ffffff;
   --text-secondary: #929DA7;
   --text-muted: #727d87;
 
   --accent-primary: var(--c-coral);
   --accent-secondary: var(--c-steel);
-  
+
   --gradient-primary: var(--c-coral-gradient);
   --gradient-glow: radial-gradient(circle at 50% 50%, rgba(255, 75, 50, 0.22), transparent 70%);
   --shadow-glow: 0 0 35px rgba(255, 75, 50, 0.3);
@@ -73,14 +73,14 @@
   --bg-card: rgba(255, 255, 255, 0.88);
   --bg-card-hover: rgba(255, 255, 255, 0.98);
   --bg-glass: rgba(255, 255, 255, 0.8);
-  
+
   --border-color: rgba(23, 25, 28, 0.1);
   --border-color-hover: rgba(255, 75, 50, 0.5);
-  
+
   --text-primary: #17191c;
   --text-secondary: #5a646e;
   --text-muted: #8a949e;
-  
+
   --shadow-card: 0 16px 40px -12px rgba(23, 25, 28, 0.08);
   --shadow-glow: 0 0 30px rgba(255, 75, 50, 0.2);
 }
@@ -89,7 +89,9 @@
    BASE & RESET
    =================================================================== */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -122,13 +124,16 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(146, 157, 167, 0.3);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--c-coral);
 }
@@ -279,7 +284,9 @@ body.cursor-hover .custom-cursor-outline {
 }
 
 @media (max-width: 992px) {
-  .custom-cursor-dot, .custom-cursor-outline {
+
+  .custom-cursor-dot,
+  .custom-cursor-outline {
     display: none !important;
   }
 }
@@ -859,10 +866,25 @@ body.cursor-hover .custom-cursor-outline {
   color: var(--c-coral);
 }
 
-.cad-crosshair.top-left { top: 1rem; left: 1rem; }
-.cad-crosshair.top-right { top: 1rem; right: 1rem; }
-.cad-crosshair.bottom-left { bottom: 1rem; left: 1rem; }
-.cad-crosshair.bottom-right { bottom: 1rem; right: 1rem; }
+.cad-crosshair.top-left {
+  top: 1rem;
+  left: 1rem;
+}
+
+.cad-crosshair.top-right {
+  top: 1rem;
+  right: 1rem;
+}
+
+.cad-crosshair.bottom-left {
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.cad-crosshair.bottom-right {
+  bottom: 1rem;
+  right: 1rem;
+}
 
 /* Floating Telemetry Badges (3D Parallax) */
 .floating-badge {
@@ -933,12 +955,19 @@ body.cursor-hover .custom-cursor-outline {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
+
   .hero-portrait-card {
     max-width: 360px;
     margin: 0 auto;
   }
-  .badge-top-right { right: -2%; }
-  .badge-bottom-left { left: -2%; }
+
+  .badge-top-right {
+    right: -2%;
+  }
+
+  .badge-bottom-left {
+    left: -2%;
+  }
 }
 
 /* ===================================================================
@@ -1005,6 +1034,7 @@ body.cursor-hover .custom-cursor-outline {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
+
   .metric-item:nth-child(2)::after {
     display: none;
   }
@@ -1056,115 +1086,1114 @@ section {
 }
 
 /* ===================================================================
-   IDEA-WISE CORE DISCIPLINES & SERVICES
+   ENGINEERING JOURNEY: LET'S GO BACK IN TIME
+   Interactive Half-Clock Dial & Year Panel with Pinned Milestone Cards
    =================================================================== */
 
-.disciplines-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.75rem;
+.journey-section {
+  position: relative;
+  height: 260vh; /* Pinned Runway for Scroll Interaction */
+  background: var(--bg-primary);
+  margin-bottom: 0;
 }
 
-.discipline-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 2.25rem;
+.journey-sticky-stage {
+  position: sticky;
+  top: 72px;
+  height: calc(100vh - 84px);
+  max-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.journey-layout {
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+/* LEFT: Info Panel (Year/Text) + Conduit Bridge + Half-Clock Dial */
+.journey-sticky-col {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.journey-info-panel {
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
-  box-shadow: var(--shadow-card);
+  gap: 0.35rem;
+  flex: 1;
+  max-width: 250px;
+}
+
+.journey-hud-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-story-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+  display: inline-block;
+}
+
+.journey-main-title {
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+/* ===================================================================
+   CHRONO-YEAR MECHANICAL SPLIT-FLAP CHAMBER
+   =================================================================== */
+
+.journey-year-chamber {
   position: relative;
+  background: rgba(23, 25, 28, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(146, 157, 167, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  width: 100%;
+  max-width: 250px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="light"] .journey-year-chamber {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(146, 157, 167, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.journey-year-chamber:hover {
+  border-color: rgba(255, 75, 50, 0.55);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 75, 50, 0.16);
+}
+
+/* Laser Scan Sweep across Chamber */
+.chamber-scan-laser {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--c-coral), #ffffff, var(--c-coral), transparent);
+  box-shadow: 0 0 8px var(--c-coral);
+  opacity: 0.8;
+  pointer-events: none;
+  animation: laserScan 4s ease-in-out infinite;
+}
+
+@keyframes laserScan {
+  0% { left: -100%; top: 0; }
+  50% { left: 100%; top: 100%; }
+  100% { left: -100%; top: 0; }
+}
+
+/* 4 Mechanical Digit Reels */
+.chrono-reels-stage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  perspective: 600px;
+}
+
+.chrono-reel {
+  position: relative;
+  flex: 1;
+  height: 54px;
+  background: #0d0f11;
+  border: 1px solid rgba(146, 157, 167, 0.3);
+  border-radius: 6px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.85), 0 4px 10px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  user-select: none;
   overflow: hidden;
 }
 
-.discipline-card::before {
+[data-theme="light"] .chrono-reel {
+  background: #17191c;
+  color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.chrono-reel::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 4px;
-  height: 0;
-  background: var(--c-coral);
-  transition: height 0.4s ease;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  z-index: 2;
 }
 
-.discipline-card:hover::before {
-  height: 100%;
+.chrono-reel .reel-digit {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  display: inline-block;
 }
 
-.discipline-top {
+.chrono-reel.flipping .reel-digit {
+  animation: reelFlipAnim 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes reelFlipAnim {
+  0% {
+    transform: translateY(-35px) scale(0.85);
+    opacity: 0.15;
+    filter: blur(2px);
+  }
+  50% {
+    transform: translateY(5px) scale(1.05);
+    opacity: 0.95;
+    filter: blur(0);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.chrono-reel:hover .reel-digit {
+  color: var(--c-coral);
+  text-shadow: 0 0 10px rgba(255, 75, 50, 0.6);
+}
+
+.chamber-date-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
-.discipline-num {
+.journey-date-sub {
   font-family: var(--font-mono);
-  font-size: 1.75rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.discipline-badge {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-secondary);
-  background: rgba(146, 157, 167, 0.12);
-  padding: 0.25rem 0.65rem;
-  border-radius: 6px;
+  background: rgba(146, 157, 167, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(146, 157, 167, 0.2);
+  display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 
-.discipline-title {
-  font-size: 1.35rem;
-  font-weight: 800;
+/* Step Counter & Horizontal Progress Line */
+.journey-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.journey-step-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   color: var(--text-primary);
-  line-height: 1.3;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
 }
 
-.discipline-idea {
-  background: rgba(255, 75, 50, 0.08);
-  border-left: 3px solid var(--c-coral);
-  padding: 0.75rem 1rem;
-  border-radius: 0 8px 8px 0;
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  line-height: 1.5;
-}
-
-.discipline-idea strong {
+.journey-step-meta svg {
   color: var(--c-coral);
 }
 
-.discipline-desc {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
+.journey-step-counter {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
 }
 
-.discipline-tags {
+.journey-progress-bar {
+  width: 80px;
+  height: 3px;
+  background: rgba(146, 157, 167, 0.22);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.journey-progress-fill {
+  height: 100%;
+  background: var(--c-coral);
+  border-radius: 99px;
+  transition: width 0.35s ease;
+  box-shadow: 0 0 6px rgba(255, 75, 50, 0.5);
+}
+
+/* Navigation Pills for direct jumping */
+.journey-nav-pills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.35rem;
+  width: 100%;
+  max-width: 250px;
+}
+
+.journey-nav-pill {
+  background: rgba(146, 157, 167, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  padding: 0.2rem 0.45rem;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.journey-nav-pill:hover {
+  background: rgba(146, 157, 167, 0.15);
+  border-color: var(--c-coral);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.journey-nav-pill.active {
+  background: var(--c-coral-soft);
+  border-color: var(--c-coral);
+  color: var(--c-coral);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(255, 75, 50, 0.2);
+}
+
+.journey-nav-pill .pill-year {
+  font-family: var(--font-mono);
+  font-weight: 800;
+}
+
+.journey-nav-pill .pill-title {
+  opacity: 0.85;
+}
+
+/* ===================================================================
+   TEMPORAL CONDUIT BRIDGE (Animated UI Bridge between Year & Clock)
+   =================================================================== */
+
+.temporal-conduit-bridge {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  flex: 1;
+  min-width: 50px;
+  max-width: 140px;
+  user-select: none;
+  z-index: 5;
+}
+
+/* Horizontal Conduit Laser Beam with Running Photons */
+.conduit-beam {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: rgba(146, 157, 167, 0.28);
+  border-radius: 99px;
+  overflow: visible;
+}
+
+.conduit-pulse {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 22px;
+  height: 6px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, transparent, var(--c-coral), #ffffff, var(--c-coral), transparent);
+  box-shadow: 0 0 10px var(--c-coral);
+  animation: conduitFlow 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.conduit-pulse.delay {
+  animation-delay: 0.9s;
+}
+
+@keyframes conduitFlow {
+  0% {
+    left: -22px;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Animated Equalizer Waveform Bars */
+.conduit-waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 22px;
+}
+
+.conduit-waveform .wave-bar {
+  width: 2.5px;
+  background: var(--c-coral);
+  border-radius: 99px;
+  box-shadow: 0 0 6px rgba(255, 75, 50, 0.55);
+  animation: waveBarDance 1.2s ease-in-out infinite alternate;
+}
+
+.conduit-waveform .wave-bar.bar-1 { height: 8px; animation-delay: 0.1s; }
+.conduit-waveform .wave-bar.bar-2 { height: 16px; animation-delay: 0.35s; }
+.conduit-waveform .wave-bar.bar-3 { height: 22px; animation-delay: 0.15s; }
+.conduit-waveform .wave-bar.bar-4 { height: 14px; animation-delay: 0.5s; }
+.conduit-waveform .wave-bar.bar-5 { height: 18px; animation-delay: 0.25s; }
+.conduit-waveform .wave-bar.bar-6 { height: 9px; animation-delay: 0.4s; }
+
+@keyframes waveBarDance {
+  0% {
+    transform: scaleY(0.35);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Telemetry Badge */
+.conduit-telemetry {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  background: rgba(146, 157, 167, 0.1);
+  border: 1px solid rgba(146, 157, 167, 0.2);
+  padding: 0.12rem 0.4rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+[data-theme="light"] .conduit-beam {
+  background: rgba(23, 25, 28, 0.15);
+}
+
+[data-theme="light"] .conduit-telemetry {
+  background: rgba(23, 25, 28, 0.05);
+  border-color: rgba(23, 25, 28, 0.15);
+  color: var(--text-primary);
+}
+
+/* ===================================================================
+   DEDICATED HALF-CLOCK DIAL (Right Semicircle Arc 0° to 180°)
+   =================================================================== */
+
+.journey-half-clock-panel {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  width: 240px;
+}
+
+.journey-half-clock-stage {
+  position: relative;
+  width: 240px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  user-select: none;
+}
+
+.half-clock-ambient-glow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 240px;
+  height: 340px;
+  background: radial-gradient(ellipse at center right, rgba(255, 75, 50, 0.22) 0%, rgba(146, 157, 167, 0.04) 60%, transparent 80%);
+  filter: blur(28px);
+  pointer-events: none;
+  animation: clockGlowPulse 5s ease-in-out infinite;
+}
+
+@keyframes clockGlowPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+.half-clock-dial-wrapper {
+  position: relative;
+  width: 240px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+/* SVG Vector Clock Face with Custom Left Sculpted Contour */
+.half-clock-face-svg {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.35));
+}
+
+/* Glassy Dial Surface clipped to Contour */
+.clock-dial-body {
+  fill: rgba(23, 25, 28, 0.82);
+  stroke: rgba(146, 157, 167, 0.22);
+  stroke-width: 1;
+  transition: fill 0.3s ease;
+}
+
+[data-theme="light"] .clock-dial-body {
+  fill: rgba(255, 255, 255, 0.88);
+  stroke: rgba(23, 25, 28, 0.12);
+}
+
+/* Clipped Vintage Wrought-Iron Texture */
+.clock-vintage-image {
+  opacity: 0.2;
+  filter: grayscale(1) contrast(1.25);
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+}
+
+[data-theme="light"] .clock-vintage-image {
+  opacity: 0.15;
+  filter: grayscale(1) contrast(1.1);
+  mix-blend-mode: multiply;
+}
+
+/* Sculpted Contour Line (Red Marked Design on Left) */
+.clock-sculpted-contour-main {
+  fill: none;
+  stroke: var(--c-coral);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 7px rgba(255, 75, 50, 0.85));
+}
+
+.clock-sculpted-contour-glow {
+  fill: none;
+  stroke: var(--c-coral);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.35;
+  filter: blur(4px);
+}
+
+/* Micro-Rivets & Hub Cradle along Sculpted Contour */
+.contour-rivet {
+  fill: var(--c-midnight);
+  stroke: var(--c-coral);
+  stroke-width: 1.8;
+  filter: drop-shadow(0 0 5px var(--c-coral));
+}
+
+[data-theme="light"] .contour-rivet {
+  fill: #ffffff;
+}
+
+.contour-rivet.hub-cradle {
+  fill: var(--c-coral);
+  stroke: #ffffff;
+  stroke-width: 1.5;
+}
+
+/* Energy Bridge connecting Contour Cradle to Center Ruby Hub */
+.clock-hub-conduit-bridge {
+  stroke: var(--c-coral);
+  stroke-width: 2.5;
+  stroke-dasharray: 4 2;
+  opacity: 0.85;
+}
+
+/* Decorative Semicircle Bezel Rings */
+.clock-bezel-outer {
+  fill: none;
+  stroke: rgba(146, 157, 167, 0.3);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.clock-bezel-track {
+  fill: none;
+  stroke: rgba(146, 157, 167, 0.18);
+  stroke-width: 1;
+}
+
+.clock-bezel-inner {
+  fill: none;
+  stroke: rgba(146, 157, 167, 0.22);
+  stroke-width: 1.2;
+}
+
+.clock-bezel-core {
+  fill: none;
+  stroke: rgba(255, 75, 50, 0.25);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+/* Active Half Arc Rail (0° to 180° Right Semicircle) */
+.clock-half-arc-rail {
+  fill: none;
+  stroke: rgba(146, 157, 167, 0.35);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.clock-half-arc-fill {
+  fill: none;
+  stroke: var(--c-coral);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 550;
+  stroke-dashoffset: 550;
+  transition: stroke-dashoffset 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 0 6px rgba(255, 75, 50, 0.6));
+}
+
+/* Radial Ticks along the Half Arc */
+.clock-tick-major {
+  stroke: var(--c-coral);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.clock-tick-minor {
+  stroke: rgba(146, 157, 167, 0.5);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+
+/* Roman Numerals */
+.clock-numeral {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--text-secondary);
+  text-anchor: middle;
+  dominant-baseline: central;
+  transition: fill 0.3s ease, font-size 0.3s ease;
+}
+
+.clock-numeral.active {
+  fill: var(--c-coral);
+  font-size: 18px;
+  font-weight: 900;
+  filter: drop-shadow(0 0 6px rgba(255, 75, 50, 0.7));
+}
+
+.clock-milestone-nodes {
+  pointer-events: auto;
+}
+
+/* Milestone Nodes on the Arc */
+.clock-arc-node {
+  fill: var(--c-midnight);
+  stroke: var(--c-steel);
+  stroke-width: 2;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+[data-theme="light"] .clock-arc-node {
+  fill: #fff;
+}
+
+.clock-arc-node.active {
+  fill: var(--c-coral);
+  stroke: #ffffff;
+  stroke-width: 2.5;
+  r: 9;
+  filter: drop-shadow(0 0 8px var(--c-coral));
+}
+
+/* Animated Clock Sticks (Hands Pivoting at 20px 200px) */
+.clock-stick-master {
+  transform-origin: 20px 200px;
+  transform: rotate(var(--hand-rotation, 0deg));
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Subtle Escapement Tick Animation */
+.clock-stick-anim-wrap {
+  transform-origin: 20px 200px;
+  animation: clockStickTick 2s ease-in-out infinite;
+}
+
+@keyframes clockStickTick {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(1deg);
+  }
+  30% {
+    transform: rotate(0deg);
+  }
+  65% {
+    transform: rotate(-0.75deg);
+  }
+}
+
+.clock-hand-blade {
+  fill: var(--c-coral);
+  stroke: #ffffff;
+  stroke-width: 1.2;
+  filter: drop-shadow(0 0 6px rgba(255, 75, 50, 0.6));
+}
+
+.clock-hand-heart {
+  fill: var(--c-midnight);
+  stroke: #ffffff;
+  stroke-width: 1;
+}
+
+[data-theme="light"] .clock-hand-heart {
+  fill: #ffffff;
+  stroke: var(--c-coral);
+}
+
+/* Second Precision Stick */
+.clock-stick-second {
+  transform-origin: 20px 200px;
+  transform: rotate(var(--second-rotation, 0deg));
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.clock-stick-second-wrap {
+  transform-origin: 20px 200px;
+  animation: secondHandBreathe 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+@keyframes secondHandBreathe {
+  0% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(2deg);
+  }
+}
+
+.clock-hand-needle {
+  stroke: #ffffff;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
+
+[data-theme="light"] .clock-hand-needle {
+  stroke: var(--c-midnight);
+}
+
+.clock-hand-needle-tip {
+  fill: var(--c-coral);
+  stroke: #ffffff;
+  stroke-width: 1;
+}
+
+/* Center Pivot Hub on Left Border (20px 200px) */
+.clock-hub-outer {
+  fill: var(--c-midnight);
+  stroke: var(--c-coral);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 8px rgba(255, 75, 50, 0.6));
+}
+
+[data-theme="light"] .clock-hub-outer {
+  fill: #ffffff;
+}
+
+.clock-hub-ring {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.2;
+}
+
+.clock-hub-ruby {
+  fill: var(--c-coral);
+  filter: drop-shadow(0 0 4px var(--c-coral));
+}
+
+/* RIGHT: Timeline Column & Milestone Cards Viewport */
+.journey-timeline-col {
+  display: flex;
+  gap: 1.75rem;
+  align-items: stretch;
+  position: relative;
+  width: 100%;
+}
+
+/* Continuous Vertical Track with Following Dot */
+.journey-vertical-track {
+  position: relative;
+  width: 16px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.journey-track-line {
+  position: absolute;
+  top: 15px;
+  bottom: 15px;
+  width: 2px;
+  background: rgba(146, 157, 167, 0.25);
+  border-radius: 99px;
+}
+
+.journey-active-node {
+  position: absolute;
+  left: 50%;
+  top: 25px;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--c-coral);
+  border: 2.5px solid var(--bg-primary);
+  box-shadow: 0 0 10px var(--c-coral);
+  transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 3;
+}
+
+.journey-active-node .node-glow {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--c-coral);
+  opacity: 0.7;
+  animation: nodePulse 2.5s infinite;
+}
+
+/* Viewport for Stacked Milestone Cards (Prefix hides, suffix shows) */
+.journey-story-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+/* Story Card (Glassmorphic Compact Architecture) */
+.journey-story-card {
+  grid-area: 1 / 1;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem 1.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(22px) scale(0.98);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.4s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.journey-story-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.5px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--c-coral) 0%, #ff7a66 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Active card: shows clearly */
+.journey-story-card.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  border-color: rgba(255, 75, 50, 0.55);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(255, 75, 50, 0.15);
+  z-index: 2;
+}
+
+.journey-story-card.active::before {
+  opacity: 1;
+}
+
+/* Prefix card: hides upwards */
+.journey-story-card.is-prefix {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-24px) scale(0.97);
+  z-index: 1;
+}
+
+/* Suffix card: hides downwards */
+.journey-story-card.is-suffix {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(24px) scale(0.97);
+  z-index: 1;
+}
+
+.card-header-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.card-milestone-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--c-coral);
+  background: var(--c-coral-soft);
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 75, 50, 0.25);
+}
+
+.card-date-tag {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.card-title {
+  font-size: clamp(1.25rem, 1.8vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.card-subtitle {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.card-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0.2rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.card-bullets li {
+  position: relative;
+  padding-left: 1.15rem;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.card-bullets li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--c-coral);
+  font-weight: 800;
+}
+
+.card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: auto;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
 }
 
-.discipline-tags span {
+.card-tags span {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--c-steel);
   background: rgba(146, 157, 167, 0.1);
-  padding: 0.25rem 0.6rem;
-  border-radius: 4px;
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+  border: 1px solid rgba(146, 157, 167, 0.18);
+  transition: all 0.2s ease;
 }
 
-@media (max-width: 800px) {
-  .disciplines-grid {
+.journey-story-card.active .card-tags span {
+  border-color: rgba(255, 75, 50, 0.25);
+  color: var(--text-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  .journey-section {
+    height: auto;
+    padding: 3.5rem 0;
+  }
+
+  .journey-sticky-stage {
+    position: static;
+    height: auto;
+    max-height: none;
+    padding: 0;
+  }
+
+  .journey-layout {
     grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .journey-sticky-col {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .temporal-conduit-bridge {
+    display: none;
+  }
+
+  .journey-info-panel {
+    align-items: center;
+  }
+
+  .journey-year-readout {
+    align-items: center;
+  }
+
+  .journey-half-clock-panel {
+    justify-content: center;
+  }
+
+  .journey-progress-row {
+    justify-content: center;
+  }
+
+  .journey-nav-pills {
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .journey-timeline-col {
+    gap: 1.25rem;
+  }
+
+  .journey-vertical-track {
+    display: none;
+  }
+
+  .journey-story-viewport {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: auto;
+  }
+
+  .journey-story-card {
+    grid-area: auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .journey-giant-year {
+    font-size: 2.6rem;
+  }
+
+  .journey-half-clock-stage,
+  .half-clock-dial-wrapper {
+    width: 200px;
+    height: 330px;
+  }
+
+  .journey-nav-pills {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1855,14 +2884,17 @@ section {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
+
   .about-card-left {
     max-width: 360px;
     margin: 0 auto;
   }
+
   .about-badge-card {
     right: 0;
     bottom: -1rem;
   }
+
   .about-pillars {
     grid-template-columns: 1fr;
   }
@@ -2151,7 +3183,8 @@ section {
   color: var(--text-primary);
 }
 
-.form-input, .form-textarea {
+.form-input,
+.form-textarea {
   background: rgba(146, 157, 167, 0.08);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
@@ -2163,7 +3196,8 @@ section {
   transition: border-color var(--transition-fast);
 }
 
-.form-input:focus, .form-textarea:focus {
+.form-input:focus,
+.form-textarea:focus {
   border-color: var(--c-coral);
   box-shadow: 0 0 12px rgba(255, 75, 50, 0.2);
 }
@@ -2201,6 +3235,7 @@ section {
   .contact-grid {
     grid-template-columns: 1fr;
   }
+
   .form-row {
     grid-template-columns: 1fr;
   }
@@ -2531,9 +3566,17 @@ section {
   cursor: pointer;
 }
 
-.terminal-dot.red { background: #ff5f56; }
-.terminal-dot.yellow { background: #ffbd2e; }
-.terminal-dot.green { background: #27c93f; }
+.terminal-dot.red {
+  background: #ff5f56;
+}
+
+.terminal-dot.yellow {
+  background: #ffbd2e;
+}
+
+.terminal-dot.green {
+  background: #27c93f;
+}
 
 .terminal-title {
   font-size: 0.8rem;
@@ -2582,9 +3625,18 @@ section {
   color: #ffffff;
 }
 
-.term-coral { color: var(--c-coral); }
-.term-steel { color: var(--c-steel); }
-.term-err { color: #ff6b6b; }
+.term-coral {
+  color: var(--c-coral);
+}
+
+.term-steel {
+  color: var(--c-steel);
+}
+
+.term-err {
+  color: #ff6b6b;
+}
+
 .term-link {
   color: var(--c-coral);
   text-decoration: underline;

@@ -278,103 +278,326 @@
     </section>
 
     <!-- ===================================================================
-         IDEA-WISE CORE DISCIPLINES & SERVICES
+         ENGINEERING JOURNEY: LET'S GO BACK IN TIME
+         Interactive Half-Clock Dial & Year Panel with Pinned Milestone Cards
          =================================================================== -->
-    <section id="disciplines" class="disciplines-section">
-      <div class="container">
-        
-        <div class="section-header reveal-on-scroll">
-          <span class="section-tag">Core Disciplines</span>
-          <h2 class="section-title">Idea-Wise <span class="text-coral">Engineering Services</span></h2>
-          <p class="section-subtitle">
-            Bridging conceptual design, complex enterprise workflows, and robust engineering architectures.
-          </p>
-        </div>
-
-        <div class="disciplines-grid">
+    <section id="disciplines" class="journey-section">
+      <div class="journey-sticky-stage">
+        <div class="container">
           
-          <!-- Discipline 1: Enterprise ERP & Compliance Automation -->
-          <div class="discipline-card glow-border reveal-on-scroll">
-            <div class="discipline-top">
-              <span class="discipline-num text-coral">01</span>
-            </div>
-            <h3 class="discipline-title">Compliance ERP & Calculation Engines</h3>
-            <div class="discipline-idea">
-              <strong>The Idea:</strong> Replace error-prone manual testing spreadsheets with automated, role-based calculation portals that deliver certified compliance reports instantly.
-            </div>
-            <p class="discipline-desc">
-              Engineered for enterprise cleanroom & HVAC compliance. Converts on-site airflow velocities, HEPA filter efficiency formulas, and particle count readings into verifiable, export-ready audit certificates.
-            </p>
-            <div class="discipline-tags">
-              <span>Core PHP</span>
-              <span>MySQL</span>
-              <span>Calculation Engines</span>
-              <span>PDF Automation</span>
-            </div>
-          </div>
+          <div class="journey-layout">
+            
+            <!-- LEFT: Story Info & Year Panel + Half-Clock Dial -->
+            <div class="journey-sticky-col">
+              
+              <!-- Story Info, Giant Year & Milestone Controls -->
+              <div class="journey-info-panel">
+                <div class="journey-hud-top">
+                  <span class="journey-story-tag">• My story</span>
+                  <h2 class="journey-main-title">Let's go back in time.</h2>
+                </div>
 
-          <!-- Discipline 2: High-Concurrency Product Dashboards -->
-          <div class="discipline-card glow-border reveal-on-scroll delay-100">
-            <div class="discipline-top">
-              <span class="discipline-num text-coral">02</span>
-            </div>
-            <h3 class="discipline-title">Mission-Critical Product Suites</h3>
-            <div class="discipline-idea">
-              <strong>The Idea:</strong> Unify operational data, team rosters, and business metrics into sub-second, highly responsive dashboards for distributed remote teams.
-            </div>
-            <p class="discipline-desc">
-              Developed and maintained core product dashboards (Getty, Care, Zylo, Roster) at VSplash Tech Labs Private Ltd. Spearheaded legacy view modernization into typed React & TypeScript SPAs.
-            </p>
-            <div class="discipline-tags">
-              <span>React.js</span>
-              <span>TypeScript</span>
-              <span>Doctrine ORM</span>
-              <span>MongoDB & MySQL</span>
-            </div>
-          </div>
+                <!-- Interactive Chrono-Year Chamber (Mechanical Reels & Laser Scan) -->
+                <div class="journey-year-chamber" id="journey-year-chamber">
+                  <div class="chamber-scan-laser"></div>
 
-          <!-- Discipline 3: API Integrations & Service Provisioning -->
-          <div class="discipline-card glow-border reveal-on-scroll delay-200">
-            <div class="discipline-top">
-              <span class="discipline-num text-coral">03</span>
-            </div>
-            <h3 class="discipline-title">Third-Party APIs & Service Automation</h3>
-            <div class="discipline-idea">
-              <strong>The Idea:</strong> Eliminate manual provisioning bottlenecks through automated CRM order lifecycles and direct GoDaddy product API synchronizations.
-            </div>
-            <p class="discipline-desc">
-              Implemented automated domain and hosting provisioning pipelines, real-time webhooks, WebSocket live streaming, and high-throughput RESTful endpoints with sub-second response times.
-            </p>
-            <div class="discipline-tags">
-              <span>GoDaddy APIs</span>
-              <span>RESTful APIs</span>
-              <span>WebSockets</span>
-              <span>Postman CI/CD</span>
-            </div>
-          </div>
+                  <div class="chrono-reels-stage" id="chrono-reels-stage" aria-label="Target Year">
+                    <div class="chrono-reel" data-pos="0"><span class="reel-digit">2</span></div>
+                    <div class="chrono-reel" data-pos="1"><span class="reel-digit">0</span></div>
+                    <div class="chrono-reel" data-pos="2"><span class="reel-digit">2</span></div>
+                    <div class="chrono-reel" data-pos="3"><span class="reel-digit">4</span></div>
+                  </div>
 
-          <!-- Discipline 4: Cross-Platform Apps & Cloud Deployments -->
-          <div class="discipline-card glow-border reveal-on-scroll delay-300">
-            <div class="discipline-top">
-              <span class="discipline-num text-coral">04</span>
-            </div>
-            <h3 class="discipline-title">Full-Stack SPAs & Cloud Infrastructure</h3>
-            <div class="discipline-idea">
-              <strong>The Idea:</strong> Deliver fluid, cross-platform ordering and discovery applications backed by serverless cloud SQL and automated deployments.
-            </div>
-            <p class="discipline-desc">
-              Engineered mobile-first food delivery applications with Neon serverless PostgreSQL, deployed on Render, and built responsive tourism guides on Netlify.
-            </p>
-            <div class="discipline-tags">
-              <span>React Native</span>
-              <span>Node.js / Express</span>
-              <span>Neon PostgreSQL</span>
-              <span>AWS EC2 & Docker</span>
-            </div>
-          </div>
+                  <div class="chamber-date-row">
+                    <span class="journey-date-sub" id="journey-date-sub">OCT 2024 – PRESENT</span>
+                  </div>
+                  <span id="journey-active-year" style="display:none;">2024</span>
+                </div>
 
+                <!-- Step Counter & Horizontal Progress Line -->
+                <div class="journey-progress-row">
+                  <div class="journey-step-meta">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 16 14"/>
+                    </svg>
+                    <span id="journey-step-counter" class="journey-step-counter">01 / 04</span>
+                  </div>
+                  <div class="journey-progress-bar">
+                    <div id="journey-progress-fill" class="journey-progress-fill" style="width: 25%;"></div>
+                  </div>
+                </div>
+
+                <!-- Navigation Pills (Click to jump to year) -->
+                <div class="journey-nav-pills" role="tablist" aria-label="Journey Milestones">
+                  <button type="button" class="journey-nav-pill active" data-index="0" role="tab" aria-selected="true">
+                    <span class="pill-year">2024</span>
+                    <span class="pill-title">Cloud SPAs</span>
+                  </button>
+                  <button type="button" class="journey-nav-pill" data-index="1" role="tab" aria-selected="false">
+                    <span class="pill-year">2023</span>
+                    <span class="pill-title">API Automation</span>
+                  </button>
+                  <button type="button" class="journey-nav-pill" data-index="2" role="tab" aria-selected="false">
+                    <span class="pill-year">2022</span>
+                    <span class="pill-title">Product Suites</span>
+                  </button>
+                  <button type="button" class="journey-nav-pill" data-index="3" role="tab" aria-selected="false">
+                    <span class="pill-year">2021</span>
+                    <span class="pill-title">Compliance ERP</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Animated Temporal Conduit Bridge (Bridges the space between Year Chamber & Clock Hub) -->
+              <div class="temporal-conduit-bridge" aria-hidden="true">
+                <!-- Glowing Circuit Beam Line with Running Photon Pulses -->
+                <div class="conduit-beam">
+                  <div class="conduit-pulse"></div>
+                  <div class="conduit-pulse delay"></div>
+                </div>
+
+                <!-- Dancing Frequency Waveform Equalizer Bars -->
+                <div class="conduit-waveform">
+                  <span class="wave-bar bar-1"></span>
+                  <span class="wave-bar bar-2"></span>
+                  <span class="wave-bar bar-3"></span>
+                  <span class="wave-bar bar-4"></span>
+                  <span class="wave-bar bar-5"></span>
+                  <span class="wave-bar bar-6"></span>
+                </div>
+
+                <!-- Telemetry Code -->
+                <div class="conduit-telemetry">
+                  <span class="conduit-code" id="conduit-code">FLUX // 44.1k</span>
+                </div>
+              </div>
+
+              <!-- Dedicated Half-Clock Dial (Only the active 180° right half!) -->
+              <div class="journey-half-clock-panel">
+                <div class="journey-half-clock-stage" id="journey-clock-stage">
+                  
+                  <!-- Ambient Backlight Glow -->
+                  <div class="half-clock-ambient-glow"></div>
+
+                  <!-- Sculpted Dial Container with Contour Bezel & Semicircular Border -->
+                  <div class="half-clock-dial-wrapper">
+
+                    <!-- SVG Sculpted Clock Face (Custom Left Contour to 180° Right Arc) -->
+                    <svg viewBox="-45 0 245 400" class="half-clock-face-svg" aria-hidden="true">
+                      <defs>
+                        <!-- Custom Sculpted Contour ClipPath (Red Mark Shape on Left + Semicircle Arc on Right) -->
+                        <clipPath id="contourClockClip">
+                          <path d="M 20,25 C 0,15 -35,30 -30,68 C -26,92 5,100 2,125 C -2,145 -42,155 -36,182 C -32,195 -18,192 -24,200 C -18,208 -32,205 -36,218 C -42,245 -2,255 2,275 C 5,300 -26,308 -30,332 C -35,370 0,385 20,375 A 175,175 0 0,1 20,25 Z" />
+                        </clipPath>
+                        <filter id="clockHalfGlow" x="-20%" y="-20%" width="140%" height="140%">
+                          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#FF4B32" flood-opacity="0.6"/>
+                        </filter>
+                        <filter id="clockContourGlow" x="-30%" y="-20%" width="160%" height="140%">
+                          <feDropShadow dx="-2" dy="0" stdDeviation="6" flood-color="#FF4B32" flood-opacity="0.7"/>
+                        </filter>
+                      </defs>
+
+                      <!-- Clipped Clock Face Backdrop (Starts from the Red Contour Line!) -->
+                      <g clip-path="url(#contourClockClip)">
+                        <!-- Solid Glass Dial Face -->
+                        <path d="M 20,25 C 0,15 -35,30 -30,68 C -26,92 5,100 2,125 C -2,145 -42,155 -36,182 C -32,195 -18,192 -24,200 C -18,208 -32,205 -36,218 C -42,245 -2,255 2,275 C 5,300 -26,308 -30,332 C -35,370 0,385 20,375 A 175,175 0 0,1 20,25 Z" class="clock-dial-body" />
+
+                        <!-- Authentic Vintage Wrought-Iron Dial Filigree Texture -->
+                        <image href="assets/images/vintage-clock.jpg" xlink:href="assets/images/vintage-clock.jpg" x="-155" y="25" width="350" height="350" class="clock-vintage-image" preserveAspectRatio="xMidYMid slice" />
+                      </g>
+
+                      <!-- Sculpted Red Contour Line (Glow and Crisp Edge Stroke) -->
+                      <path d="M 20,25 C 0,15 -35,30 -30,68 C -26,92 5,100 2,125 C -2,145 -42,155 -36,182 C -32,195 -18,192 -24,200 C -18,208 -32,205 -36,218 C -42,245 -2,255 2,275 C 5,300 -26,308 -30,332 C -35,370 0,385 20,375" class="clock-sculpted-contour-glow" />
+                      <path d="M 20,25 C 0,15 -35,30 -30,68 C -26,92 5,100 2,125 C -2,145 -42,155 -36,182 C -32,195 -18,192 -24,200 C -18,208 -32,205 -36,218 C -42,245 -2,255 2,275 C 5,300 -26,308 -30,332 C -35,370 0,385 20,375" class="clock-sculpted-contour-main" />
+
+                      <!-- Ornate Micro-Nodes / Rivets along the Sculpted Contour -->
+                      <g class="clock-contour-nodes">
+                        <circle cx="-30" cy="68" r="3" class="contour-rivet" />
+                        <circle cx="2" cy="125" r="2.5" class="contour-rivet" />
+                        <circle cx="-36" cy="182" r="3" class="contour-rivet" />
+                        <circle cx="-24" cy="200" r="4.5" class="contour-rivet hub-cradle" />
+                        <circle cx="-36" cy="218" r="3" class="contour-rivet" />
+                        <circle cx="2" cy="275" r="2.5" class="contour-rivet" />
+                        <circle cx="-30" cy="332" r="3" class="contour-rivet" />
+                      </g>
+
+                      <!-- Center Conduit Bridge Line linking Contour Cradle to Pivot Hub -->
+                      <line x1="-24" y1="200" x2="20" y2="200" class="clock-hub-conduit-bridge" />
+
+                      <!-- Decorative Concentric Half-Bezel Semicircles -->
+                      <path d="M 20,25 A 175,175 0 0,1 20,375" class="clock-bezel-outer" />
+                      <path d="M 20,38 A 162,162 0 0,1 20,362" class="clock-bezel-track" />
+                      <path d="M 20,75 A 125,125 0 0,1 20,325" class="clock-bezel-inner" />
+                      <path d="M 20,135 A 65,65 0 0,1 20,265" class="clock-bezel-core" />
+
+                      <!-- Active Semicircle Rail (0° to 180°) -->
+                      <path d="M 20,25 A 175,175 0 0,1 20,375" class="clock-half-arc-rail" />
+                      <path d="M 20,25 A 175,175 0 0,1 20,375" id="clock-half-arc-fill" class="clock-half-arc-fill" />
+
+                      <!-- Radial Ticks along the Half Arc -->
+                      <line x1="20" y1="25" x2="35" y2="25" class="clock-tick-major" />
+                      <line x1="107.5" y1="48.4" x2="99" y2="62" class="clock-tick-minor" />
+                      <line x1="171.6" y1="112.5" x2="157" y2="121" class="clock-tick-major" />
+                      <line x1="195" y1="200" x2="178" y2="200" class="clock-tick-minor" />
+                      <line x1="171.6" y1="287.5" x2="157" y2="279" class="clock-tick-major" />
+                      <line x1="107.5" y1="351.6" x2="99" y2="338" class="clock-tick-minor" />
+                      <line x1="20" y1="375" x2="35" y2="375" class="clock-tick-major" />
+
+                      <!-- Roman Numerals along Half Dial -->
+                      <text x="36" y="58" class="clock-numeral active" data-milestone="0">XII</text>
+                      <text x="96" y="78" class="clock-numeral">I</text>
+                      <text x="146" y="132" class="clock-numeral" data-milestone="1">II</text>
+                      <text x="162" y="206" class="clock-numeral">III</text>
+                      <text x="146" y="278" class="clock-numeral" data-milestone="2">IV</text>
+                      <text x="96" y="332" class="clock-numeral">V</text>
+                      <text x="36" y="352" class="clock-numeral" data-milestone="3">VI</text>
+
+                      <!-- Milestone Glowing Nodes on the Arc -->
+                      <g class="clock-milestone-nodes">
+                        <circle cx="20" cy="25" r="7" class="clock-arc-node active" data-index="0" />
+                        <circle cx="171.6" cy="112.5" r="7" class="clock-arc-node" data-index="1" />
+                        <circle cx="171.6" cy="287.5" r="7" class="clock-arc-node" data-index="2" />
+                        <circle cx="20" cy="375" r="7" class="clock-arc-node" data-index="3" />
+                      </g>
+
+                      <!-- Animated Clock Sticks (Hands with Subtle Mechanical Escapement Animation) -->
+                      <!-- Master Hour Stick Pivoting at (20, 200) -->
+                      <g id="clock-stick-master" class="clock-stick-master">
+                        <g class="clock-stick-anim-wrap">
+                          <path d="M 17,200 L 16,108 L 11,92 L 20,32 L 29,92 L 24,108 L 23,200 Z" class="clock-hand-blade" />
+                          <circle cx="20" cy="80" r="4.5" class="clock-hand-heart" />
+                        </g>
+                      </g>
+
+                      <!-- Precision Minute Stick Pivoting at (20, 200) -->
+                      <g id="clock-stick-second" class="clock-stick-second">
+                        <g class="clock-stick-second-wrap">
+                          <line x1="20" y1="200" x2="20" y2="28" class="clock-hand-needle" />
+                          <circle cx="20" cy="28" r="3" class="clock-hand-needle-tip" />
+                        </g>
+                      </g>
+
+                      <!-- Center Pivot Hub at Left Border (20, 200) -->
+                      <circle cx="20" cy="200" r="16" class="clock-hub-outer" />
+                      <circle cx="20" cy="200" r="10" class="clock-hub-ring" />
+                      <circle cx="20" cy="200" r="5" class="clock-hub-ruby" />
+                    </svg>
+
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT: Continuous Vertical Timeline Track & Story Cards Viewport -->
+            <div class="journey-timeline-col">
+              
+              <!-- Vertical Line with Animated Following Node -->
+              <div class="journey-vertical-track" id="journey-vertical-track">
+                <div class="journey-track-line"></div>
+                <div id="journey-active-node" class="journey-active-node">
+                  <span class="node-dot"></span>
+                  <span class="node-glow"></span>
+                </div>
+              </div>
+
+              <!-- Viewport containing Stacked Milestone Cards (Prefix hides, suffix shows) -->
+              <div class="journey-story-viewport" id="journey-story-viewport">
+
+                <!-- Card 01 (Present) -->
+                <article class="journey-story-card active" data-index="0" data-year="2024" data-range="OCT 2024 – PRESENT">
+                  <div class="card-header-meta">
+                    <span class="card-milestone-badge">MILESTONE 01</span>
+                    <span class="card-date-tag">OCT 2024 – NOW</span>
+                  </div>
+                  <h3 class="card-title">Full-Stack SPAs &amp; Cloud Architectures</h3>
+                  <div class="card-subtitle">Independent Engineering &amp; Modern Web Apps</div>
+                  <ul class="card-bullets">
+                    <li>Websites, mobile-first ordering platforms, interfaces, and cloud architectures engineered from conceptual architecture to production launch.</li>
+                    <li>Working directly with real-world users, building responsive travel budget portals and food delivery applications.</li>
+                    <li>Serverless PostgreSQL data pipelines on Neon and continuous automated deployments on Render and Netlify with sub-second response times.</li>
+                  </ul>
+                  <div class="card-tags">
+                    <span>React.js</span>
+                    <span>React Native</span>
+                    <span>Node.js / Express</span>
+                    <span>Neon PostgreSQL</span>
+                    <span>Render &amp; Netlify</span>
+                  </div>
+                </article>
+
+                <!-- Card 02 (2023) -->
+                <article class="journey-story-card is-suffix" data-index="1" data-year="2023" data-range="JAN 2023 – DEC 2023">
+                  <div class="card-header-meta">
+                    <span class="card-milestone-badge">MILESTONE 02</span>
+                    <span class="card-date-tag">JAN 2023 – DEC 2023</span>
+                  </div>
+                  <h3 class="card-title">Third-Party APIs &amp; Service Automation</h3>
+                  <div class="card-subtitle">Enterprise Systems Integration &amp; CRM Automation</div>
+                  <ul class="card-bullets">
+                    <li>Eliminated operational provisioning bottlenecks through automated CRM order lifecycles and direct GoDaddy product API synchronizations.</li>
+                    <li>Implemented high-throughput WebSocket streaming and real-time webhook endpoints with sub-second response times.</li>
+                    <li>Architected Postman CI/CD regression suites and streamlined provisioning handoffs for distributed client operations.</li>
+                  </ul>
+                  <div class="card-tags">
+                    <span>GoDaddy APIs</span>
+                    <span>RESTful APIs</span>
+                    <span>WebSockets</span>
+                    <span>PHP / MySQL</span>
+                    <span>CI/CD</span>
+                  </div>
+                </article>
+
+                <!-- Card 03 (2021-2022) -->
+                <article class="journey-story-card is-suffix" data-index="2" data-year="2022" data-range="OCT 2021 – DEC 2022">
+                  <div class="card-header-meta">
+                    <span class="card-milestone-badge">MILESTONE 03</span>
+                    <span class="card-date-tag">OCT 2021 – DEC 2022</span>
+                  </div>
+                  <h3 class="card-title">Mission-Critical Product Suites</h3>
+                  <div class="card-subtitle">VSplash Tech Labs Private Ltd.</div>
+                  <ul class="card-bullets">
+                    <li>Developed and maintained core product dashboards (Getty, Care, Zylo, Roster) serving distributed corporate teams.</li>
+                    <li>Spearheaded modernization of legacy server-rendered views into type-safe, responsive React &amp; TypeScript single-page applications.</li>
+                    <li>Normalized database schemas across MongoDB and MySQL with Doctrine ORM, reducing query latency by 45%.</li>
+                  </ul>
+                  <div class="card-tags">
+                    <span>React.js</span>
+                    <span>TypeScript</span>
+                    <span>Doctrine ORM</span>
+                    <span>MongoDB &amp; MySQL</span>
+                  </div>
+                </article>
+
+                <!-- Card 04 (2020-2021) -->
+                <article class="journey-story-card is-suffix" data-index="3" data-year="2021" data-range="JUL 2020 – SEP 2021">
+                  <div class="card-header-meta">
+                    <span class="card-milestone-badge">MILESTONE 04</span>
+                    <span class="card-date-tag">JUL 2020 – SEP 2021</span>
+                  </div>
+                  <h3 class="card-title">Compliance ERP &amp; Calculation Engines</h3>
+                  <div class="card-subtitle">Enterprise Cleanroom &amp; HVAC Compliance Portal</div>
+                  <ul class="card-bullets">
+                    <li>Replaced error-prone manual testing spreadsheets with automated, role-based calculation portals delivering certified compliance audit certificates.</li>
+                    <li>Automated airflow velocity, HEPA filter efficiency formulas, and particle count readings with 100% calculation accuracy.</li>
+                    <li>Engineered dynamic PDF document generation and verifiable certificate archival pipelines for 500+ commercial inspections.</li>
+                  </ul>
+                  <div class="card-tags">
+                    <span>Core PHP</span>
+                    <span>MySQL</span>
+                    <span>Calculation Engines</span>
+                    <span>PDF Automation</span>
+                  </div>
+                </article>
+
+              </div>
+
+            </div>
+
+          </div>
         </div>
-
       </div>
     </section>
 

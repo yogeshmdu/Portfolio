@@ -34,6 +34,7 @@ class PortfolioApp {
     this.initCustomCursor();
     this.initScrollReveal();
     this.initScrollSpy();
+    this.initDisciplinesStickyTimeline();
     this.initBackgroundSwitcher();
     this.bindEvents();
     this.initSoundButton();
@@ -427,6 +428,271 @@ class PortfolioApp {
         });
       });
     }
+  }
+
+        /* Engineering Journey: "Let's go back in time" (Compact Scaled Half-Clock & Prefix/Suffix Cards) */
+  initDisciplinesStickyTimeline() {
+    const section = document.getElementById('disciplines');
+    if (!section) return;
+
+    const cards = section.querySelectorAll('.journey-story-card');
+    const navPills = section.querySelectorAll('.journey-nav-pill');
+    const activeYear = document.getElementById('journey-active-year');
+    const activeDateSub = document.getElementById('journey-date-sub');
+    const stepCounter = document.getElementById('journey-step-counter');
+    const progressFill = document.getElementById('journey-progress-fill');
+    const activeNode = document.getElementById('journey-active-node');
+    const verticalTrack = document.getElementById('journey-vertical-track');
+
+    // Chrono-Year Chamber Elements & Digits
+    const chronoReels = section.querySelectorAll('.chrono-reel');
+    const reelDigits = section.querySelectorAll('.chrono-reel .reel-digit');
+    const conduitCode = document.getElementById('conduit-code');
+
+    const eraMetadata = [
+      { year: '2024', conduitCode: 'FLUX // 44.1k' },
+      { year: '2023', conduitCode: 'SYNC // GoDaddy' },
+      { year: '2022', conduitCode: 'SUITE // vSplash' },
+      { year: '2021', conduitCode: 'AUDIT // 100%' }
+    ];
+
+    // Compact Half-Clock Controls
+    const clockMasterStick = document.getElementById('clock-stick-master');
+    const clockSecondStick = document.getElementById('clock-stick-second');
+    const clockArcFill = document.getElementById('clock-half-arc-fill');
+    const arcNodes = section.querySelectorAll('.clock-arc-node');
+    const numerals = section.querySelectorAll('.clock-numeral[data-milestone]');
+
+    if (!cards.length) return;
+
+    // Milestone Angles along the 180° Half Arc:
+    // 0: XII (0°) | 1: II (60°) | 2: IV (120°) | 3: VI (180°)
+    const milestoneAngles = [0, 60, 120, 180];
+    const totalArcLen = 550;
+
+    let currentIndex = 0;
+    let isUserClicking = false;
+    let clickTimeout = null;
+
+    const updateActiveItem = (index, syncScroll = false) => {
+      index = Math.max(0, Math.min(cards.length - 1, index));
+      currentIndex = index;
+
+      const currentCard = cards[index];
+      if (!currentCard) return;
+
+      const year = currentCard.getAttribute('data-year') || '2024';
+      const range = currentCard.getAttribute('data-range') || '';
+      const targetAngle = milestoneAngles[index] || 0;
+
+      // 1. Prefix Hides Upwards, Suffix Hides Downwards, Active Shows!
+      cards.forEach((card, i) => {
+        if (i === index) {
+          card.classList.add('active');
+          card.classList.remove('is-prefix', 'is-suffix');
+        } else if (i < index) {
+          card.classList.remove('active', 'is-suffix');
+          card.classList.add('is-prefix'); // Prefix card hides
+        } else {
+          card.classList.remove('active', 'is-prefix');
+          card.classList.add('is-suffix'); // Suffix card hides
+        }
+      });
+
+      // 2. Toggle active class on nav pills
+      navPills.forEach((pill, i) => {
+        const isCurrent = i === index;
+        pill.classList.toggle('active', isCurrent);
+        pill.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+      });
+
+      // 3. Update Clock Arc Nodes and Roman Numerals
+      arcNodes.forEach((node, i) => {
+        node.classList.toggle('active', i === index);
+      });
+      numerals.forEach((num) => {
+        const m = parseInt(num.getAttribute('data-milestone'), 10);
+        num.classList.toggle('active', m === index);
+      });
+
+      // 4. Rotate Clock Sticks across the 0° to 180° Half Movement!
+      if (!syncScroll) {
+        if (clockMasterStick) {
+          clockMasterStick.style.setProperty('--hand-rotation', `${targetAngle}deg`);
+        }
+        if (clockSecondStick) {
+          clockSecondStick.style.setProperty('--second-rotation', `${targetAngle + 10}deg`);
+        }
+        if (clockArcFill) {
+          const fillRatio = index / (cards.length - 1);
+          clockArcFill.style.strokeDashoffset = `${totalArcLen * (1 - fillRatio)}`;
+        }
+      }
+
+      // 5. Chrono-Year Chamber: Mechanical Split-Flap Digit Reels
+      const meta = eraMetadata[index];
+      if (meta) {
+        if (conduitCode && meta.conduitCode) conduitCode.textContent = meta.conduitCode;
+
+        const targetDigits = meta.year.split('');
+        reelDigits.forEach((digitEl, pos) => {
+          const targetChar = targetDigits[pos];
+          const parentReel = chronoReels[pos];
+
+          if (digitEl.textContent !== targetChar) {
+            if (parentReel) {
+              parentReel.classList.remove('flipping');
+              void parentReel.offsetWidth;
+              parentReel.classList.add('flipping');
+            }
+
+            // Quick mechanical cipher roll
+            let count = 0;
+            const scramble = setInterval(() => {
+              digitEl.textContent = Math.floor(Math.random() * 10);
+              count++;
+              if (count >= 3) {
+                clearInterval(scramble);
+                digitEl.textContent = targetChar;
+              }
+            }, 40);
+          }
+        });
+      }
+
+      if (activeYear) {
+        activeYear.textContent = year;
+      }
+
+      // 6. Update date sub-range
+      if (activeDateSub) {
+        activeDateSub.textContent = range;
+      }
+
+      // 7. Update Step Counter & Progress Fill
+      if (stepCounter) {
+        stepCounter.textContent = `0${index + 1} / 0${cards.length}`;
+      }
+      if (progressFill) {
+        progressFill.style.width = `${((index + 1) / cards.length) * 100}%`;
+      }
+
+      // 8. Align vertical tracking dot on continuous line
+      if (activeNode && verticalTrack && !syncScroll) {
+        const trackHeight = Math.max(0, verticalTrack.offsetHeight - 50);
+        const nodeY = 25 + ((index / (cards.length - 1)) * trackHeight);
+        activeNode.style.top = `${nodeY}px`;
+      }
+    };
+
+    // Nav Pills Click: smoothly navigates to milestone
+    navPills.forEach((pill) => {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.soundEngine?.playClick();
+        const idx = parseInt(pill.getAttribute('data-index'), 10) || 0;
+        goToMilestone(idx);
+      });
+    });
+
+    // Arc Milestone Nodes Click: clicking directly on clock dial jumps to card
+    arcNodes.forEach((node) => {
+      node.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.soundEngine?.playClick();
+        const idx = parseInt(node.getAttribute('data-index'), 10) || 0;
+        goToMilestone(idx);
+      });
+    });
+
+    // Chrono Chamber Click: clicking chamber cycles to next milestone
+    const yearChamber = document.getElementById('journey-year-chamber');
+    if (yearChamber) {
+      yearChamber.addEventListener('click', () => {
+        window.soundEngine?.playClick();
+        const nextIdx = (currentIndex + 1) % cards.length;
+        goToMilestone(nextIdx);
+      });
+    }
+
+    const goToMilestone = (idx) => {
+      if (window.innerWidth > 960) {
+        isUserClicking = true;
+        clearTimeout(clickTimeout);
+
+        updateActiveItem(idx, false);
+
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        const totalRunway = section.offsetHeight - window.innerHeight;
+        if (totalRunway > 0) {
+          const targetProgress = (idx + 0.35) / cards.length;
+          const targetY = sectionTop + (targetProgress * totalRunway);
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+        }
+
+        clickTimeout = setTimeout(() => {
+          isUserClicking = false;
+        }, 800);
+      } else {
+        updateActiveItem(idx, false);
+        cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+
+    // Scroll Handler: calculates progress through pinned runway and executes transitions
+    let scrollTicking = false;
+    const handleScroll = () => {
+      if (scrollTicking) return;
+      scrollTicking = true;
+      window.requestAnimationFrame(() => {
+        scrollTicking = false;
+
+        if (window.innerWidth <= 960) return;
+        if (isUserClicking) return;
+
+        const rect = section.getBoundingClientRect();
+        const totalRunway = section.offsetHeight - window.innerHeight;
+        if (totalRunway <= 0) return;
+
+        // When pinned runway is in active viewport range
+        if (rect.top <= 120 && rect.bottom >= window.innerHeight - 120) {
+          const scrolled = -rect.top + 72;
+          const progress = Math.max(0, Math.min(1, scrolled / totalRunway));
+
+          // Fine continuous rotation for the clock stick across 0° to 180°
+          const continuousAngle = progress * 180;
+          if (clockMasterStick) {
+            clockMasterStick.style.setProperty('--hand-rotation', `${continuousAngle}deg`);
+          }
+          if (clockSecondStick) {
+            clockSecondStick.style.setProperty('--second-rotation', `${continuousAngle + 10}deg`);
+          }
+
+          // Arc fill progress
+          if (clockArcFill) {
+            clockArcFill.style.strokeDashoffset = `${totalArcLen * (1 - progress)}`;
+          }
+
+          // Move active node along the vertical track
+          if (activeNode && verticalTrack) {
+            const trackHeight = Math.max(0, verticalTrack.offsetHeight - 50);
+            const nodeY = 25 + (progress * trackHeight);
+            activeNode.style.top = `${nodeY}px`;
+          }
+
+          // Discrete milestone card transition: prefix hides, suffix shows
+          const step = Math.min(cards.length - 1, Math.floor(progress * cards.length + 0.1));
+          if (step !== currentIndex) {
+            updateActiveItem(step, true);
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Initial activation
+    updateActiveItem(0);
   }
 }
 
