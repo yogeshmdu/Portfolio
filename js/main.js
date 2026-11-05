@@ -5,7 +5,7 @@
 
 class PortfolioApp {
   constructor() {
-    this.theme = localStorage.getItem('theme') || 'dark';
+    this.theme = localStorage.getItem('theme') || 'light';
     this.bgMode = localStorage.getItem('bg_mode') || 'canvas';
     this.soundBtn = document.getElementById('sound-toggle-btn');
     this.themeBtn = document.getElementById('theme-toggle-btn');

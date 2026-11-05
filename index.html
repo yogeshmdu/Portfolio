@@ -1,8 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    /* Immediate theme initialization to prevent flash: default to light */
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
   <title>Yogesh B | Full Stack Architect & Software Engineer</title>
   
   <!-- SEO & Social Meta -->
@@ -116,7 +123,7 @@
         </svg>
       </div>
       <div class="rope-tooltip" id="rope-tooltip">
-        <span class="rope-tooltip-pill">Pull for Light ☀️</span>
+        <span class="rope-tooltip-pill">Pull for Dark 🌙</span>
       </div>
     </div>
 
