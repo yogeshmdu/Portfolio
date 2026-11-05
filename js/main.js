@@ -262,47 +262,147 @@ class PortfolioApp {
     setTimeout(type, 500);
   }
 
-  /* Madurai Real-Time Clock & Greeting */
+  /* Real-Time Dynamic Visitor Location Clock & Greeting */
   initMaduraiClock() {
     const clockEl = document.getElementById('madurai-clock');
     const greetingEl = document.getElementById('madurai-greeting');
+    const beaconLabel = document.getElementById('visitor-location-label') || document.querySelector('.beacon-label');
+    const tzBadge = document.getElementById('visitor-tz-badge') || document.querySelector('.time-tz-badge');
     if (!clockEl) return;
+
+    // Detect user timezone from browser environment
+    let userTz = '';
+    try {
+      userTz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    } catch (e) {
+      userTz = '';
+    }
+
+    // Default friendly location extracted from Intl timezone
+    let detectedCity = '';
+    let detectedRegion = '';
+    let detectedCountry = '';
+
+    const formatTzLocation = (tz) => {
+      if (!tz) return { city: 'Your Location', region: '', country: 'LOCAL' };
+      const parts = tz.split('/');
+      if (parts.length >= 2) {
+        const rawCity = parts[parts.length - 1].replace(/_/g, ' ');
+        const continent = parts[0].replace(/_/g, ' ');
+        // Common timezone clean mappings
+        if (tz === 'Asia/Kolkata' || tz === 'Asia/Calcutta') return { city: 'India', region: '', country: 'IN' };
+        if (tz === 'America/New_York') return { city: 'New York', region: 'NY', country: 'USA' };
+        if (tz === 'America/Los_Angeles') return { city: 'Los Angeles', region: 'CA', country: 'USA' };
+        if (tz === 'America/Chicago') return { city: 'Chicago', region: 'IL', country: 'USA' };
+        if (tz === 'Europe/London') return { city: 'London', region: '', country: 'UK' };
+        if (tz === 'Europe/Paris') return { city: 'Paris', region: '', country: 'FRANCE' };
+        if (tz === 'Europe/Berlin') return { city: 'Berlin', region: '', country: 'GERMANY' };
+        if (tz === 'Asia/Tokyo') return { city: 'Tokyo', region: '', country: 'JAPAN' };
+        if (tz === 'Asia/Singapore') return { city: 'Singapore', region: '', country: 'SG' };
+        if (tz === 'Asia/Dubai') return { city: 'Dubai', region: '', country: 'UAE' };
+        if (tz === 'Australia/Sydney') return { city: 'Sydney', region: 'NSW', country: 'AUSTRALIA' };
+        return { city: rawCity, region: '', country: continent.toUpperCase() };
+      }
+      return { city: tz, region: '', country: 'LOCAL' };
+    };
+
+    const initialGeo = formatTzLocation(userTz);
+    detectedCity = initialGeo.city;
+    detectedRegion = initialGeo.region;
+    detectedCountry = initialGeo.country;
+
+    // Non-blocking asynchronous IP Geolocation to resolve exact city where website is open
+    try {
+      fetch('https://get.geojs.io/v1/ip/geo.json')
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.city) {
+            detectedCity = data.city;
+            detectedRegion = data.region || data.country_code || detectedRegion;
+            detectedCountry = data.country || detectedCountry;
+            updateLocationLabels();
+            updateTime();
+          }
+        })
+        .catch(() => {
+          // Graceful fallback to timezone-derived location
+        });
+    } catch (e) {}
+
+    const updateLocationLabels = () => {
+      const now = new Date();
+      // Calculate visitor UTC offset
+      const offsetMinutes = -now.getTimezoneOffset();
+      const sign = offsetMinutes >= 0 ? '+' : '-';
+      const absMin = Math.abs(offsetMinutes);
+      const hours = String(Math.floor(absMin / 60)).padStart(2, '0');
+      const mins = String(absMin % 60).padStart(2, '0');
+      const utcString = `UTC ${sign}${hours}:${mins}`;
+
+      // Short timezone abbreviation
+      let tzAbbr = '';
+      try {
+        const parts = new Intl.DateTimeFormat('en-US', { timeZoneName: 'short' }).formatToParts(now);
+        tzAbbr = parts.find(p => p.type === 'timeZoneName')?.value || '';
+        if (tzAbbr.startsWith('GMT') || tzAbbr.startsWith('UTC')) {
+          tzAbbr = 'LOCAL';
+        }
+      } catch (e) {
+        tzAbbr = 'LOCAL';
+      }
+
+      if (beaconLabel) {
+        if (detectedCity && detectedCountry) {
+          const regionPart = detectedRegion && detectedRegion !== detectedCountry ? `, ${detectedRegion.toUpperCase()}` : '';
+          beaconLabel.innerHTML = `${detectedCity.toUpperCase()}${regionPart} &bull; ${detectedCountry.toUpperCase()}`;
+        } else if (detectedCity) {
+          beaconLabel.innerHTML = `${detectedCity.toUpperCase()} &bull; LOCAL TIME`;
+        } else {
+          beaconLabel.innerHTML = `CURRENT LOCATION &bull; LOCAL TIME`;
+        }
+      }
+
+      if (tzBadge) {
+        tzBadge.textContent = `${tzAbbr} • ${utcString}`;
+      }
+    };
 
     const updateTime = () => {
       const now = new Date();
-      const options = {
-        timeZone: 'Asia/Kolkata',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-      };
-      const formatter = new Intl.DateTimeFormat([], options);
-      const parts = formatter.formatToParts(now);
+      const currentHour = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const dayPeriod = currentHour >= 12 ? 'PM' : 'AM';
+      const displayHours = String(currentHour % 12 || 12).padStart(2, '0');
 
-      const hour = parts.find(p => p.type === 'hour')?.value || '00';
-      const minute = parts.find(p => p.type === 'minute')?.value || '00';
-      const second = parts.find(p => p.type === 'second')?.value || '00';
-      const dayPeriod = (parts.find(p => p.type === 'dayPeriod')?.value || 'PM').toUpperCase();
+      let tzCode = '';
+      try {
+        const parts = new Intl.DateTimeFormat('en-US', { timeZoneName: 'short' }).formatToParts(now);
+        tzCode = parts.find(p => p.type === 'timeZoneName')?.value || '';
+        if (tzCode.startsWith('GMT') || tzCode.startsWith('UTC')) {
+          tzCode = '';
+        }
+      } catch (e) {
+        tzCode = '';
+      }
 
       clockEl.innerHTML = `
-        <span class="time-val">${hour}:${minute}:${second}</span>
+        <span class="time-val">${displayHours}:${minutes}:${seconds}</span>
         <span class="time-ampm">${dayPeriod}</span>
-        <span class="time-code">IST</span>
+        ${tzCode ? `<span class="time-code">${tzCode}</span>` : ''}
       `;
 
-      const hourFormatter = new Intl.DateTimeFormat([], { timeZone: 'Asia/Kolkata', hour: 'numeric', hour12: false });
-      const currentHour = parseInt(hourFormatter.format(now), 10);
-
-      let greeting = 'Good evening from Madurai 🌆';
+      // Dynamic Greeting based on visitor's current location & hour
+      const place = detectedCity || 'your location';
+      let greeting = `Late night engineering in ${place} 🌙`;
       if (currentHour >= 5 && currentHour < 12) {
-        greeting = 'Good morning from Madurai 🌅';
+        greeting = `Good morning from ${place} 🌅`;
       } else if (currentHour >= 12 && currentHour < 17) {
-        greeting = 'Good afternoon from Madurai ☀️';
+        greeting = `Good afternoon from ${place} ☀️`;
       } else if (currentHour >= 17 && currentHour < 21) {
-        greeting = 'Good evening from Madurai 🌆';
+        greeting = `Good evening from ${place} 🌆`;
       } else {
-        greeting = 'Late night engineering in Madurai 🌙';
+        greeting = `Late night engineering in ${place} 🌙`;
       }
 
       if (greetingEl) {
@@ -310,6 +410,7 @@ class PortfolioApp {
       }
     };
 
+    updateLocationLabels();
     updateTime();
     setInterval(updateTime, 1000);
   }
@@ -330,7 +431,7 @@ class PortfolioApp {
       }, { duration: 250, fill: 'forwards' });
     });
 
-    const interactiveSelectors = 'a, button, input, textarea, .project-card, .discipline-card, .skill-card, .exp-card, .filter-btn, .hero-portrait-card';
+    const interactiveSelectors = 'a, button, input, textarea, .project-card, .discipline-card, .skill-card, .skill-icon, .exp-card, .filter-btn, .hero-portrait-card';
     document.querySelectorAll(interactiveSelectors).forEach(el => {
       el.addEventListener('mouseenter', () => {
         document.body.classList.add('cursor-hover');
@@ -496,6 +597,70 @@ class PortfolioApp {
           }
         });
       });
+    });
+
+    // Skill Icon Innovative Floating Mini-Popup (Hover & Click)
+    const skillIcons = document.querySelectorAll('.skill-icon');
+    skillIcons.forEach(icon => {
+      // Click toggle support (desktop click & mobile tap)
+      icon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = icon.classList.contains('popup-open');
+
+        // Close any other open popups first
+        skillIcons.forEach(i => {
+          i.classList.remove('popup-open');
+          i.closest('.skill-card')?.classList.remove('popup-active');
+        });
+
+        if (!isOpen) {
+          icon.classList.add('popup-open');
+          icon.closest('.skill-card')?.classList.add('popup-active');
+          window.soundEngine?.playClick();
+        }
+      });
+
+      // Hover support
+      icon.addEventListener('mouseenter', () => {
+        icon.closest('.skill-card')?.classList.add('popup-active');
+      });
+
+      icon.addEventListener('mouseleave', () => {
+        if (!icon.classList.contains('popup-open')) {
+          icon.closest('.skill-card')?.classList.remove('popup-active');
+        }
+      });
+
+      // Keyboard accessibility
+      icon.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          icon.click();
+        } else if (e.key === 'Escape') {
+          icon.classList.remove('popup-open');
+          icon.closest('.skill-card')?.classList.remove('popup-active');
+        }
+      });
+    });
+
+    // Global click outside to dismiss any active skill popups
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.skill-icon')) {
+        skillIcons.forEach(i => {
+          i.classList.remove('popup-open');
+          i.closest('.skill-card')?.classList.remove('popup-active');
+        });
+      }
+    });
+
+    // Global Escape key dismiss
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        skillIcons.forEach(i => {
+          i.classList.remove('popup-open');
+          i.closest('.skill-card')?.classList.remove('popup-active');
+        });
+      }
     });
 
     // Back to Top button

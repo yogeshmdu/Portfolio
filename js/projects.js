@@ -6,28 +6,52 @@
 const portfolioProjects = [
   {
     id: 'food-delivery-app',
-    title: 'Food Delivery Application',
-    company: 'Delivery Website',
+    title: 'Food Delivery Application — Madurai Syead Meats',
+    company: 'Madurai Syead Meats',
     category: 'react',
     categoryLabel: 'React Native & Node.js',
-    tagline: 'On-demand food delivery platform powered by Node.js, PostgreSQL & Render',
+    tagline: 'On-demand meat delivery platform with live GPS tracking, Google Auth & Neon PostgreSQL',
     image: 'assets/images/project-food-delivery.jpg',
+    sliderScreens: [
+      {
+        title: 'Customer Authentication',
+        badge: '1. Secure Auth & Google Sign-in',
+        image: 'assets/images/project-food-delivery-auth.png'
+      },
+      {
+        title: 'Fresh Cuts Storefront',
+        badge: '2. Dynamic Catalog & Smart Cart',
+        image: 'assets/images/project-food-delivery-home.png'
+      },
+      {
+        title: 'Live GPS Tracking',
+        badge: '3. Real-Time Courier Route Tracking',
+        image: 'assets/images/project-food-delivery-track.png'
+      }
+    ],
     liveUrl: 'https://food-delivery-app-1-ufhh.onrender.com/#/home',
     githubUrl: null,
-    tags: ['React Native', 'Node.js', 'PostgreSQL', 'Neon DB', 'Render', 'Antigravity IDE', 'AI Tools'],
-    idea: 'Empower culinary businesses and restaurants with an ultra-fast on-demand delivery app featuring dynamic menu categorization, serverless cloud database, and one-tap WhatsApp orders.',
-    problem: 'Food businesses needed an ultra-fast, modern digital storefront to eliminate phone order bottlenecks and showcase dishes with real-time pricing and delivery tracking.',
-    solution: 'Engineered a modern cross-platform application utilizing React Native / React.js on the frontend, a Node.js REST API on the backend, and serverless PostgreSQL on Neon hosted on Render, developed using Antigravity and AI-assisted workflows.',
-    impact: 'Deployed live on Render with serverless Neon DB, delivering sub-20ms query latency and seamless multi-channel ordering.',
+    tags: ['React Native', 'Node.js', 'PostgreSQL', 'Neon DB', 'Live GPS Tracking', 'Google Auth', 'Render', 'Antigravity IDE'],
+    idea: 'A mobile-first on-demand meat and food delivery platform for Madurai Syead Meats, engineered to streamline hygienic meat ordering with Google OAuth sign-in, dynamic product cataloging, and real-time GPS courier route tracking.',
+    problem: 'Local meat purveyors faced heavy phone-order bottlenecks, lack of digital catalog visibility for daily fresh cuts, and customer uncertainty regarding order dispatch and estimated delivery time.',
+    solution: 'Engineered a modern cross-platform application with encrypted Google/credentials authentication, dynamic category filtering (Chicken, Mutton, Fish, Eggs), real-time cart state management, and a dedicated live GPS tracking view displaying delivery partner status, vehicle details, and direct dispatch calling.',
+    impact: 'Deployed live on Render with serverless Neon DB, delivering sub-20ms query latency, automated 5-stage order status progression, and seamless multi-channel ordering.',
     features: [
-      'Clean mobile-first UI with categorized menu ordering and delivery tracking',
-      'Instant debounced search bar for swift product lookup and filtering',
-      'Direct one-tap WhatsApp and phone call triggers for local delivery coordination',
-      'Serverless PostgreSQL database persistence hosted on Neon',
-      'Continuous deployment and cloud hosting powered by Render',
+      'Unified 3-tier mobile flow: Secure Authentication, Interactive Catalog, and Live GPS Tracking',
+      'Google OAuth & encrypted credentials sign-in with fast guest checkout option',
+      'Dynamic fresh meat inventory with weight-based pricing (500g, 1kg) and instant cart management',
+      'Real-time GPS order tracking map with live distance route and courier assignment (Murugan K., 4.9★)',
+      '5-stage live order pipeline: Placed ➔ Accepted ➔ Packing ➔ On the way ➔ Delivered',
+      'Direct in-app one-tap phone calling and WhatsApp triggers for store and delivery partner',
+      'Serverless PostgreSQL database persistence hosted on Neon with continuous Render deployment',
       'Developed with Antigravity IDE and modern AI-assisted engineering tools'
     ],
-    architecture: 'React Native / React.js frontend, Node.js & Express REST API, Neon serverless PostgreSQL, deployed on Render cloud platform.'
+    architecture: 'React Native / React.js frontend, Node.js & Express REST API with JWT auth, Neon serverless PostgreSQL, OpenStreetMap / route telemetry integration, hosted on Render cloud platform.',
+    screenshots: [
+      { title: '1. Secure Authentication', image: 'assets/images/project-food-delivery-auth.png', caption: 'Google OAuth & Credential Sign-in' },
+      { title: '2. Fresh Cuts Catalog', image: 'assets/images/project-food-delivery-home.png', caption: 'Dynamic Category Ordering & Cart' },
+      { title: '3. Live GPS Order Tracking', image: 'assets/images/project-food-delivery-track.png', caption: 'Real-Time Courier Route & Dispatch' }
+    ]
   },
   {
     id: 'world-travel-budget',
@@ -183,8 +207,16 @@ class ProjectsManager {
     this.modal = document.getElementById('project-modal');
     this.modalContent = document.getElementById('modal-card-content');
     this.currentFilter = 'all';
+    this.scrollerTimers = [];
 
     this.init();
+  }
+
+  clearScrollerTimers() {
+    if (this.scrollerTimers && this.scrollerTimers.length) {
+      this.scrollerTimers.forEach(t => clearInterval(t));
+      this.scrollerTimers = [];
+    }
   }
 
   init() {
@@ -195,6 +227,7 @@ class ProjectsManager {
 
   render(filter = 'all') {
     if (!this.container) return;
+    this.clearScrollerTimers();
     this.currentFilter = filter;
     this.container.innerHTML = '';
 
@@ -217,9 +250,38 @@ class ProjectsManager {
              <span>Preview Idea</span>
            </button>`;
 
-      const mediaHtml = p.video 
-        ? `<video src="${p.video}" poster="${p.image}" autoplay loop muted playsinline></video>`
-        : `<img src="${p.image}" alt="${p.title}" loading="lazy">`;
+      let mediaHtml;
+      if (p.sliderScreens && p.sliderScreens.length) {
+        mediaHtml = `
+          <div class="mockup-auto-scroller" data-project-id="${p.id}">
+            <div class="scroller-viewport">
+              <div class="scroller-track">
+                ${p.sliderScreens.map((s, idx) => `
+                  <div class="scroller-slide ${idx === 0 ? 'active' : ''}" data-slide-index="${idx}">
+                    <div class="phone-mockup-frame">
+                      <img src="${s.image}" alt="${s.title}" loading="lazy">
+                    </div>
+                    <span class="scroller-pill-badge">${s.badge}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div class="scroller-nav">
+              <button type="button" class="scroller-arrow prev" aria-label="Previous Screen">&lsaquo;</button>
+              <div class="scroller-dots">
+                ${p.sliderScreens.map((_, idx) => `
+                  <button type="button" class="scroller-dot ${idx === 0 ? 'active' : ''}" data-dot-index="${idx}" aria-label="Jump to screen ${idx + 1}"></button>
+                `).join('')}
+              </div>
+              <button type="button" class="scroller-arrow next" aria-label="Next Screen">&rsaquo;</button>
+            </div>
+          </div>
+        `;
+      } else if (p.video) {
+        mediaHtml = `<video src="${p.video}" poster="${p.image}" autoplay loop muted playsinline></video>`;
+      } else {
+        mediaHtml = `<img src="${p.image}" alt="${p.title}" loading="lazy">`;
+      }
 
       card.innerHTML = `
         <div class="project-thumb">
@@ -255,6 +317,110 @@ class ProjectsManager {
       `;
       this.container.appendChild(card);
     });
+
+    this.initMockupScrollers();
+  }
+
+  initMockupScrollers() {
+    const scrollers = document.querySelectorAll('.mockup-auto-scroller:not(.modal-scroller)');
+    scrollers.forEach(s => this.initMockupScroller(s));
+  }
+
+  initMockupScroller(scroller) {
+    if (!scroller) return;
+    const track = scroller.querySelector('.scroller-track');
+    const slides = scroller.querySelectorAll('.scroller-slide');
+    const dots = scroller.querySelectorAll('.scroller-dot');
+    const prevBtn = scroller.querySelector('.scroller-arrow.prev');
+    const nextBtn = scroller.querySelector('.scroller-arrow.next');
+
+    if (!track || slides.length === 0) return;
+
+    let currentIndex = 0;
+    let timer = null;
+    const total = slides.length;
+
+    const updateSlide = (idx) => {
+      currentIndex = (idx + total) % total;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      slides.forEach((s, i) => {
+        s.classList.toggle('active', i === currentIndex);
+      });
+
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === currentIndex);
+      });
+    };
+
+    const startAutoPlay = () => {
+      stopAutoPlay();
+      timer = setInterval(() => {
+        updateSlide(currentIndex + 1);
+      }, 3000);
+      this.scrollerTimers.push(timer);
+    };
+
+    const stopAutoPlay = () => {
+      if (timer) {
+        clearInterval(timer);
+        this.scrollerTimers = this.scrollerTimers.filter(t => t !== timer);
+        timer = null;
+      }
+    };
+
+    scroller._stopAutoPlay = stopAutoPlay;
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.soundEngine?.playClick();
+        updateSlide(idx);
+        startAutoPlay();
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.soundEngine?.playClick();
+        updateSlide(currentIndex - 1);
+        startAutoPlay();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.soundEngine?.playClick();
+        updateSlide(currentIndex + 1);
+        startAutoPlay();
+      });
+    }
+
+    scroller.addEventListener('mouseenter', stopAutoPlay);
+    scroller.addEventListener('mouseleave', startAutoPlay);
+
+    let touchStartX = 0;
+    scroller.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      stopAutoPlay();
+    }, { passive: true });
+
+    scroller.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          updateSlide(currentIndex + 1);
+        } else {
+          updateSlide(currentIndex - 1);
+        }
+      }
+      startAutoPlay();
+    }, { passive: true });
+
+    startAutoPlay();
   }
 
   bindFilterEvents() {
@@ -290,9 +456,55 @@ class ProjectsManager {
          </a>`
       : '';
 
-    const modalMediaHtml = p.video
-      ? `<video src="${p.video}" poster="${p.image}" autoplay loop muted playsinline controls></video>`
-      : `<img src="${p.image}" alt="${p.title}">`;
+    let modalMediaHtml;
+    if (p.sliderScreens && p.sliderScreens.length) {
+      modalMediaHtml = `
+        <div class="mockup-auto-scroller modal-scroller" data-project-id="${p.id}-modal">
+          <div class="scroller-viewport">
+            <div class="scroller-track">
+              ${p.sliderScreens.map((s, idx) => `
+                <div class="scroller-slide ${idx === 0 ? 'active' : ''}" data-slide-index="${idx}">
+                  <div class="phone-mockup-frame">
+                    <img src="${s.image}" alt="${s.title}">
+                  </div>
+                  <span class="scroller-pill-badge">${s.badge}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div class="scroller-nav">
+            <button type="button" class="scroller-arrow prev" aria-label="Previous Screen">&lsaquo;</button>
+            <div class="scroller-dots">
+              ${p.sliderScreens.map((_, idx) => `
+                <button type="button" class="scroller-dot ${idx === 0 ? 'active' : ''}" data-dot-index="${idx}" aria-label="Jump to screen ${idx + 1}"></button>
+              `).join('')}
+            </div>
+            <button type="button" class="scroller-arrow next" aria-label="Next Screen">&rsaquo;</button>
+          </div>
+        </div>
+      `;
+    } else if (p.video) {
+      modalMediaHtml = `<video src="${p.video}" poster="${p.image}" autoplay loop muted playsinline controls></video>`;
+    } else {
+      modalMediaHtml = `<img src="${p.image}" alt="${p.title}">`;
+    }
+
+    const screenshotsHtml = p.screenshots && p.screenshots.length
+      ? `
+        <h4 class="modal-section-title">📱 Core Application Flow & Mobile Screens</h4>
+        <div class="modal-screens-grid">
+          ${p.screenshots.map(s => `
+            <div class="modal-screen-card">
+              <img src="${s.image}" alt="${s.title}" loading="lazy">
+              <div class="modal-screen-info">
+                <span class="modal-screen-title">${s.title}</span>
+                <span class="modal-screen-caption">${s.caption}</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `
+      : '';
 
     this.modalContent.innerHTML = `
       <div class="modal-thumb">
@@ -323,6 +535,8 @@ class ProjectsManager {
         <h4 class="modal-section-title">🚀 Core Capabilities & Highlights</h4>
         <div class="modal-feature-list">${featuresHtml}</div>
 
+        ${screenshotsHtml}
+
         <h4 class="modal-section-title">💻 Technical Stack & Architecture Details</h4>
         <p class="modal-desc-full" style="margin-bottom: 1rem; font-size: 0.95rem;">${p.architecture}</p>
         <div class="modal-tags">${tagsHtml}</div>
@@ -334,6 +548,16 @@ class ProjectsManager {
       </div>
     `;
 
+    if (p.sliderScreens && p.sliderScreens.length) {
+      const modalScroller = this.modal.querySelector('.mockup-auto-scroller.modal-scroller');
+      if (modalScroller) {
+        this.initMockupScroller(modalScroller);
+      }
+    }
+
+    if (this.modalContent) {
+      this.modalContent.scrollTop = 0;
+    }
     this.modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -341,6 +565,10 @@ class ProjectsManager {
   closeModal() {
     window.soundEngine?.playClick();
     if (!this.modal) return;
+    const modalScroller = this.modal.querySelector('.mockup-auto-scroller.modal-scroller');
+    if (modalScroller && modalScroller._stopAutoPlay) {
+      modalScroller._stopAutoPlay();
+    }
     const modalVideo = this.modal.querySelector('video');
     if (modalVideo) {
       modalVideo.pause();
