@@ -73,65 +73,7 @@
   <!-- Content Wrapper -->
   <div class="content-wrapper">
 
-    <!-- ===================================================================
-         HANGING CEILING LAMP PULL ROPE (Interactive Dark & Light Theme Switch)
-         =================================================================== -->
-    <div id="theme-rope-toggle" class="theme-rope-container" role="button" tabindex="0" aria-label="Pull cord to toggle Dark and Light theme" title="Pull cord to toggle theme">
-      <div class="rope-sway-assembly" id="rope-assembly">
-        <svg class="rope-svg" viewBox="0 0 70 230" width="70" height="230" aria-hidden="true">
-          <defs>
-            <pattern id="rope-braid" width="8" height="13" patternUnits="userSpaceOnUse" patternTransform="rotate(32)">
-              <rect width="4" height="13" fill="#f8f5f0"/>
-              <rect x="4" width="4" height="13" fill="#ded5c8"/>
-              <line x1="0" y1="0" x2="8" y2="13" stroke="#b0a290" stroke-width="0.8"/>
-              <line x1="0" y1="6.5" x2="8" y2="19.5" stroke="#8a7c6a" stroke-width="0.5" opacity="0.6"/>
-            </pattern>
-            <linearGradient id="brass-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#8a6316"/>
-              <stop offset="22%" stop-color="#e8bf58"/>
-              <stop offset="48%" stop-color="#fff4cb"/>
-              <stop offset="76%" stop-color="#d4a332"/>
-              <stop offset="100%" stop-color="#5a3d07"/>
-            </linearGradient>
-            <linearGradient id="wood-base-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#341303"/>
-              <stop offset="18%" stop-color="#5c260c"/>
-              <stop offset="45%" stop-color="#8a3e16"/>
-              <stop offset="68%" stop-color="#6e2e0e"/>
-              <stop offset="88%" stop-color="#471b06"/>
-              <stop offset="100%" stop-color="#240b01"/>
-            </linearGradient>
-            <linearGradient id="gloss-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.65)"/>
-              <stop offset="60%" stop-color="rgba(255, 255, 255, 0.25)"/>
-              <stop offset="100%" stop-color="rgba(255, 255, 255, 0)"/>
-            </linearGradient>
-          </defs>
-          <!-- Rope Strand -->
-          <line class="rope-strand" x1="35" y1="0" x2="35" y2="152" stroke="url(#rope-braid)" stroke-width="5.2" stroke-linecap="square"/>
-          <line x1="32.5" y1="0" x2="32.5" y2="152" stroke="rgba(255,255,255,0.45)" stroke-width="0.8"/>
-          <line x1="37.5" y1="0" x2="37.5" y2="152" stroke="rgba(80,65,50,0.35)" stroke-width="0.8"/>
-          <!-- Brass Ferrule Collar -->
-          <rect x="29.5" y="150" width="11" height="2.5" rx="1" fill="url(#brass-grad)" stroke="#573e0a" stroke-width="0.4"/>
-          <rect x="30" y="152.5" width="10" height="4.5" fill="url(#brass-grad)" stroke="#573e0a" stroke-width="0.4"/>
-          <rect x="28.5" y="157" width="13" height="3" rx="1.2" fill="url(#brass-grad)" stroke="#573e0a" stroke-width="0.4"/>
-          <!-- Wooden Acorn Knob -->
-          <g class="rope-knob-group">
-            <path d="M 31 160 C 29 167, 20 173, 20 183 C 20 195, 27 202, 35 202 C 43 202, 50 195, 50 183 C 50 173, 41 167, 39 160 Z"
-                  fill="url(#wood-base-grad)" stroke="#220b02" stroke-width="0.7"/>
-            <path d="M 32 163 C 30 171, 25 178, 25 186 C 25 194, 29 199, 33 201" fill="none" stroke="rgba(30, 8, 2, 0.45)" stroke-width="0.7"/>
-            <path d="M 35 163 C 34 172, 32 181, 33 191 C 33.5 196, 35 200, 36 201.5" fill="none" stroke="rgba(30, 8, 2, 0.35)" stroke-width="0.6"/>
-            <path d="M 37 163 C 39 171, 44 177, 44 186 C 44 194, 40 199, 37 201" fill="none" stroke="rgba(30, 8, 2, 0.4)" stroke-width="0.7"/>
-            <!-- Specular Gloss Highlight -->
-            <path d="M 23.5 174 C 22.2 179, 22.8 187, 25.5 191 C 25 186, 24 179, 24.8 174 Z" fill="url(#gloss-grad)"/>
-            <ellipse cx="25.5" cy="180" rx="1.6" ry="4" fill="rgba(255,255,255,0.55)" transform="rotate(-12 25.5 180)"/>
-          </g>
-        </svg>
-      </div>
-      <div class="rope-tooltip" id="rope-tooltip">
-        <span class="rope-tooltip-pill">Pull for Dark 🌙</span>
-      </div>
-    </div>
+    
 
     <!-- ===================================================================
          FLOATING MINIMAL GLASS HEADER
@@ -170,6 +112,11 @@
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
           </button>
 
+          <!-- Mobile Header Theme Toggle Button (Active on Mobile Screens) -->
+          <button id="theme-toggle-btn" class="action-btn mobile-theme-btn" title="Toggle Dark and Light theme" aria-label="Toggle Dark and Light theme">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+
           <!-- Resume Action Button -->
           <a href="https://drive.google.com/uc?export=download&id=18j0J1hhtb_8h6INpdU-PzHpfSm-R8x5n" target="_blank" rel="noopener noreferrer" download="Yogesh_B_Resume.pdf" class="resume-nav-btn" onclick="window.soundEngine?.playClick(); window.portfolioApp?.showToast('Downloading Yogesh B — Resume... 📄');" title="Download Yogesh B's Resume (PDF)">
             <span>Resume</span>
@@ -182,6 +129,70 @@
           </button>
         </div>
 
+                <!-- Hanging Lamp Pull Cord (Attached Directly to Right Navbar Cap - Pure Braided Rope) -->
+        <div id="theme-rope-toggle" class="theme-rope-container" role="button" tabindex="0" aria-label="Pull cord to toggle Dark and Light theme" title="Pull cord to toggle theme">
+          <svg class="rope-svg" viewBox="0 0 65 210" width="65" height="210" aria-hidden="true">
+            <defs>
+              <pattern id="rope-braid" width="8" height="13" patternUnits="userSpaceOnUse" patternTransform="rotate(32)">
+                <rect width="4" height="13" fill="#f8f5f0"/>
+                <rect x="4" width="4" height="13" fill="#ded5c8"/>
+                <line x1="0" y1="0" x2="8" y2="13" stroke="#b0a290" stroke-width="0.8"/>
+                <line x1="0" y1="6.5" x2="8" y2="19.5" stroke="#8a7c6a" stroke-width="0.5" opacity="0.6"/>
+              </pattern>
+              <linearGradient id="brass-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#8a6316"/>
+                <stop offset="22%" stop-color="#e8bf58"/>
+                <stop offset="48%" stop-color="#fff4cb"/>
+                <stop offset="76%" stop-color="#d4a332"/>
+                <stop offset="100%" stop-color="#5a3d07"/>
+              </linearGradient>
+              <linearGradient id="wood-base-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#341303"/>
+                <stop offset="18%" stop-color="#5c260c"/>
+                <stop offset="45%" stop-color="#8a3e16"/>
+                <stop offset="68%" stop-color="#6e2e0e"/>
+                <stop offset="88%" stop-color="#471b06"/>
+                <stop offset="100%" stop-color="#240b01"/>
+              </linearGradient>
+              <linearGradient id="gloss-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="rgba(255, 255, 255, 0.65)"/>
+                <stop offset="60%" stop-color="rgba(255, 255, 255, 0.25)"/>
+                <stop offset="100%" stop-color="rgba(255, 255, 255, 0)"/>
+              </linearGradient>
+            </defs>
+            <!-- Minimal flush eyelet grommet on navbar edge -->
+            <ellipse cx="2" cy="22" rx="2.2" ry="4.5" fill="url(#brass-grad)" stroke="#573e0a" stroke-width="0.5"/>
+            <ellipse cx="2" cy="22" rx="1.1" ry="2.8" fill="#1b120c"/>
+
+            <!-- Swaying & Pullable Hanging Rope Assembly -->
+            <g class="rope-hanging-cable" id="rope-assembly">
+              <!-- Braided Rope directly curving from navbar grommet and dropping straight down -->
+              <path class="rope-strand-curve" d="M 2 22 C 16 22, 30 26, 30 46 L 30 150" fill="none" stroke="url(#rope-braid)" stroke-width="5.2" stroke-linecap="round"/>
+              <path d="M 2 20.8 C 15.5 20.8, 28 24.6, 28 46 L 28 150" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="0.8"/>
+              <path d="M 2 23.2 C 16.5 23.2, 32 27.4, 32 46 L 32 150" fill="none" stroke="rgba(80, 65, 50, 0.35)" stroke-width="0.8"/>
+
+              <!-- Brass Ferrule Collar -->
+              <rect x="24.5" y="148" width="11" height="2.5" rx="1" fill="url(#brass-grad)" stroke="#573e0a" stroke-width="0.4"/>
+              <rect x="25" y="150.5" width="10" height="4.5" fill="url(#brass-grad)" stroke="#573e0a" stroke-width="0.4"/>
+              <rect x="23.5" y="155" width="13" height="3" rx="1.2" fill="url(#brass-grad)" stroke="#573e0a" stroke-width="0.4"/>
+
+              <!-- Wooden Acorn Knob -->
+              <g class="rope-knob-group">
+                <path d="M 26 158 C 24 165, 15 171, 15 181 C 15 193, 22 200, 30 200 C 38 200, 45 193, 45 181 C 45 171, 36 165, 34 158 Z"
+                      fill="url(#wood-base-grad)" stroke="#220b02" stroke-width="0.7"/>
+                <path d="M 27 161 C 25 169, 20 176, 20 184 C 20 192, 24 197, 28 199" fill="none" stroke="rgba(30, 8, 2, 0.45)" stroke-width="0.7"/>
+                <path d="M 30 161 C 29 170, 27 179, 28 189 C 28.5 194, 30 198, 31 199.5" fill="none" stroke="rgba(30, 8, 2, 0.35)" stroke-width="0.6"/>
+                <path d="M 32 161 C 34 169, 39 175, 39 184 C 39 192, 35 197, 32 199" fill="none" stroke="rgba(30, 8, 2, 0.4)" stroke-width="0.7"/>
+                <!-- Specular Gloss Highlight -->
+                <path d="M 18.5 172 C 17.2 177, 17.8 185, 20.5 189 C 20 184, 19 177, 19.8 172 Z" fill="url(#gloss-grad)"/>
+                <ellipse cx="20.5" cy="178" rx="1.6" ry="4" fill="rgba(255,255,255,0.55)" transform="rotate(-12 20.5 178)"/>
+              </g>
+            </g>
+          </svg>
+          <div class="rope-tooltip" id="rope-tooltip">
+            <span class="rope-tooltip-pill">Pull for Dark 🌙</span>
+          </div>
+        </div>
       </div>
     </header>
 

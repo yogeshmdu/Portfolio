@@ -323,12 +323,13 @@ body.cursor-hover .custom-cursor-outline {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 0 clamp(3.5rem, 5vw, 5rem) 0 clamp(1.5rem, 5vw, 5rem);
+  padding: 0 clamp(4.5rem, 5.5vw, 6.5rem) 0 clamp(1.5rem, 5vw, 5rem);
   transition: all var(--transition-normal);
 }
 
 .nav-container {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: space-between;
   background: var(--bg-glass);
@@ -506,52 +507,61 @@ body.cursor-hover .custom-cursor-outline {
   box-shadow: 0 6px 18px rgba(255, 75, 50, 0.4);
 }
 
+/* Mobile Header Theme Toggle (Hidden on Laptops / Systems, Active on Mobile) */
+.mobile-theme-btn {
+  display: none !important;
+}
+
 /* ===================================================================
-   HANGING CEILING LAMP PULL ROPE (Interactive Dark/Light Switch)
+   HANGING CEILING LAMP PULL ROPE (Navbar-Mounted Interactive Switch)
    =================================================================== */
 
 .theme-rope-container {
-  position: fixed;
-  top: 0;
-  right: clamp(14px, 1.8vw, 24px);
-  left: auto;
+  position: absolute;
+  top: 50%;
+  left: calc(100% - 3px);
+  right: auto;
+  transform: translateY(-22px);
   z-index: 105;
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  filter: drop-shadow(-5px 8px 12px rgba(0, 0, 0, 0.28));
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28));
   transition: filter 0.3s ease;
 }
 
 [data-theme="dark"] .theme-rope-container {
-  filter: drop-shadow(-5px 8px 16px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 10px rgba(255, 75, 50, 0.15));
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 10px rgba(255, 75, 50, 0.15));
 }
 
 .theme-rope-container:active {
   cursor: grabbing;
 }
 
+.rope-hanging-cable,
 .rope-sway-assembly {
-  transform-origin: 35px 0px;
+  transform-origin: 2px 22px;
   will-change: transform;
 }
 
 /* Hover gentle pendulum sway */
+.theme-rope-container:hover .rope-hanging-cable,
 .theme-rope-container:hover .rope-sway-assembly {
   animation: ropeSway 2.4s ease-in-out infinite;
 }
 
 /* Pull bounce spring animation */
+.theme-rope-container.is-pulled .rope-hanging-cable,
 .theme-rope-container.is-pulled .rope-sway-assembly {
   animation: ropePullSpring 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 @keyframes ropeSway {
   0% { transform: rotate(0deg); }
-  25% { transform: rotate(2.5deg); }
+  25% { transform: rotate(3deg); }
   50% { transform: rotate(0deg); }
-  75% { transform: rotate(-2.5deg); }
+  75% { transform: rotate(-3deg); }
   100% { transform: rotate(0deg); }
 }
 
@@ -560,13 +570,13 @@ body.cursor-hover .custom-cursor-outline {
     transform: translateY(0) scaleY(1);
   }
   28% {
-    transform: translateY(32px) scaleY(1.1);
+    transform: translateY(28px) scaleY(1.08);
   }
   50% {
-    transform: translateY(-8px) scaleY(0.96);
+    transform: translateY(-7px) scaleY(0.96);
   }
   70% {
-    transform: translateY(4px) scaleY(1.02);
+    transform: translateY(3px) scaleY(1.02);
   }
   86% {
     transform: translateY(-2px) scaleY(0.99);
@@ -584,8 +594,8 @@ body.cursor-hover .custom-cursor-outline {
 /* Tooltip floating to the left of knob */
 .rope-tooltip {
   position: absolute;
-  top: 172px;
-  right: 68px;
+  top: 160px;
+  right: 42px;
   left: auto;
   white-space: nowrap;
   pointer-events: none;
@@ -616,7 +626,7 @@ body.cursor-hover .custom-cursor-outline {
 
 @media (max-width: 768px) {
   .site-header {
-    padding: 0 3.2rem 0 0.65rem;
+    padding: 0 1rem;
   }
 
   .nav-container {
@@ -698,11 +708,12 @@ body.cursor-hover .custom-cursor-outline {
     flex-shrink: 0;
   }
 
+  .mobile-theme-btn {
+    display: inline-flex !important;
+  }
+
   .theme-rope-container {
-    right: 12px;
-    left: auto;
-    transform: scale(0.82);
-    transform-origin: top right;
+    display: none !important;
   }
 
   .rope-tooltip {
@@ -712,7 +723,7 @@ body.cursor-hover .custom-cursor-outline {
 
 @media (max-width: 480px) {
   .site-header {
-    padding: 0 2.7rem 0 0.45rem;
+    padding: 0 0.5rem;
     top: 0.45rem;
   }
 
@@ -792,15 +803,20 @@ body.cursor-hover .custom-cursor-outline {
     height: 12px;
   }
 
+  .mobile-theme-btn {
+    display: inline-flex !important;
+  }
+
   .theme-rope-container {
-    right: 8px;
-    left: auto;
-    transform: scale(0.72);
-    transform-origin: top right;
+    display: none !important;
   }
 }
 
 @media (max-width: 350px) {
+  .theme-rope-container {
+    display: none !important;
+  }
+
   .brand-name {
     font-size: 0.78rem;
   }
@@ -1141,6 +1157,16 @@ body.cursor-hover .custom-cursor-outline {
     padding: 0.6rem 1.25rem;
     font-size: 0.86rem;
   }
+
+  /* Center contact pills on mobile screen view */
+  .hero-socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media (max-width: 580px) {
@@ -1181,21 +1207,44 @@ body.cursor-hover .custom-cursor-outline {
     height: 9px;
   }
 
+  /* Center contact pills on mobile screens */
   .hero-socials {
-    gap: 0.4rem;
-    margin-top: 0.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 0.45rem;
+    margin-top: 0.25rem;
   }
 
   .social-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.28rem 0.65rem;
     font-size: 0.74rem;
     gap: 0.35rem;
+    white-space: nowrap;
   }
 
   .social-pill svg,
   .social-pill img {
     width: 12px;
     height: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-socials {
+    gap: 0.32rem;
+  }
+
+  .social-pill {
+    padding: 0.24rem 0.48rem;
+    font-size: 0.7rem;
+    gap: 0.28rem;
   }
 }
 
@@ -2734,7 +2783,7 @@ section[id] {
 @media (max-width: 960px) {
   .journey-section {
     height: auto;
-    padding: 2.5rem 0 1.5rem 0;
+    padding: 2.25rem 0 1.5rem 0;
   }
 
   .journey-sticky-stage {
@@ -2749,86 +2798,184 @@ section[id] {
     gap: 1.5rem;
   }
 
+  /* Clean side-by-side positioning: zero overlap between content and clock */
   .journey-sticky-col {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.5rem;
     width: 100%;
+    box-sizing: border-box;
   }
 
   .temporal-conduit-bridge {
     display: none;
   }
 
+  /* Left Side: Confined to 175px width so it never touches the clock */
   .journey-info-panel {
-    flex: 1;
-    max-width: none;
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    flex: 0 0 auto;
+    width: 175px;
+    max-width: 175px;
+    gap: 0.45rem;
+    box-sizing: border-box;
   }
 
   .journey-hud-top {
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
+    text-align: left;
+    margin-bottom: 0.1rem;
   }
 
   .journey-main-title {
-    font-size: 1.4rem;
-    margin-bottom: 0.35rem;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin-bottom: 0.15rem;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
   }
 
+  /* Odometer chamber: clean 168px box, clock never overlaps */
   .journey-year-chamber {
-    max-width: 200px;
-    padding: 0.65rem 0.75rem;
+    width: 100%;
+    max-width: 168px;
+    padding: 0.45rem 0.6rem;
+    margin: 0;
+    box-sizing: border-box;
+    gap: 0.35rem;
+  }
+
+  .chrono-reels-stage {
+    display: flex;
+    justify-content: center;
+    gap: 0.32rem;
   }
 
   .chrono-reel {
-    height: 42px;
-    font-size: 1.45rem;
+    width: 30px;
+    height: 36px;
+    font-size: 1.3rem;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .chamber-date-row {
+    display: flex;
+    justify-content: center;
   }
 
   .chamber-date-row .journey-date-sub {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
   }
 
+  /* Progress Row: Strictly single line, 03 / 04 never wraps */
   .journey-progress-row {
+    display: flex;
+    align-items: center;
     justify-content: flex-start;
     width: 100%;
-    max-width: 200px;
+    max-width: 168px;
+    gap: 0.5rem;
+    white-space: nowrap;
+    box-sizing: border-box;
   }
 
+  .journey-step-meta {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.7rem;
+    gap: 0.3rem;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .journey-step-counter {
+    white-space: nowrap;
+    display: inline-block;
+    font-weight: 700;
+  }
+
+  .journey-progress-bar {
+    flex: 1;
+    min-width: 45px;
+    max-width: 85px;
+  }
+
+  /* 2x2 Pills: Year on top, Title below - full text visible, zero overlap with clock */
   .journey-nav-pills {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.35rem;
-    max-width: 230px;
+    width: 100%;
+    max-width: 172px;
+    box-sizing: border-box;
   }
 
   .journey-nav-pill {
-    padding: 0.32rem 0.55rem;
-    font-size: 0.72rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0.26rem 0.4rem;
+    min-height: 35px;
+    line-height: 1.15;
+    border-radius: 7px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
   }
 
+  .journey-nav-pill .pill-year {
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .journey-nav-pill .pill-title {
+    font-size: 0.56rem;
+    font-weight: 500;
+    opacity: 0.88;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    line-height: 1.1;
+  }
+
+  /* Right Side: Clock Dial - clean position with dedicated margin right */
   .journey-half-clock-panel {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    flex-shrink: 0;
-    width: 145px;
+    flex: 0 0 auto;
+    width: 135px;
+    max-width: 135px;
+    overflow: visible;
+    box-sizing: border-box;
+    margin-right: 0.85rem; /* Clean margin right to the clock */
   }
 
   .journey-half-clock-stage,
   .half-clock-dial-wrapper {
-    width: 145px;
-    height: 236px;
+    width: 135px;
+    height: 220px;
   }
 
   .half-clock-ambient-glow {
-    width: 145px;
-    height: 215px;
+    width: 135px;
+    height: 200px;
   }
 
+  /* Active Milestone Card below */
   .journey-timeline-col {
     width: 100%;
     margin-top: 0.25rem;
@@ -2855,59 +3002,75 @@ section[id] {
 
 @media (max-width: 580px) {
   .journey-section {
-    padding: 2rem 0 1.25rem 0;
-  }
-
-  .journey-main-title {
-    font-size: 1.25rem;
+    padding: 1.75rem 0 1.25rem 0;
   }
 
   .journey-sticky-col {
-    gap: 0.5rem;
+    gap: 0.35rem;
+  }
+
+  .journey-info-panel {
+    width: 165px;
+    max-width: 165px;
+    gap: 0.38rem;
+  }
+
+  .journey-main-title {
+    font-size: 1.15rem;
   }
 
   .journey-year-chamber {
-    max-width: 165px;
-    padding: 0.5rem 0.6rem;
-    gap: 0.4rem;
+    max-width: 160px;
+    padding: 0.38rem 0.55rem;
   }
 
   .chrono-reel {
-    height: 36px;
-    font-size: 1.25rem;
+    width: 27px;
+    height: 33px;
+    font-size: 1.2rem;
   }
 
   .chamber-date-row .journey-date-sub {
-    font-size: 0.6rem;
+    font-size: 0.56rem;
   }
 
   .journey-progress-row {
-    max-width: 165px;
+    max-width: 160px;
   }
 
   .journey-nav-pills {
-    max-width: 195px;
+    max-width: 162px;
     gap: 0.3rem;
   }
 
   .journey-nav-pill {
-    padding: 0.28rem 0.45rem;
-    font-size: 0.68rem;
+    padding: 0.22rem 0.35rem;
+    min-height: 33px;
+  }
+
+  .journey-nav-pill .pill-year {
+    font-size: 0.66rem;
+  }
+
+  .journey-nav-pill .pill-title {
+    font-size: 0.54rem;
   }
 
   .journey-half-clock-panel {
-    width: 130px;
+    width: 126px;
+    max-width: 126px;
+    margin-right: 0.75rem; /* Clean margin right on mobile */
   }
 
   .journey-half-clock-stage,
   .half-clock-dial-wrapper {
-    width: 130px;
-    height: 212px;
+    width: 126px;
+    height: 206px;
   }
 
   .half-clock-ambient-glow {
-    width: 130px;
-    height: 195px;
+    width: 126px;
+    height: 185px;
   }
 
   .journey-story-card {
@@ -2935,6 +3098,51 @@ section[id] {
   .card-tags span {
     font-size: 0.66rem;
     padding: 0.15rem 0.42rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .journey-info-panel {
+    width: 150px;
+    max-width: 150px;
+  }
+
+  .journey-year-chamber {
+    max-width: 146px;
+    padding: 0.32rem 0.45rem;
+  }
+
+  .chrono-reel {
+    width: 24px;
+    height: 29px;
+    font-size: 1.1rem;
+  }
+
+  .journey-nav-pills {
+    max-width: 148px;
+    gap: 0.25rem;
+  }
+
+  .journey-nav-pill {
+    padding: 0.18rem 0.28rem;
+    min-height: 30px;
+  }
+
+  .journey-half-clock-panel {
+    width: 116px;
+    max-width: 116px;
+    margin-right: 0.65rem;
+  }
+
+  .journey-half-clock-stage,
+  .half-clock-dial-wrapper {
+    width: 116px;
+    height: 190px;
+  }
+
+  .half-clock-ambient-glow {
+    width: 116px;
+    height: 170px;
   }
 }
 
@@ -5084,6 +5292,20 @@ section[id] {
   gap: 1rem;
 }
 
+@media (max-width: 768px) {
+  .footer-action {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.35rem 0;
+  }
+
+  .scroll-top-btn {
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 600px) {
   .site-footer {
     padding: 2.5rem 0 1.5rem 0;
@@ -5103,14 +5325,24 @@ section[id] {
     font-size: 0.82rem;
   }
 
+  /* Center the Back-to-Top Button on Mobile */
+  .footer-action {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem auto;
+  }
+
   .scroll-top-btn {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
+    margin: 0 auto;
   }
 
   .scroll-top-btn svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
   }
 
   .footer-bottom {
