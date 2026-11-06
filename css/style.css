@@ -323,7 +323,7 @@ body.cursor-hover .custom-cursor-outline {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 0 clamp(1.5rem, 5vw, 5rem);
+  padding: 0 clamp(3.5rem, 5vw, 5rem) 0 clamp(1.5rem, 5vw, 5rem);
   transition: all var(--transition-normal);
 }
 
@@ -360,6 +360,8 @@ body.cursor-hover .custom-cursor-outline {
   text-decoration: none;
   color: var(--text-primary);
   font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .logo-badge {
@@ -375,18 +377,22 @@ body.cursor-hover .custom-cursor-outline {
   font-size: 0.85rem;
   color: var(--c-coral);
   box-shadow: 0 0 14px rgba(255, 75, 50, 0.25);
+  flex-shrink: 0;
 }
 
 .brand-text-wrap {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .brand-name {
   font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .brand-dot {
@@ -403,13 +409,14 @@ body.cursor-hover .custom-cursor-outline {
   background: rgba(146, 157, 167, 0.15);
   padding: 0.15rem 0.45rem;
   border-radius: 4px;
+  white-space: nowrap;
 }
 
 /* Desktop Navigation Menu */
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 1.8rem;
+  gap: clamp(0.9rem, 1.6vw, 1.8rem);
   list-style: none;
 }
 
@@ -449,6 +456,8 @@ body.cursor-hover .custom-cursor-outline {
   display: flex;
   align-items: center;
   gap: 0.65rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .action-btn {
@@ -504,19 +513,19 @@ body.cursor-hover .custom-cursor-outline {
 .theme-rope-container {
   position: fixed;
   top: 0;
-  left: clamp(14px, 1.8vw, 24px);
-  right: auto;
+  right: clamp(14px, 1.8vw, 24px);
+  left: auto;
   z-index: 105;
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  filter: drop-shadow(5px 8px 12px rgba(0, 0, 0, 0.28));
+  filter: drop-shadow(-5px 8px 12px rgba(0, 0, 0, 0.28));
   transition: filter 0.3s ease;
 }
 
 [data-theme="dark"] .theme-rope-container {
-  filter: drop-shadow(5px 8px 16px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 10px rgba(255, 75, 50, 0.15));
+  filter: drop-shadow(-5px 8px 16px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 10px rgba(255, 75, 50, 0.15));
 }
 
 .theme-rope-container:active {
@@ -572,16 +581,16 @@ body.cursor-hover .custom-cursor-outline {
   overflow: visible;
 }
 
-/* Tooltip floating to the right of knob */
+/* Tooltip floating to the left of knob */
 .rope-tooltip {
   position: absolute;
   top: 172px;
-  left: 68px;
-  right: auto;
+  right: 68px;
+  left: auto;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transform: translateX(-10px);
+  transform: translateX(10px);
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
@@ -607,18 +616,93 @@ body.cursor-hover .custom-cursor-outline {
 
 @media (max-width: 768px) {
   .site-header {
-    padding: 0 0.85rem 0 3.5rem;
+    padding: 0 3.2rem 0 0.65rem;
   }
 
   .nav-container {
-    padding: 0.55rem 1rem;
+    padding: 0.4rem 0.8rem;
+    min-height: 46px;
+  }
+
+  .brand-logo {
+    gap: 0.45rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .logo-badge {
+    width: 30px;
+    height: 30px;
+    font-size: 0.82rem;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .brand-text-wrap {
+    display: flex !important;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 0.92rem;
+    font-weight: 800;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .brand-dot {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  /* Hide the extra DEV tag on mobile to keep the brand name clean and uncluttered */
+  .brand-tag {
+    display: none !important;
+  }
+
+  .nav-actions {
+    gap: 0.35rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .action-btn {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+  }
+
+  .action-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .mobile-toggle {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+  }
+
+  .mobile-toggle svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .resume-nav-btn {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.76rem;
+    gap: 0.25rem;
+    flex-shrink: 0;
   }
 
   .theme-rope-container {
-    left: 14px;
-    right: auto;
-    transform: scale(0.85);
-    transform-origin: top left;
+    right: 12px;
+    left: auto;
+    transform: scale(0.82);
+    transform-origin: top right;
   }
 
   .rope-tooltip {
@@ -628,44 +712,97 @@ body.cursor-hover .custom-cursor-outline {
 
 @media (max-width: 480px) {
   .site-header {
-    padding: 0 0.45rem 0 2.9rem;
-    top: 0.5rem;
+    padding: 0 2.7rem 0 0.45rem;
+    top: 0.45rem;
   }
 
   .nav-container {
-    padding: 0.42rem 0.65rem;
+    padding: 0.32rem 0.65rem;
+    min-height: 44px;
+    height: 44px;
+  }
+
+  .brand-logo {
+    gap: 0.4rem;
+  }
+
+  .logo-badge {
+    width: 28px;
+    height: 28px;
+    font-size: 0.78rem;
+    border-radius: 7px;
+  }
+
+  .brand-text-wrap {
+    display: flex !important;
+    gap: 0.2rem;
+  }
+
+  .brand-name {
+    font-size: 0.84rem;
+    font-weight: 800;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .brand-dot {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .brand-tag {
+    display: none !important;
   }
 
   .nav-actions {
-    gap: 0.32rem;
-  }
-
-  .action-btn {
-    width: 32px;
-    height: 32px;
-  }
-
-  .mobile-toggle {
-    width: 32px;
-    height: 32px;
-  }
-
-  .resume-nav-btn {
-    padding: 0.38rem 0.65rem;
-    font-size: 0.76rem;
     gap: 0.28rem;
   }
 
+  .action-btn {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  .action-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .mobile-toggle {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  .mobile-toggle svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .resume-nav-btn {
+    padding: 0.32rem 0.58rem;
+    font-size: 0.72rem;
+    gap: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .resume-nav-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
   .theme-rope-container {
-    left: 8px;
-    transform: scale(0.76);
-    transform-origin: top left;
+    right: 8px;
+    left: auto;
+    transform: scale(0.72);
+    transform-origin: top right;
   }
 }
 
-@media (max-width: 380px) {
-  .brand-tag {
-    display: none;
+@media (max-width: 350px) {
+  .brand-name {
+    font-size: 0.78rem;
   }
 
   .resume-nav-btn span {
@@ -673,17 +810,11 @@ body.cursor-hover .custom-cursor-outline {
   }
 
   .resume-nav-btn {
-    padding: 0.4rem 0.52rem;
+    padding: 0.32rem 0.48rem;
   }
 
-  .logo-badge {
-    width: 28px;
-    height: 28px;
-    font-size: 0.8rem;
-  }
-
-  .brand-name {
-    font-size: 0.92rem;
+  .nav-actions {
+    gap: 0.2rem;
   }
 }
 
@@ -773,13 +904,13 @@ body.cursor-hover .custom-cursor-outline {
   width: fit-content;
   max-width: 100%;
   backdrop-filter: blur(12px);
-  margin-left: clamp(2.8rem, 4.8vw, 4.5rem);
+  margin-left: 0;
   transition: all var(--transition-fast);
 }
 
 @media (max-width: 768px) {
   .hero-eyebrow-pill {
-    margin-left: 2rem;
+    margin-left: 0;
     padding: 0.35rem 0.95rem;
   }
 }
@@ -1855,6 +1986,20 @@ section[id] {
   align-items: center;
   justify-content: flex-end;
   user-select: none;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journey-half-clock-stage:hover .clock-sculpted-contour-main {
+  filter: drop-shadow(0 0 11px rgba(255, 75, 50, 1));
+}
+
+.journey-half-clock-stage:hover .half-clock-ambient-glow {
+  opacity: 1;
+}
+
+.journey-half-clock-stage:active {
+  transform: scale(0.985);
 }
 
 .half-clock-ambient-glow {
@@ -2042,6 +2187,11 @@ section[id] {
   text-anchor: middle;
   dominant-baseline: central;
   transition: fill 0.3s ease, font-size 0.3s ease;
+  cursor: pointer;
+}
+
+.clock-numeral:hover {
+  fill: var(--c-coral);
 }
 
 .clock-numeral.active {
@@ -2049,6 +2199,17 @@ section[id] {
   font-size: 18px;
   font-weight: 900;
   filter: drop-shadow(0 0 6px rgba(255, 75, 50, 0.7));
+}
+
+.half-clock-dial-wrapper,
+.half-clock-face-svg,
+.clock-dial-body,
+.clock-sculpted-contour-main,
+.clock-sculpted-contour-glow,
+.clock-stick-master,
+.clock-stick-second,
+.contour-rivet {
+  cursor: pointer;
 }
 
 .clock-milestone-nodes {

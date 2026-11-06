@@ -413,7 +413,7 @@
               </div>
 
               <!-- Animated Temporal Conduit Bridge (Bridges the space between Year Chamber & Clock Hub) -->
-              <div class="temporal-conduit-bridge" aria-hidden="true">
+              <div class="temporal-conduit-bridge" id="journey-conduit" aria-hidden="true">
                 <!-- Glowing Circuit Beam Line with Running Photon Pulses -->
                 <div class="conduit-beam">
                   <div class="conduit-pulse"></div>
@@ -438,7 +438,7 @@
 
               <!-- Dedicated Half-Clock Dial (Only the active 180° right half!) -->
               <div class="journey-half-clock-panel">
-                <div class="journey-half-clock-stage" id="journey-clock-stage">
+                <div class="journey-half-clock-stage" id="journey-clock-stage" role="button" tabindex="0" title="Click clock to cycle through experience milestones" aria-label="Interactive Clock Dial — click to advance milestone">
                   
                   <!-- Ambient Backlight Glow -->
                   <div class="half-clock-ambient-glow"></div>
@@ -509,11 +509,11 @@
 
                       <!-- Roman Numerals along Half Dial -->
                       <text x="36" y="58" class="clock-numeral active" data-milestone="0">XII</text>
-                      <text x="96" y="78" class="clock-numeral">I</text>
+                      <text x="96" y="78" class="clock-numeral" data-milestone="0">I</text>
                       <text x="146" y="132" class="clock-numeral" data-milestone="1">II</text>
-                      <text x="162" y="206" class="clock-numeral">III</text>
+                      <text x="162" y="206" class="clock-numeral" data-milestone="1">III</text>
                       <text x="146" y="278" class="clock-numeral" data-milestone="2">IV</text>
-                      <text x="96" y="332" class="clock-numeral">V</text>
+                      <text x="96" y="332" class="clock-numeral" data-milestone="2">V</text>
                       <text x="36" y="352" class="clock-numeral" data-milestone="3">VI</text>
 
                       <!-- Milestone Glowing Nodes on the Arc -->
@@ -1452,33 +1452,38 @@
           <div class="contact-form-card">
             <div class="form-header">
               <h3 class="form-title">Send a Direct Message</h3>
-              <p class="form-subtitle">Fill in the details below and it will compose a structured email directly to my inbox.</p>
+              <p class="form-subtitle">Fill in the details below and your message will be delivered directly to my inbox.</p>
             </div>
 
-            <form id="contact-form" class="contact-form">
+            <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+              <!-- Web3Forms Access Key & Spam Protection -->
+              <input type="hidden" name="access_key" value="5f44b6f5-0ecc-48c4-bf76-da16ef3579b7">
+              <input type="hidden" name="from_name" value="Portfolio Contact Form">
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
               <div class="form-row">
                 <div class="form-group">
                   <label for="form-name" class="form-label">Your Name *</label>
-                  <input type="text" id="form-name" class="form-input" placeholder="e.g. Hiring Manager / Client" required>
+                  <input type="text" id="form-name" name="name" class="form-input" placeholder="e.g. Hiring Manager / Client" required>
                 </div>
 
                 <div class="form-group">
                   <label for="form-email" class="form-label">Your Email *</label>
-                  <input type="email" id="form-email" class="form-input" placeholder="e.g. manager@company.com" required>
+                  <input type="email" id="form-email" name="email" class="form-input" placeholder="e.g. manager@company.com" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="form-subject" class="form-label">Subject</label>
-                <input type="text" id="form-subject" class="form-input" placeholder="e.g. Full-Stack / Software Engineer Role">
+                <input type="text" id="form-subject" name="subject" class="form-input" placeholder="e.g. Full-Stack / Software Engineer Role">
               </div>
 
               <div class="form-group">
                 <label for="form-message" class="form-label">Message *</label>
-                <textarea id="form-message" class="form-textarea" placeholder="Describe the role, tech stack, or project requirements..." required></textarea>
+                <textarea id="form-message" name="message" class="form-textarea" placeholder="Describe the role, tech stack, or project requirements..." required></textarea>
               </div>
 
-              <button type="submit" class="submit-btn">
+              <button type="submit" class="submit-btn" id="contact-submit-btn">
                 <span>Send Direct Message</span>
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
               </button>

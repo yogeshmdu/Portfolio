@@ -431,7 +431,7 @@ class PortfolioApp {
       }, { duration: 250, fill: 'forwards' });
     });
 
-    const interactiveSelectors = 'a, button, input, textarea, .project-card, .discipline-card, .skill-card, .skill-icon, .exp-card, .filter-btn, .hero-portrait-card';
+    const interactiveSelectors = 'a, button, [role="button"], input, textarea, .project-card, .discipline-card, .skill-card, .skill-icon, .exp-card, .filter-btn, .hero-portrait-card, .journey-half-clock-stage, #journey-year-chamber, .journey-conduit-bridge';
     document.querySelectorAll(interactiveSelectors).forEach(el => {
       el.addEventListener('mouseenter', () => {
         document.body.classList.add('cursor-hover');
@@ -554,12 +554,15 @@ class PortfolioApp {
       });
     });
 
-    // Contact Form submission
+    // Contact Form submission via Web3Forms
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-      contactForm.addEventListener('submit', (e) => {
+      contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        window.soundEngine?.playPop();
+
+        const submitBtn = document.getElementById('contact-submit-btn') || contactForm.querySelector('.submit-btn');
+        const submitBtnSpan = submitBtn ? submitBtn.querySelector('span') : null;
+        const originalText = submitBtnSpan ? submitBtnSpan.textContent : 'Send Direct Message';
 
         const name = document.getElementById('form-name')?.value.trim();
         const email = document.getElementById('form-email')?.value.trim();
@@ -571,11 +574,58 @@ class PortfolioApp {
           return;
         }
 
-        const mailtoLink = `mailto:yogesh0398@gmail.com?subject=${encodeURIComponent(`[Portfolio] ${subject} - from ${name}`)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+        window.soundEngine?.playClick();
 
-        window.open(mailtoLink, '_blank');
-        this.showToast('Opening your default mail client to send email! 🚀');
-        contactForm.reset();
+        // UI Loading state
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = '0.75';
+          submitBtn.style.cursor = 'wait';
+        }
+        if (submitBtnSpan) {
+          submitBtnSpan.textContent = 'Sending Message... ⏳';
+        }
+
+        try {
+          const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              access_key: '5f44b6f5-0ecc-48c4-bf76-da16ef3579b7',
+              name: name,
+              email: email,
+              subject: `[Portfolio Inquiry] ${subject} — from ${name}`,
+              message: message,
+              from_name: `${name} (Portfolio Inquiry)`,
+              botcheck: ''
+            })
+          });
+
+          const data = await response.json();
+
+          if (response.status === 200 && data.success) {
+            window.soundEngine?.playChime ? window.soundEngine.playChime() : window.soundEngine?.playClick();
+            this.showToast('Message sent directly to Yogesh\'s inbox! 🚀 Thank you!');
+            contactForm.reset();
+          } else {
+            throw new Error(data.message || 'Submission failed. Please try again.');
+          }
+        } catch (error) {
+          console.error('Web3Forms submission error:', error);
+          this.showToast(error.message || 'Could not send message. Please email yogesh0398@gmail.com directly.');
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '';
+            submitBtn.style.cursor = '';
+          }
+          if (submitBtnSpan) {
+            submitBtnSpan.textContent = originalText;
+          }
+        }
       });
     }
 
@@ -842,20 +892,61 @@ class PortfolioApp {
       });
     });
 
-    // Arc Milestone Nodes Click: clicking directly on clock dial jumps to card
-    arcNodes.forEach((node) => {
-      node.addEventListener('click', (e) => {
+    // Clock Dial Click: clicking anywhere on the clock advances or jumps to milestone
+    const clockStage = document.getElementById('journey-clock-stage');
+    if (clockStage) {
+      clockStage.addEventListener('click', (e) => {
         e.preventDefault();
         window.soundEngine?.playClick();
-        const idx = parseInt(node.getAttribute('data-index'), 10) || 0;
-        goToMilestone(idx);
+
+        const numeral = e.target.closest('.clock-numeral[data-milestone]');
+        const node = e.target.closest('.clock-arc-node[data-index]');
+
+        if (numeral) {
+          const m = parseInt(numeral.getAttribute('data-milestone'), 10);
+          if (!isNaN(m) && m !== currentIndex) {
+            goToMilestone(m);
+            return;
+          }
+        } else if (node) {
+          const idx = parseInt(node.getAttribute('data-index'), 10);
+          if (!isNaN(idx) && idx !== currentIndex) {
+            goToMilestone(idx);
+            return;
+          }
+        }
+
+        // Clicking anywhere else on the clock (dial face, contour, hands, bezel, image, etc.)
+        // or clicking the current milestone advances to the next milestone
+        const nextIdx = (currentIndex + 1) % cards.length;
+        goToMilestone(nextIdx);
       });
-    });
+
+      clockStage.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          window.soundEngine?.playClick();
+          const nextIdx = (currentIndex + 1) % cards.length;
+          goToMilestone(nextIdx);
+        }
+      });
+    }
 
     // Chrono Chamber Click: clicking chamber cycles to next milestone
     const yearChamber = document.getElementById('journey-year-chamber');
     if (yearChamber) {
       yearChamber.addEventListener('click', () => {
+        window.soundEngine?.playClick();
+        const nextIdx = (currentIndex + 1) % cards.length;
+        goToMilestone(nextIdx);
+      });
+    }
+
+    // Conduit Bridge Click: clicking bridge also cycles milestone
+    const conduitBridge = document.getElementById('journey-conduit');
+    if (conduitBridge) {
+      conduitBridge.style.cursor = 'pointer';
+      conduitBridge.addEventListener('click', () => {
         window.soundEngine?.playClick();
         const nextIdx = (currentIndex + 1) % cards.length;
         goToMilestone(nextIdx);
